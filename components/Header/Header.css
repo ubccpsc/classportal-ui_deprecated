@@ -1,0 +1,10 @@
+.header {
+  text-align: center;
+  padding: 0;
+  background-color: #5c86ff;
+  background-image: linear-gradient(135deg, #5c86ff, #1c2040);
+}
+
+.header h1 {
+  color: white;
+}
