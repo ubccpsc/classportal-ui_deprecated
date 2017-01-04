@@ -1,37 +1,84 @@
-# ClassPortal
+# ClassPortal UI
 
-### Description
+Frontend client for [ClassPortal][classportal].
 
-React Static Template is a boilerplate for React apps that has a simple one-page layout
-(no routing), markdown compatibility, and plays well with GitHub pages.
+Built with
+- [React][react]
+- [Babel][babel]
+- [Webpack][webpack] with [Hot Module Replacement][hmr]
 
-This project is inspired by [React Static Boilerplate][rsb]. The Webpack and Node.js 
-configuration, as well as the markdown loader, is borrowed and adapted from React Static Boilerplate.
+## System overview
 
-Demo: https://mksarge.github.io/react-static-template/
+Some docs will need to be provided to the system to set it up, these include:
 
-### Instructions
+* Student list; this will be a CSV with these fields: ```<NAME>,<STUDENT NUMBER>,<CS LAB ID>```
+* Deliverable list; this will be a JSON file that will look just like an array of model.Deliverable objects.
 
-Install: `npm install`
+## Github requirements
 
-Lint: `npm run lint`
+- Sign up for an organization in Github.
+- Make sure you set the "Default repository permission" in the Organization setting page to "none".
+- GithubProjectController has some hard coded fields for the organization
+  - these should change in the future, but if they haven't, make sure they are set for your org
 
-Dev Build with [HMR][hmr]: `npm run start`
+To send/recieve data; go to the portal directory on the non-server machine:
 
-Production Build: `npm run build`
+To Send:
+```rsync -auvp HOST:/PATHTOPORTAL/priv/ priv/```
 
-### Deploy to GitHub Pages
+To Receive:
+```rsync -auvp priv/ HOST:PATHTOPORTAL/priv/```
 
-1. Make some changes.
-2. `npm run build`
-3. `git checkout gh-pages`
-4. Copy files from `public` into the root folder
-5. Commit and push. (Make sure you have GitHub Pages set to `gh-pages` in the settings!)
+## Install
+
+```sh
+$ git clone https://github.com/mksarge/classportal-ui.git
+$ npm install
+```
+
+## Lint
+
+```sh
+// lint js
+npm run eslint
+
+// lint css
+npm run stylelint
+
+// lint all
+npm run lint
+```
+
+## Test
+
+```sh
+// run tests
+npm run test
+```
+
+## Run
+
+```sh
+// run dev build with [Hot Module Reloading][hmr] of .js and .css files
+$ npm run start
+```
+
+## Deploy
+
+ClassPortal can be easily deployed to [Firebase][firebase]. Make sure your firebase app is configured in `.firebaserc` and `run.js`.
+
+```sh
+// deploy
+$ npm run publish
+```
 
 ### License
-zz
-The source code is licensed under the MIT license found in the [LICENSE.txt][license] file in the root folder of this project.
 
-[rsb]: <https://github.com/kriasoft/react-static-boilerplate>
+MIT
+
+[classportal]: <https://classportal-116d2.firebaseapp.com/login>
+[react]: <https://facebook.github.io/react/>
+[babel]: <https://babeljs.io/>
+[webpack]: <https://webpack.github.io/>
 [hmr]: <https://webpack.github.io/docs/hot-module-replacement.html>
-[license]: <https://github.com/mksarge/react-static-template/blob/master/LICENSE.txt>
+[firebase]: <https://firebase.google.com/>
