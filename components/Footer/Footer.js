@@ -12,8 +12,6 @@ const Footer = () => (
       <a href="https://github.com/ubccpsc/classportal-frontend/issues">Report an issue</a>
       &nbsp;&middot;&nbsp;
       <a href="https://github.com/ubccpsc/classportal-frontend/CONTRIBUTING.md">Contribute</a>
-      <br />
-      &copy; Reid Holmes 2017
     </p>
   </footer>
 );

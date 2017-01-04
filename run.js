@@ -11,9 +11,9 @@ const ejs = require('ejs');
 const webpack = require('webpack');
 
 const config = {
-  title: '',
+  title: 'ClassPortal',
   url: '',
-  project: '',
+  project: 'classportal-116d2',
   trackingID: '',
 };
 
@@ -70,6 +70,20 @@ tasks.set('build', () => {
     .then(() => run('clean'))
     .then(() => run('bundle'))
     .then(() => run('html'));
+});
+
+//
+// Build and publish the website
+// -----------------------------------------------------------------------------
+tasks.set('publish', () => {
+  const firebase = require('firebase-tools');
+  return run('build')
+    .then(() => firebase.login({ nonInteractive: false }))
+    .then(() => firebase.deploy({
+      project: config.project,
+      cwd: __dirname,
+    }))
+    .then(() => { setTimeout(() => process.exit()); });
 });
 
 //

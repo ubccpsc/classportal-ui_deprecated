@@ -11,9 +11,8 @@ function registerButton(e) {
 
 function loginButton(e) {
   e.preventDefault();
-  const clientId = config.client_id;
-  const redirectUri = `http://${config.app_address}/postlogin`;
-  window.location = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}`;
+  const redirectUri = `${config.app_address}/postlogin`;
+  window.location = `https://github.com/login/oauth/authorize?client_id=${config.client_id}&redirect_uri=${redirectUri}`;
 }
 
 const Login = () => (
