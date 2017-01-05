@@ -1,6 +1,6 @@
 import config from '../config/env';
 
-function status(response) {
+function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response);
   } else {
@@ -8,7 +8,7 @@ function status(response) {
   }
 }
 
-function json(response) {
+function getJson(response) {
   return response.json();
 }
 
@@ -28,8 +28,8 @@ export function loginRequest(csid, sid, authcode, successCallback, errorCallback
       authcode,
     },
   })
-    .then(status)
-    .then(json)
+    .then(checkStatus)
+    .then(getJson)
     .then(successCallback)
     .catch(errorCallback);
 }
@@ -49,8 +49,8 @@ export function registerRequest(csid, sid, successCallback, errorCallback) {
       sid,
     },
   })
-    .then(status)
-    .then(json)
+    .then(checkStatus)
+    .then(getJson)
     .then(successCallback)
     .catch(errorCallback);
 }
@@ -66,8 +66,8 @@ export function logoutRequest(successCallback, errorCallback) {
       admin: localStorage.admin,
     },
   })
-    .then(status)
-    .then(json)
+    .then(checkStatus)
+    .then(getJson)
     .then(successCallback)
     .catch(errorCallback);
 }
@@ -83,8 +83,8 @@ export function loadStudentPortalRequest(successCallback, errorCallback) {
       admin: localStorage.admin,
     },
   })
-    .then(status)
-    .then(json)
+    .then(checkStatus)
+    .then(getJson)
     .then(successCallback)
     .catch(errorCallback);
 }
@@ -100,8 +100,8 @@ export function loadAdminPortalRequest(successCallback, errorCallback) {
       admin: localStorage.admin,
     },
   })
-    .then(status)
-    .then(json)
+    .then(checkStatus)
+    .then(getJson)
     .then(successCallback)
     .catch(errorCallback);
 }
@@ -118,8 +118,8 @@ export function createTeamRequest(teamMembers, successCallback, errorCallback) {
     },
     body: { teamMembers },
   })
-    .then(status)
-    .then(json)
+    .then(checkStatus)
+    .then(getJson)
     .then(successCallback)
     .catch(errorCallback);
 }
@@ -135,8 +135,8 @@ export function disbandTeamRequest(teamId, successCallback, errorCallback) {
       admin: localStorage.admin,
     },
   })
-    .then(status)
-    .then(json)
+    .then(checkStatus)
+    .then(getJson)
     .then(successCallback)
     .catch(errorCallback);
 }
@@ -153,8 +153,8 @@ export function assignTeamRequest(newTA, teamId, successCallback, errorCallback)
     },
     body: { newTA },
   })
-    .then(status)
-    .then(json)
+    .then(checkStatus)
+    .then(getJson)
     .then(successCallback)
     .catch(errorCallback);
 }
@@ -176,8 +176,8 @@ export function submitGradeRequest(sid, assnId, grade, comment, successCallback,
       comment,
     },
   })
-    .then(status)
-    .then(json)
+    .then(checkStatus)
+    .then(getJson)
     .then(successCallback)
     .catch(errorCallback);
 }
@@ -194,8 +194,8 @@ export function submitClasslistRequest(formData, successCallback, errorCallback)
     },
     body: { formData },
   })
-    .then(status)
-    .then(json)
+    .then(checkStatus)
+    .then(getJson)
     .then(successCallback)
     .catch(errorCallback);
 }

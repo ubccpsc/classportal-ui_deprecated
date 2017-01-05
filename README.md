@@ -59,7 +59,7 @@ npm run test
 ## Run
 
 ```sh
-// run dev build with [Hot Module Reloading][hmr] of .js and .css files
+// dev build with live reloading of .js and .css
 $ npm run start
 ```
 
