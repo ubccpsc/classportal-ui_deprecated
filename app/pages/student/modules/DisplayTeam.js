@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormInput, FormIconField, Glyph, Button, InputGroup } from 'elemental';
 import Module from '../../../components/Module/Module';
-import { disbandTeamRequest } from '../../../app/ajax';
-import config from '../../../config/env';
+import { disbandTeamRequest } from '../../../../app/ajax';
+import config from '../../../../config/env';
 
 function disbandTeam(props) {
   if (confirm('Please confirm that you want to disband the team.')) {

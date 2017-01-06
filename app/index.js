@@ -1,12 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import Layout from '../components/Layout/Layout';
-import StudentPortal from '../pages/student';
-import AdminPortal from '../pages/admin';
-import LoginPage from '../pages/login';
-import RegisterPage from '../pages/register';
-import PostloginPage from '../pages/postlogin';
+import Layout from './components/Layout/Layout';
+import StudentPortal from './pages/student';
+import AdminPortal from './pages/admin';
+import LoginPage from './pages/login';
+import RegisterPage from './pages/register';
+import PostloginPage from './pages/postlogin';
 import { requireNoAuth, requireStudentAuth, requireAdminAuth } from './auth';
 
 render((

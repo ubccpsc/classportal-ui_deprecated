@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form, FormField, Button, FormInput, FormIconField, Glyph } from 'elemental';
 import Module from '../../../components/Module/Module';
-import { registerRequest } from '../../../app/ajax';
-import config from '../../../config/env';
+import { registerRequest } from '../../../../app/ajax';
+import config from '../../../../config/env';
 
 function handleSubmit(e) {
   e.preventDefault();

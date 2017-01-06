@@ -2,7 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import { Form, FormField, Button, Glyph, ButtonGroup } from 'elemental';
 import Module from '../../../components/Module/Module';
-import config from '../../../config/env';
+import config from '../../../../config/env';
 
 function registerButton(e) {
   e.preventDefault();

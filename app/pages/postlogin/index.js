@@ -3,7 +3,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import PostLogin from './modules/PostLogin';
-import { loginRequest } from '../../app/ajax';
+import { loginRequest } from '../../../app/ajax';
 
 function getCode() {
   return new Promise((resolve, reject) => {

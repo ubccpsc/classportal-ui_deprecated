@@ -3,7 +3,7 @@ import Logout from '../../components/shared_modules/Logout';
 import Deliverables from './modules/Deliverables';
 import Grades from './modules/Grades';
 import Team from './modules/Team';
-import { loadStudentPortal } from '../../app/ajax';
+import { loadStudentPortal } from '../../../app/ajax';
 
 class StudentPortal extends React.Component {
   getInitialState() {

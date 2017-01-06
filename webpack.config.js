@@ -76,9 +76,7 @@ const config = {
         test: /\.jsx?$/,
         include: [
           path.resolve(__dirname, './app'),
-          path.resolve(__dirname, './components'),
           path.resolve(__dirname, './config'),
-          path.resolve(__dirname, './pages'),
           path.resolve(__dirname, './test'),
         ],
         loader: `babel-loader?${JSON.stringify(babelConfig)}`,

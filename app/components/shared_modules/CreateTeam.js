@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form, FormField, FormSelect, Button } from 'elemental';
 import Module from '../../components/Module/Module';
-import { createTeamRequest } from '../../app/ajax';
-import config from '../../config/env';
+import { createTeamRequest } from '../../../app/ajax';
+import config from '../../../config/env';
 
 class CreateTeam extends React.Component {
   getInitialState() {

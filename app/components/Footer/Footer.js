@@ -3,7 +3,6 @@ import s from './Footer.css';
 
 const Footer = () => (
   <footer className={s.footer}>
-    <div className={s.bar} />
     <p>
       ClassPortal is on <a href="https://github.com/ubccpsc/classportal-frontend">GitHub</a>.
       <br />

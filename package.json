@@ -85,11 +85,11 @@
   },
   "scripts": {
     "eslint": "eslint src/ run.js webpack.config.js",
-    "stylelint": "stylelint \"public/**/*.css\"; stylelint \"components/**/*.css\"",
+    "stylelint": "stylelint \"public/**/*.css\"; stylelint \"app/**/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
     "clean": "node run clean",
     "build": "NODE_ENV='production' node run build",
-    "test": "NODE_ENV='test' node_modules/.bin/_mocha test/**/*.spec.js",
+    "test": "npm run lint; NODE_ENV='test' node_modules/.bin/_mocha test/**/*.spec.js",
     "start": "node run",
     "publish": "NODE_ENV='production' node run publish"
   }

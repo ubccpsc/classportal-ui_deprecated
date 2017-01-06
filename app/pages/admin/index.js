@@ -3,7 +3,7 @@
 
 import React from 'react';
 import Logout from '../../components/shared_modules/Logout';
-import { loadAdminPortalRequest } from '../../app/ajax';
+import { loadAdminPortalRequest } from '../../../app/ajax';
 
 class AdminPortal extends React.Component {
   getInitialState() {
