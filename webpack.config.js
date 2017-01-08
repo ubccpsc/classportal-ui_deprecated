@@ -27,6 +27,7 @@ const config = {
   context: __dirname,
 
   entry: [
+    '!!style!css!./public/elementalui.min.css',
     '!!style!css!./public/index.css',
     './app/index.js',
   ],
