@@ -181,7 +181,7 @@ export function submitGradeRequest(sid, assnId, grade, comment, successCallback,
 }
 
 export function updateClassRequest(csvFormData, successCallback, errorCallback) {
-  fetch(`${config.api_address}/api/class/list`, {
+  fetch(`${config.api_address}/api/class`, {
     method: 'post',
     headers: {
       Accept: 'application/json',

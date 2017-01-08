@@ -1,17 +1,27 @@
 .container {
-  background: #ccddfe;
-  border: 1px solid black;
   margin-bottom: 20px;
+  border: 1px solid #aabbfe;
+  border-radius: 10px;
+  background: #ccddfe;
+  text-align: center;
 }
 
 .title {
-  text-align: center;
-  background: white;
-  margin: 5px;
+  display: inline-block;
+  margin: 5px 0;
+  font-size: 20px;
 }
 
 .subcontainer {
+  margin: 0 5px 5px;
+  padding: 10px;
+  border: 1px solid #aabbfe;
+  border-radius: 10px;
   background: white;
-  margin: 5px;
-  padding: 5px;
+}
+
+.subcontainer a {
+  padding: 0 6px;
+  border-radius: 10px;
+  background: #def;
 }

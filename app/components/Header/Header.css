@@ -1,10 +1,52 @@
 .header {
+  min-height: 70px;
+  max-height: 120px;
+  padding-top: 15px;
+  margin: 0;
   text-align: center;
-  padding: 0;
-  background-color: #5c86ff;
-  background-image: linear-gradient(135deg, #5c86ff, #1c2040);
+  background-color: #002145;
+  background-image: linear-gradient(135deg, #002145, #2c76ff);
+  cursor: pointer;
 }
 
-.header h1 {
+.logo {
+  position: absolute;
+  height: 50px;
+  top: 10px;
+  left: 10px;
+}
+
+.title {
+  padding-top: 5px;
+  font-size: 2.5em;
+  line-height: 1em;
   color: white;
+}
+
+.subtitle {
+  display: none;
+  font-size: 1.2em;
+  color: white;
+}
+
+@media screen and (min-width: 980px) {
+  .header {
+    padding: 15px;
+  }
+
+  .logo {
+    top: 15px;
+    left: 15px;
+    height: 90px;
+  }
+
+  .title {
+    padding: 0;
+    font-size: 2.5em;
+    line-height: 1.5em;
+  }
+
+  .subtitle {
+    display: inline;
+  }
 }
