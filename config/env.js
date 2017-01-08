@@ -5,7 +5,7 @@ const config = {
   env,
   title: 'ClassPortal',
   app_address: 'http://localhost:3000',
-  api_address: 'http://localhost:5000',
+  api_address: 'http://192.168.1.65:5000',
   client_id: '7b22a00a9158cd0c43a1',
   team_size: 2,
   students_can_disband_teams: false,

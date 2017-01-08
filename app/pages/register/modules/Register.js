@@ -1,10 +1,10 @@
 import React from 'react';
 import { Form, FormField, Button, FormInput, FormIconField, Glyph } from 'elemental';
 import Module from '../../../components/Module/Module';
-import { registerRequest } from '../../../../app/ajax';
+import { registerRequest, pingRequest, pingRequest2 } from '../../../../app/ajax';
 import config from '../../../../config/env';
 
-function handleSubmit(e) {
+const handleSubmit = (e) => {
   e.preventDefault();
   const sid = e.target.elements[0].value;
   const csid = e.target.elements[1].value;
@@ -33,7 +33,33 @@ function handleSubmit(e) {
       localStorage.clear();
     },
   );
-}
+};
+
+const ping1 = () => {
+  const onSuccess = (response) => {
+    alert(`Success! Response: ${response}`);
+  };
+  const onError = (response) => {
+    alert(`Error! Response: ${response}`);
+  };
+  pingRequest(
+    onSuccess,
+    onError,
+  );
+};
+
+const ping2 = () => {
+  const onSuccess = (response) => {
+    alert(`Success! Response: ${response}`);
+  };
+  const onError = (response) => {
+    alert(`Error! Response: ${response}`);
+  };
+  pingRequest2(
+    onSuccess,
+    onError,
+  );
+};
 
 const Register = () => (
   <Module title="Register">
@@ -47,11 +73,18 @@ const Register = () => (
       </FormIconField>
       <FormField offsetAbsentLabel>
         <Button submit>
-          <Glyph icon="mark-github" />
-          &nbsp; Continue to GitHub
-            </Button>
+          <Glyph icon="mark-github" />&nbsp;Continue to GitHub
+        </Button>
       </FormField>
     </Form>
+    <Button onClick={ping1}>
+      <Glyph icon="mark-github" />
+      GET /api/ping
+    </Button>
+    <Button onClick={ping2}>
+      <Glyph icon="mark-github" />
+      POST /api/ping
+    </Button>
   </Module>
 );
 

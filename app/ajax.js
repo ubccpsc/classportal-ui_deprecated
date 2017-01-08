@@ -1,7 +1,8 @@
 import config from '../config/env';
 
 function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
+  // if (response.status >= 200 && response.status < 300) {
+  if (response.ok) {
     return Promise.resolve(response);
   } else {
     return Promise.reject(new Error(response.statusText));
@@ -40,9 +41,6 @@ export function registerRequest(csid, sid, successCallback, errorCallback) {
     headers: {
       'Content-type': 'application/json',
       Accept: 'application/json',
-      username: 'temp',
-      token: 'temp',
-      admin: '',
     },
     body: {
       csid,
@@ -182,17 +180,41 @@ export function submitGradeRequest(sid, assnId, grade, comment, successCallback,
     .catch(errorCallback);
 }
 
-export function submitClasslistRequest(formData, successCallback, errorCallback) {
-  fetch(`${config.api_address}/api/submitClasslist`, {
+export function updateClassRequest(csvFormData, successCallback, errorCallback) {
+  fetch(`${config.api_address}/api/class/list`, {
+    method: 'post',
+    headers: {
+      Accept: 'application/json',
+    },
+    body: csvFormData,
+  })
+    .then(checkStatus)
+    .then(getJson)
+    .then(successCallback)
+    .catch(errorCallback);
+}
+
+export function pingRequest(successCallback, errorCallback) {
+  fetch(`${config.api_address}/api/ping`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/json',
+      Accept: 'application/json',
+    },
+  })
+    .then(checkStatus)
+    .then(getJson)
+    .then(successCallback)
+    .catch(errorCallback);
+}
+
+export function pingRequest2(successCallback, errorCallback) {
+  fetch(`${config.api_address}/api/ping`, {
     method: 'post',
     headers: {
       'Content-type': 'application/json',
       Accept: 'application/json',
-      username: localStorage.username,
-      token: localStorage.token,
-      admin: localStorage.admin,
     },
-    body: { formData },
   })
     .then(checkStatus)
     .then(getJson)
