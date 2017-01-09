@@ -36,15 +36,11 @@ export function loginRequest(csid, sid, authcode, successCallback, errorCallback
 }
 
 export function registerRequest(csid, sid, successCallback, errorCallback) {
-  fetch(`${config.api_address}/api/register`, {
-    method: 'post',
+  fetch(`${config.api_address}/api/register?csid=${csid}&sid=${sid}`, {
+    method: 'get',
     headers: {
       'Content-type': 'application/json',
       Accept: 'application/json',
-    },
-    body: {
-      csid,
-      sid,
     },
   })
     .then(checkStatus)
