@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 
 import React from 'react';
-import Logout from '../../components/shared_modules/Logout';
+import Logout from '../student/modules/Logout';
 import { loadAdminPortalRequest } from '../../../app/ajax';
 
 class AdminPortal extends React.Component {

@@ -67,14 +67,11 @@ export function logoutRequest(successCallback, errorCallback) {
 }
 
 export function loadStudentPortalRequest(successCallback, errorCallback) {
-  fetch(`${config.api_address}/api/loadStudentPortal`, {
-    method: 'post',
+  fetch(`${config.api_address}/api/portal`, {
+    method: 'get',
     headers: {
       'Content-type': 'application/json',
       Accept: 'application/json',
-      username: localStorage.username,
-      token: localStorage.token,
-      admin: localStorage.admin,
     },
   })
     .then(checkStatus)

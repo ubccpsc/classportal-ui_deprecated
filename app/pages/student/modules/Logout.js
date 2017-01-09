@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormInput, FormIconField, Glyph, Button, InputGroup } from 'elemental';
 import { browserHistory } from 'react-router';
-import { logoutRequest } from '../../../app/ajax';
+import { logoutRequest } from '../../../ajax';
 
 function logoutSubmit(event) {
   event.preventDefault();

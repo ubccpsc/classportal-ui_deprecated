@@ -1,55 +1,64 @@
-import React from 'react';
-import Logout from '../../components/shared_modules/Logout';
-import Deliverables from './modules/Deliverables';
-import Grades from './modules/Grades';
-import Team from './modules/Team';
-import { loadStudentPortal } from '../../../app/ajax';
+import React, { PropTypes } from 'react';
+import User from './modules/User';
+// import Logout from './modules/Logout';
+// import Deliverables from './modules/Deliverables';
+// import Grades from './modules/Grades';
+// import Team from './modules/Team';
+import { loadStudentPortalRequest } from '../../../app/ajax';
 
-class StudentPortal extends React.Component {
-  getInitialState() {
-    return {
+// Presentational component that displays the data acquired by the container component
+const StudentPortal = (props) => (
+  <div>
+    <User student={props.data.student} />
+  </div>
+);
+/* <Team />
+<Deliverables deliverables={props.student.deliverables} grades={props.student.grades} />
+<Grades />*/
+
+StudentPortal.propTypes = {
+  data: PropTypes.shape({
+    student: PropTypes.shape({
+      username: PropTypes.string,
+      csid: PropTypes.string,
+      snum: PropTypes.string,
+      firstname: PropTypes.string,
+      lastname: PropTypes.string,
+    }),
+  }),
+  /* team: PropTypes.object,
+  grades: PropTypes.object,
+  deliverables: PropTypes.object,
+  studentsWithoutTeams: PropTypes.array,*/
+};
+
+// Container component that carries out the ajax fetch() request for student data.
+class StudentPortalContainer extends React.Component {
+  constructor() {
+    super();
+    this.state = {
       loaded: false,
-      files: {
-        myStudentFile: {},
-        myTeamFile: {},
-        myGradesFile: {},
-        deliverablesFile: {},
-        namesArray: [],
-      },
+      data: {},
     };
   }
 
   componentDidMount() {
-    loadStudentPortal(
+    loadStudentPortalRequest(
       (response) => {
-        // console.log("StudentPortal.js| Retrieved files:" + JSON.stringify(response, null, 2));
-        this.setState({ files: response }, () => {
+        console.log(JSON.stringify(response, null, 2));
+        this.setState({ data: response }, () => {
           this.setState({ loaded: true });
         });
       },
-      () => {
-        // console.log('error loading files');
+      (err) => {
+        alert(err);
       },
     );
   }
 
   render() {
-    return this.state.loaded && (
-      <div>
-        <Logout
-          firstname={this.state.files.myStudentFile.firstname}
-          sid={this.state.files.myStudentFile.sid}
-          username={localStorage.username}
-        />
-        <Team />
-        <Deliverables
-          deliverables={this.state.files.deliverablesFile}
-          grades={this.state.files.myGradesFile.grades}
-        />
-        <Grades />
-      </div>
-    );
+    return this.state.loaded && (<StudentPortal data={this.state.data} />);
   }
 }
 
-export default StudentPortal;
+export default StudentPortalContainer;
