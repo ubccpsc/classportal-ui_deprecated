@@ -1,84 +1,88 @@
-# ClassPortal UI
+# ClassPortal
 
-Frontend client for [ClassPortal][classportal].
+Static React frontend for ClassPortal. Built with help from [React Static Boilerplate][rsb].
 
-Built with
-- [React][react]
-- [Babel][babel]
-- [Webpack][webpack] with [Hot Module Replacement][hmr]
+This project requires access to a live instance of [ClassPortal API][classapi], configured in `/config/env.js`.
 
-## System overview
+## Table of Contents  
 
-Some docs will need to be provided to the system to set it up, these include:
+* [Directory Layout](#directory-layout)
+* [Getting Started](#getting-started)
+* [Develop](#develop)
+* [Contribute](#contribute)
 
-* Student list; this will be a CSV with these fields: ```<NAME>,<STUDENT NUMBER>,<CS LAB ID>```
-* Deliverable list; this will be a JSON file that will look just like an array of model.Deliverable objects.
-
-## Github requirements
-
-- Sign up for an organization in Github.
-- Make sure you set the "Default repository permission" in the Organization setting page to "none".
-- GithubProjectController has some hard coded fields for the organization
-  - these should change in the future, but if they haven't, make sure they are set for your org
-
-To send/recieve data; go to the portal directory on the non-server machine:
-
-To Send:
-```rsync -auvp HOST:/PATHTOPORTAL/priv/ priv/```
-
-To Receive:
-```rsync -auvp priv/ HOST:PATHTOPORTAL/priv/```
-
-## Install
+<a name="directory-layout"/>
+## Directory Layout
 
 ```sh
-$ git clone https://github.com/mksarge/classportal-ui.git
-$ npm install
+.
+├── app/                        # React app lives here!
+│   ├── index.js                # React application entry point
+│   ├── ajax.js                 # Http request methods
+│   ├── auth.js                 # Auth methods for restricted routes
+│   ├── components/             # Shared or generic UI components
+│   │   ├── Footer/             # Shared Footer component
+│   │   ├── Header/             # Shared Header component
+│   │   └── ...                 # etc.
+│   └── pages/                  # React components for web pages
+│       ├── admin/              # Admin page
+│       ├── login/              # Login page
+│       └── ...                 # etc.
+├── config/                     # Environment settings
+├── node_modules/               # 3rd-party libraries and utilities
+├── public/                     # Static files such as favicon.ico etc.
+│   ├── dist/                   # The folder for compiled output
+│   └── ...                     # etc.
+├── test/                       # Unit and integration tests
+├── utils/                      # Utility and helper classes
+│── package.json                # The list of project dependencies and NPM scripts
+│── routes.json                 # This list of application routes
+│── run.js                      # Build automation script, e.g. `node run build`
+└── webpack.config.js           # Bundling and optimization settings for Webpack
 ```
 
-## Lint
+<a name="getting-started"/>
+## Getting Started
+
+### Install
 
 ```sh
-// lint js
-npm run eslint
+git clone https://github.com/mksarge/classportal.git
+npm install
+```
 
-// lint css
-npm run stylelint
+### Lint
 
-// lint all
+Eslint and stylelint are used to lint `.js` and `.css` files, respectively.
+
+```sh
 npm run lint
 ```
 
-## Test
+### Test
 
 ```sh
-// run tests
 npm run test
 ```
 
-## Run
+### Build
+
+Webpack is used to bundle all of the js and css assets, and Hot Module Replacement allows live reloading of .js and .css files.
 
 ```sh
-// dev build with live reloading of .js and .css
-$ npm run start
+npm run start
+
 ```
 
-## Deploy
+<a name="develop"/>
+## Develop
 
-ClassPortal can be easily deployed to [Firebase][firebase]. Make sure your firebase app is configured in `.firebaserc` and `run.js`.
+under construction
 
-```sh
-// deploy
-$ npm run publish
-```
+<a name="contribute"/>
+## Contribute
 
-### License
+under construction
 
-MIT
-
-[classportal]: <https://classportal-116d2.firebaseapp.com/login>
-[react]: <https://facebook.github.io/react/>
-[babel]: <https://babeljs.io/>
-[webpack]: <https://webpack.github.io/>
-[hmr]: <https://webpack.github.io/docs/hot-module-replacement.html>
-[firebase]: <https://firebase.google.com/>
+[rsb]: <https://github.com/kriasoft/react-static-boilerplate>
+[classapi]: <https://github.com/mksarge/classportal-api>
