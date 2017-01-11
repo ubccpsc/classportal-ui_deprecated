@@ -43,11 +43,8 @@ class PostLoginPage extends React.Component {
   }
 
   sendCode(authcode) {
-    loginRequest(
-      localStorage.csid ? localStorage.csid : '',
-      localStorage.sid ? localStorage.sid : '',
-      authcode,
-      (response) => {
+    loginRequest(localStorage.csid ? localStorage.csid : '', localStorage.sid ? localStorage.sid : '', authcode)
+      .then((response) => {
         console.log('ajaxsuccess!');
         // console.log('PostLogin.js| Authentication success!
         // Response: ' + JSON.stringify(response));
@@ -80,8 +77,8 @@ class PostLoginPage extends React.Component {
             }, 2500);
           });
         }
-      },
-      (error) => {
+      })
+      .catch((error) => {
         console.log(`ajax fail: ${error}`);
         localStorage.clear();
         this.setState({ error: true }, () => {

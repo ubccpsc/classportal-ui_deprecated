@@ -138,20 +138,15 @@ class AdminStudents extends React.Component {
         return;
       }
     }
-    submitGradeRequest(
-      this.state.sid,
-      this.state.assnId,
-      intGrade,
-      this.state.comment,
-      () => {
+    submitGradeRequest(this.state.sid, this.state.assnId, intGrade, this.state.comment)
+      .then(() => {
         // alert("Success!")
         this.closeModal();
         window.location.reload(true);
-      },
-      () => {
+      })
+      .catch(() => {
         alert('Error submitting grades.');
-      },
-    );
+      });
   }
 
   toggleView(e) {

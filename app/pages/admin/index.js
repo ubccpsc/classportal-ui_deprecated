@@ -22,14 +22,13 @@ class AdminPortal extends React.Component {
   }
 
   componentDidMount() {
-    loadAdminPortalRequest(
-      (response) => {
+    loadAdminPortalRequest()
+      .then((response) => {
         this.setState({ files: response });
-      },
-      (error) => {
+      })
+      .catch((error) => {
         console.log(`Error loading files: ${error}`);
-      },
-    );
+      });
   }
 
   renderLogout() {

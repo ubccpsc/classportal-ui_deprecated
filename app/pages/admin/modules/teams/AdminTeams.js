@@ -36,33 +36,28 @@ function editGrades(event) {
 function addSelfToTeam(event) {
   event.preventDefault();
   if (confirm(`Would you like to assign yourself to team ${event.target.id}?`)) {
-    assignTeamRequest(
-      localStorage.username,
-      event.target.id,
-      () => {
+    assignTeamRequest(localStorage.username, event.target.id)
+      .then(() => {
         alert('Success!');
         window.location.reload(true);
-      },
-      () => {
+      })
+      .catch(() => {
         alert('Error: admin was not added.');
-      },
-    );
+      });
   }
 }
 
 function disbandTeam(event) {
   if (confirm(`Please confirm that you want to disband team ${event.target.id}.`)) {
-    disbandTeamRequest(
-      event.target.id,
-      () => {
+    disbandTeamRequest(event.target.id)
+      .then(() => {
         alert('Team has been disbanded!');
         window.location.reload(true);
-      },
-      () => {
+      })
+      .catch(() => {
         alert('Error: team could not be disbanded.');
         window.location.reload(true);
-      },
-    );
+      });
   }
 }
 

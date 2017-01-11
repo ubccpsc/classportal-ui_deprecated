@@ -23,19 +23,15 @@ class UploadClasslist extends React.Component {
       alert('Error: No file uploaded!');
     } else {
       // transform uploaded csv into formData for sending via ajax
-      const file = new FormData();
-      file.append(0, this.state.files[0]);
+      const csv = new FormData();
+      csv.append(0, this.state.files[0]);
 
       // POST api/class/list
-      updateClassRequest(
-        file,
-        (response) => {
+      updateClassRequest(csv)
+        .then((response) => {
           alert(`Success: ${response}`);
-        },
-        (response) => {
-          alert(`Error: ${response}`);
-        },
-      );
+        })
+        .catch((err) => { alert(err); });
     }
   }
 

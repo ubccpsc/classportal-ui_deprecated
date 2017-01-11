@@ -6,17 +6,15 @@ import config from '../../../../config/env';
 
 function disbandTeam(props) {
   if (confirm('Please confirm that you want to disband the team.')) {
-    disbandTeamRequest(
-      props.myTeamFile.id,
-      () => {
+    disbandTeamRequest(props.myTeamFile.id)
+      .then(() => {
         alert('Team has been disbanded!');
         window.location.reload(true);
-      },
-      () => {
+      })
+      .catch(() => {
         alert('Error: team could not be disbanded.');
         window.location.reload(true);
-      },
-    );
+      });
   }
 }
 

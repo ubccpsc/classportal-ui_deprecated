@@ -43,17 +43,16 @@ class StudentPortalContainer extends React.Component {
   }
 
   componentDidMount() {
-    loadStudentPortalRequest(
-      (response) => {
+    loadStudentPortalRequest()
+      .then((response) => {
         console.log(JSON.stringify(response, null, 2));
         this.setState({ data: response }, () => {
           this.setState({ loaded: true });
         });
-      },
-      (err) => {
+      })
+      .catch((err) => {
         alert(err);
-      },
-    );
+      });
   }
 
   render() {

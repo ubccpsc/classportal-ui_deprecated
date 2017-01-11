@@ -9,10 +9,8 @@ const handleSubmit = (e) => {
   const sid = e.target.elements[0].value;
   const csid = e.target.elements[1].value;
 
-  registerRequest(
-    csid,
-    sid,
-    () => {
+  registerRequest(csid, sid)
+    .then(() => {
       // clear any previously set values in localstorage
       localStorage.clear();
 
@@ -22,12 +20,11 @@ const handleSubmit = (e) => {
 
       // login with github
       window.location = `https://github.com/login/oauth/authorize?client_id=${config.client_id}&redirect_uri=${config.app_address}/postlogin`;
-    },
-    (err) => {
+    })
+    .catch((err) => {
       // err message
       alert(err);
-    },
-  );
+    });
 };
 
 const Register = () => (

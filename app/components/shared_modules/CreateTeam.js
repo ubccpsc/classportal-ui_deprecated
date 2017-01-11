@@ -33,17 +33,15 @@ class CreateTeam extends React.Component {
     }
 
     if (confirm(alertMessage)) {
-      createTeamRequest(
-        newTeamArray,
-        (response) => {
+      createTeamRequest(newTeamArray)
+        .then((response) => {
           // console.log("CreateTeam.js| Success: " + response);
           alert(`Success: Team ${response} created!`);
           window.location.reload(true);
-        },
-        () => {
+        })
+        .catch(() => {
           alert('Error: Could not create team.');
-        },
-      );
+        });
     }
   }
 

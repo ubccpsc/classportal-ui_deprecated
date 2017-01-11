@@ -5,17 +5,16 @@ import { logoutRequest } from '../../../ajax';
 
 function logoutSubmit(event) {
   event.preventDefault();
-  logoutRequest(
-    () => {
+  logoutRequest()
+    .then(() => {
       localStorage.clear();
       browserHistory.push('/login');
-    },
-    () => {
+    })
+    .catch(() => {
       // If the logout process fails, we still log the user out.
       localStorage.clear();
       browserHistory.push('/login');
-    },
-  );
+    });
 }
 
 const Logout = () => (
