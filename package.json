@@ -85,7 +85,7 @@
   },
   "scripts": {
     "eslint": "eslint src/ run.js webpack.config.js",
-    "stylelint": "stylelint \"public/**/*.css\"; stylelint \"app/**/*.css\"",
+    "stylelint": "stylelint \"public/index.css\"; stylelint \"app/**/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
     "clean": "node run clean",
     "build": "NODE_ENV='production' node run build",

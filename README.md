@@ -33,10 +33,9 @@ This project requires access to a live instance of [ClassPortal API][classapi], 
 ├── public/                     # Static files such as favicon.ico etc.
 │   ├── dist/                   # The folder for compiled output
 │   └── ...                     # etc.
-├── test/                       # Unit and integration tests
+├── test/                       # Tests
 ├── utils/                      # Utility and helper classes
 │── package.json                # The list of project dependencies and NPM scripts
-│── routes.json                 # This list of application routes
 │── run.js                      # Build automation script, e.g. `node run build`
 └── webpack.config.js           # Bundling and optimization settings for Webpack
 ```
