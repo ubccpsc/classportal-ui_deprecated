@@ -18,6 +18,7 @@ function checkNetworkError(response) {
   if (response instanceof TypeError && response.message === serverDownMessage) {
     return Promise.reject(alternativeMessage);
   } else {
+    console.log(response);
     return Promise.reject(response);
   }
 }
@@ -72,22 +73,9 @@ export function logoutRequest() {
     .catch(checkNetworkError);
 }
 
-export function loadStudentPortalRequest() {
-  return fetch(`${config.apiAddress}/api/portal`, {
+export function loadPortalRequest() {
+  return fetch(`${config.apiAddress}/api/load`, {
     method: 'get',
-    headers: {
-      'Content-type': 'application/json',
-      Accept: 'application/json',
-    },
-  })
-    .then(checkStatus)
-    .then(getJson)
-    .catch(checkNetworkError);
-}
-
-export function loadAdminPortalRequest() {
-  return fetch(`${config.apiAddress}/api/loadAdminPortal`, {
-    method: 'post',
     headers: {
       'Content-type': 'application/json',
       Accept: 'application/json',
