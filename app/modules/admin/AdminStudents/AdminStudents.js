@@ -144,9 +144,7 @@ class AdminStudents extends React.Component {
         this.closeModal();
         window.location.reload(true);
       })
-      .catch(() => {
-        alert('Error submitting grades.');
-      });
+      .catch(alert);
   }
 
   toggleView(e) {

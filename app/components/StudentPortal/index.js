@@ -50,9 +50,7 @@ class StudentPortalContainer extends React.Component {
           this.setState({ loaded: true });
         });
       })
-      .catch((err) => {
-        alert(err);
-      });
+      .catch(alert);
   }
 
   render() {

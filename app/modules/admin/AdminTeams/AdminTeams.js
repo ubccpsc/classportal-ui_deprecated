@@ -41,9 +41,7 @@ function addSelfToTeam(event) {
         alert('Success!');
         window.location.reload(true);
       })
-      .catch(() => {
-        alert('Error: admin was not added.');
-      });
+     .catch(alert);
   }
 }
 
@@ -54,10 +52,7 @@ function disbandTeam(event) {
         alert('Team has been disbanded!');
         window.location.reload(true);
       })
-      .catch(() => {
-        alert('Error: team could not be disbanded.');
-        window.location.reload(true);
-      });
+      .catch(alert);
   }
 }
 

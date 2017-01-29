@@ -39,9 +39,7 @@ class CreateTeam extends React.Component {
           alert(`Success: Team ${response} created!`);
           window.location.reload(true);
         })
-        .catch(() => {
-          alert('Error: Could not create team.');
-        });
+        .catch(alert);
     }
   }
 

@@ -11,10 +11,7 @@ function disbandTeam(props) {
         alert('Team has been disbanded!');
         window.location.reload(true);
       })
-      .catch(() => {
-        alert('Error: team could not be disbanded.');
-        window.location.reload(true);
-      });
+      .catch(alert);
   }
 }
 

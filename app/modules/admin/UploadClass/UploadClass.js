@@ -31,7 +31,7 @@ class UploadClasslist extends React.Component {
         .then((response) => {
           alert(`Success: ${response}`);
         })
-        .catch((err) => { alert(err); });
+        .catch(alert);
     }
   }
 

@@ -21,10 +21,7 @@ const handleSubmit = (e) => {
       // login with github
       window.location = `https://github.com/login/oauth/authorize?client_id=${config.clientId}&redirect_uri=${config.appAddress}/postlogin`;
     })
-    .catch((err) => {
-      // err message
-      alert(err);
-    });
+    .catch(alert);
 };
 
 const Register = () => (

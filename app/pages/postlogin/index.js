@@ -39,7 +39,7 @@ class PostLoginPage extends React.Component {
   componentDidMount() {
     getCode()
       .then(this.sendCode)
-      .catch((e) => console.log(e));
+      .catch(alert);
   }
 
   sendCode(authcode) {
@@ -79,7 +79,7 @@ class PostLoginPage extends React.Component {
         }
       })
       .catch((error) => {
-        console.log(`ajax fail: ${error}`);
+        alert(error);
         localStorage.clear();
         this.setState({ error: true }, () => {
           // display error message for 3 seconds before redirecting to login

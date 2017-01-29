@@ -26,9 +26,7 @@ class AdminPortal extends React.Component {
       .then((response) => {
         this.setState({ files: response });
       })
-      .catch((error) => {
-        console.log(`Error loading files: ${error}`);
-      });
+      .catch(alert);
   }
 
   renderLogout() {
