@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Button, FormInput, FormIconField, Glyph } from 'elemental';
 import Module from '../../../components/Module/Module';
 import { registerRequest } from '../../../../app/ajax';
-import config from '../../../../config/env';
+import config from '../../../config';
 
 const handleSubmit = (e) => {
   e.preventDefault();
@@ -19,7 +19,7 @@ const handleSubmit = (e) => {
       localStorage.setItem('csid', csid);
 
       // login with github
-      window.location = `https://github.com/login/oauth/authorize?client_id=${config.client_id}&redirect_uri=${config.app_address}/postlogin`;
+      window.location = `https://github.com/login/oauth/authorize?client_id=${config.clientId}&redirect_uri=${config.appAddress}/postlogin`;
     })
     .catch((err) => {
       // err message

@@ -2,7 +2,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import s from './Header.css';
-import config from '../../../config/env';
+import config from '../../config';
 
 function redirect(e) {
   e.preventDefault();

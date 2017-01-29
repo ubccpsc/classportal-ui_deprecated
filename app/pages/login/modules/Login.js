@@ -2,7 +2,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import { Form, FormField, Button, Glyph, ButtonGroup } from 'elemental';
 import Module from '../../../components/Module/Module';
-import config from '../../../../config/env';
+import config from '../../../config';
 
 function registerButton(e) {
   e.preventDefault();
@@ -11,8 +11,8 @@ function registerButton(e) {
 
 function loginButton(e) {
   e.preventDefault();
-  const redirectUri = `${config.app_address}/postlogin`;
-  window.location = `https://github.com/login/oauth/authorize?client_id=${config.client_id}&redirect_uri=${redirectUri}`;
+  const redirectUri = `${config.appAddress}/postlogin`;
+  window.location = `https://github.com/login/oauth/authorize?client_id=${config.clientId}&redirect_uri=${redirectUri}`;
 }
 
 const Login = () => (

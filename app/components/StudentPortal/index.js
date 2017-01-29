@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import User from './modules/User';
+import User from './User';
 // import Logout from './modules/Logout';
 // import Deliverables from './modules/Deliverables';
 // import Grades from './modules/Grades';

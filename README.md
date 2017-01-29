@@ -2,7 +2,7 @@
 
 Static React frontend for ClassPortal. Built with help from [React Static Boilerplate][rsb].
 
-This project requires access to a live instance of [ClassPortal API][classapi], configured in `/config/env.js`.
+This project requires access to a live instance of [ClassPortal API][classapi], configured in `/app/config.js`.
 
 ## Table of Contents  
 

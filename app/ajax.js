@@ -1,4 +1,4 @@
-import config from '../config/env';
+import config from './config';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -23,7 +23,7 @@ function checkNetworkError(response) {
 }
 
 export function loginRequest(csid, sid, authcode) {
-  return fetch(`${config.api_address}/api/login`, {
+  return fetch(`${config.apiAddress}/api/login`, {
     method: 'post',
     headers: {
       'Content-type': 'application/json',
@@ -44,7 +44,7 @@ export function loginRequest(csid, sid, authcode) {
 }
 
 export function registerRequest(csid, sid) {
-  return fetch(`${config.api_address}/api/register?csid=${csid}&sid=${sid}`, {
+  return fetch(`${config.apiAddress}/api/register?csid=${csid}&sid=${sid}`, {
     method: 'get',
     headers: {
       'Content-type': 'application/json',
@@ -57,7 +57,7 @@ export function registerRequest(csid, sid) {
 }
 
 export function logoutRequest() {
-  return fetch(`${config.api_address}/api/logout`, {
+  return fetch(`${config.apiAddress}/api/logout`, {
     method: 'post',
     headers: {
       'Content-type': 'application/json',
@@ -73,7 +73,7 @@ export function logoutRequest() {
 }
 
 export function loadStudentPortalRequest() {
-  return fetch(`${config.api_address}/api/portal`, {
+  return fetch(`${config.apiAddress}/api/portal`, {
     method: 'get',
     headers: {
       'Content-type': 'application/json',
@@ -86,7 +86,7 @@ export function loadStudentPortalRequest() {
 }
 
 export function loadAdminPortalRequest() {
-  return fetch(`${config.api_address}/api/loadAdminPortal`, {
+  return fetch(`${config.apiAddress}/api/loadAdminPortal`, {
     method: 'post',
     headers: {
       'Content-type': 'application/json',
@@ -102,7 +102,7 @@ export function loadAdminPortalRequest() {
 }
 
 export function createTeamRequest(teamMembers) {
-  return fetch(`${config.api_address}/api/team`, {
+  return fetch(`${config.apiAddress}/api/team`, {
     method: 'put',
     headers: {
       'Content-type': 'application/json',
@@ -119,7 +119,7 @@ export function createTeamRequest(teamMembers) {
 }
 
 export function disbandTeamRequest(teamId) {
-  return fetch(`${config.api_address}/api/team/${teamId}`, {
+  return fetch(`${config.apiAddress}/api/team/${teamId}`, {
     method: 'del',
     headers: {
       'Content-type': 'application/json',
@@ -135,7 +135,7 @@ export function disbandTeamRequest(teamId) {
 }
 
 export function assignTeamRequest(newTA, teamId) {
-  return fetch(`${config.api_address}/api/team/${teamId}`, {
+  return fetch(`${config.apiAddress}/api/team/${teamId}`, {
     method: 'post',
     headers: {
       'Content-type': 'application/json',
@@ -152,7 +152,7 @@ export function assignTeamRequest(newTA, teamId) {
 }
 
 export function submitGradeRequest(sid, assnId, grade, comment) {
-  return fetch(`${config.api_address}/api/submitGrade`, {
+  return fetch(`${config.apiAddress}/api/submitGrade`, {
     method: 'post',
     headers: {
       'Content-type': 'application/json',
@@ -174,7 +174,7 @@ export function submitGradeRequest(sid, assnId, grade, comment) {
 }
 
 export function updateClassRequest(csvFormData) {
-  return fetch(`${config.api_address}/api/class`, {
+  return fetch(`${config.apiAddress}/api/class`, {
     method: 'post',
     headers: {
       Accept: 'application/json',
@@ -187,7 +187,7 @@ export function updateClassRequest(csvFormData) {
 }
 
 export function pingRequest() {
-  return fetch(`${config.api_address}/api/ping`, {
+  return fetch(`${config.apiAddress}/api/ping`, {
     method: 'get',
     headers: {
       'Content-type': 'application/json',

@@ -1,7 +1,7 @@
 import React from 'react';
 import AdminTeams from './AdminTeams';
 import CreateProjects from './CreateProjects';
-import CreateTeam from '../../../../components/shared_modules/CreateTeam';
+import CreateTeam from '../../CreateTeam';
 
 const AdminTeamsView = (props) => (
   <div>

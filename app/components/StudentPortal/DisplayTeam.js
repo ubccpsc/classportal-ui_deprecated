@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormInput, FormIconField, Glyph, Button, InputGroup } from 'elemental';
-import Module from '../../../components/Module/Module';
-import { disbandTeamRequest } from '../../../../app/ajax';
-import config from '../../../../config/env';
+import Module from '../Module';
+import { disbandTeamRequest } from '../../ajax';
+import config from '../../config';
 
 function disbandTeam(props) {
   if (confirm('Please confirm that you want to disband the team.')) {
@@ -22,7 +22,7 @@ function renderMembers(props) {
   const members = [];
   let memberName;
 
-  for (let index = 0; index < config.team_size; index++) {
+  for (let index = 0; index < config.teamSize; index++) {
     memberName = props.teammateNames[index];
     members[index] =
       (<InputGroup.Section key={index} grow>
@@ -67,7 +67,7 @@ function renderTeam() {
     <div>
       <InputGroup >
         {renderMembers()}
-        {config.students_can_disband_teams &&
+        {config.studentsCanDisbandTeams &&
           (<InputGroup.Section>
             <Button size="sm" onClick={disbandTeam}><Glyph icon="tools" />&nbsp; Disband</Button>
           </InputGroup.Section>)}

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Module from '../../../components/Module/Module';
+import Module from '../Module';
 
 const User = (props) => {
   console.log('props');

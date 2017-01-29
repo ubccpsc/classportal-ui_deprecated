@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, FormField, Button } from 'elemental';
-import Module from '../../../../components/Module/Module';
-import { updateClassRequest } from '../../../../ajax';
+import Module from '../../Module';
+import { updateClassRequest } from '../../../ajax';
 
 class UploadClasslist extends React.Component {
   constructor() {

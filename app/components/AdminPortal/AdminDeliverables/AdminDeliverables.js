@@ -1,5 +1,5 @@
 import React from 'react';
-import Module from '../../../../components/Module/Module';
+import Module from '../../Module';
 
 class AdminDeliverables extends React.Component {
   renderDeliverables() {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, FormField, FormSelect, Button } from 'elemental';
 import Module from '../../components/Module/Module';
 import { createTeamRequest } from '../../../app/ajax';
-import config from '../../../config/env';
+import config from '../../config';
 
 class CreateTeam extends React.Component {
   getInitialState() {
@@ -15,7 +15,7 @@ class CreateTeam extends React.Component {
     let alertMessage = 'Forming team with students: ';
 
     // check for valid students
-    for (let i = 0; i < config.team_size; i++) {
+    for (let i = 0; i < config.teamSize; i++) {
       // check that there actually is a selected student at this index
       if (!!newTeamArray[i] && typeof newTeamArray[i] === 'string') {
         // check that this student was not previously selected
@@ -60,7 +60,7 @@ class CreateTeam extends React.Component {
     const oneOrMoreDropdowns = [];
 
     // build array of dropdown menus depending on specified team size
-    for (let index = 0; index < config.team_size; index++) {
+    for (let index = 0; index < config.teamSize; index++) {
       if (index === 0 && this.props.isAdmin !== 'true') {
         oneOrMoreDropdowns[index] = this.renderFirstDropdown();
       } else {

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Module from '../../../components/Module/Module';
+import Module from '../Module';
 
 function renderGrades() {
   const block = [];

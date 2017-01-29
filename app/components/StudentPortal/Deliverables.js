@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { Modal, ModalHeader, ModalFooter, ModalBody, Button } from 'elemental';
-import Module from '../../../components/Module/Module';
+import Module from '../Module';
 
 class Deliverables extends React.Component {
   getInitialState() {

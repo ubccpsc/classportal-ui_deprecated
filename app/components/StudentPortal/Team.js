@@ -1,6 +1,6 @@
 import React from 'react';
 import DisplayTeam from './DisplayTeam';
-import CreateTeam from '../../../components/shared_modules/CreateTeam';
+import CreateTeam from '../CreateTeam';
 
 function renderTeamDisplay(props) {
   let renderTeam;

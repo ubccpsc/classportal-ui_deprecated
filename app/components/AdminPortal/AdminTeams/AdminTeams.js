@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, FormField, Button } from 'elemental';
-import Module from '../../../../components/Module/Module';
-import { assignTeamRequest, disbandTeamRequest } from '../../../../ajax';
+import Module from '../../Module';
+import { assignTeamRequest, disbandTeamRequest } from '../../../ajax';
 
 function toggleView(e) {
   e.preventDefault();

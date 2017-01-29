@@ -11,9 +11,9 @@ const ejs = require('ejs');
 const webpack = require('webpack');
 
 const config = {
-  title: 'ClassPortal',
-  url: '',
-  project: 'classportal-116d2',
+  title: 'UBC ClassPortal',
+  url: 'https://ubc-classportal.firebaseapp.com',
+  project: 'ubc-classportal',
   trackingID: '',
 };
 
