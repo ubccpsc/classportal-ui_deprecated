@@ -1,66 +1,38 @@
-/* eslint-disable no-constant-condition */
-/* eslint-disable react/prop-types */
-
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Logout from '../../modules/common/Logout';
-import { loadAdminPortalRequest } from '../../../app/ajax';
+import AdminStudentsView from './AdminStudentsView';
 
-class AdminPortal extends React.Component {
-  getInitialState() {
-    return {
-      loaded: false,
-      files: {
-        adminsFile: {},
-        myAdminIndex: 0,
-        studentsFile: {},
-        teamsFile: {},
-        deliverablesFile: {},
-        gradesFile: {},
-        namesArray: [],
-      },
-    };
+function renderLogout(files) {
+  let firstname = null;
+  let prof = null;
+
+  if (files.adminsFile.length >= 0) {
+    firstname = files.adminsFile[files.myAdminIndex].firstname;
+    prof = files.adminsFile[files.myAdminIndex].prof;
   }
 
-  componentDidMount() {
-    loadAdminPortalRequest()
-      .then((response) => {
-        this.setState({ files: response });
-      })
-      .catch(alert);
-  }
-
-  renderLogout() {
-    let firstname = null;
-    let prof = null;
-
-    if (this.state.files.adminsFile.length >= 0) {
-      firstname = this.state.files.adminsFile[this.state.files.myAdminIndex].firstname;
-      prof = this.state.files.adminsFile[this.state.files.myAdminIndex].prof;
-    }
-
-    return (
-      <Logout
-        firstname={firstname}
-        sid={prof ? 'Prof' : 'TA'}
-        username={localStorage.username}
-      />
-    );
-  }
-
-  render() {
-    // more info: http://stackoverflow.com/questions/32370994/how-to-pass-props-to-this-props-children
-    const childrenWithProps = React.Children.map(
-      this.props.children,
-      (child) => React.cloneElement(child, { files: this.state.files }),
-    );
-
-    return (
-      <div>
-        {this.renderLogout()}
-        {this.state.loaded && childrenWithProps}
-      </div>
-    );
-  }
+  return (
+    <Logout
+      firstname={firstname}
+      sid={prof ? 'Prof' : 'TA'}
+      username={localStorage.username}
+    />
+  );
 }
+
+const AdminPortal = (props) => (
+  <div>
+    {renderLogout(props.data.files)}
+    <AdminStudentsView data={props.data} />
+  </div>
+);
+
+AdminPortal.propTypes = {
+  data: PropTypes.any, // eslint-disable-line
+};
+
+AdminPortal.defaultProps = {
+  data: null,
+};
 
 export default AdminPortal;

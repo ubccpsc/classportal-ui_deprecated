@@ -1,20 +1,19 @@
 import React, { PropTypes } from 'react';
 import User from '../../modules/student/User';
-// import Logout from './modules/Logout';
-// import Deliverables from './modules/Deliverables';
-// import Grades from './modules/Grades';
-// import Team from './modules/Team';
-import { loadStudentPortalRequest } from '../../../app/ajax';
+import Logout from '../../modules/common/Logout';
+import Deliverables from '../../modules/student/Deliverables';
+import Grades from '../../modules/student/Grades';
+import Team from '../../modules/student/Team';
 
-// Presentational component that displays the data acquired by the container component
 const StudentPortal = (props) => (
   <div>
+    <Logout />
     <User student={props.data.student} />
+    <Team />
+    <Deliverables deliverables={props.student.deliverables} grades={props.student.grades} />
+    <Grades />
   </div>
 );
-/* <Team />
-<Deliverables deliverables={props.student.deliverables} grades={props.student.grades} />
-<Grades />*/
 
 StudentPortal.propTypes = {
   data: PropTypes.shape({
@@ -32,30 +31,4 @@ StudentPortal.propTypes = {
   studentsWithoutTeams: PropTypes.array,*/
 };
 
-// Container component that carries out the ajax fetch() request for student data.
-class StudentPortalContainer extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      loaded: false,
-      data: {},
-    };
-  }
-
-  componentDidMount() {
-    loadStudentPortalRequest()
-      .then((response) => {
-        console.log(JSON.stringify(response, null, 2));
-        this.setState({ data: response }, () => {
-          this.setState({ loaded: true });
-        });
-      })
-      .catch(alert);
-  }
-
-  render() {
-    return this.state.loaded && (<StudentPortal data={this.state.data} />);
-  }
-}
-
-export default StudentPortalContainer;
+export default StudentPortal;

@@ -7,8 +7,9 @@ import Module from '../../../components/Module';
 import { submitGradeRequest } from '../../../ajax';
 
 class AdminStudents extends React.Component {
-  getInitialState() {
-    return {
+  constructor() {
+    super();
+    this.state = {
       viewAll: true,
       modalIsOpen: false,
       gradesModalIsOpen: false,
@@ -19,6 +20,24 @@ class AdminStudents extends React.Component {
       grade: '',
       comment: '',
     };
+    this.getTeamFromSid = this.getTeamFromSid.bind(this);
+    this.setNewGrade = this.setNewGrade.bind(this);
+    this.setNewComment = this.setNewComment.bind(this);
+    this.handleSelectAssignment = this.handleSelectAssignment.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.openGradesModal = this.openGradesModal.bind(this);
+    this.closeGradesModal = this.openGradesModal.bind(this);
+    this.returnGradeAndComment = this.returnGradeAndComment.bind(this);
+    this.submitGrades = this.submitGrades.bind(this);
+    this.toggleView = this.toggleView.bind(this);
+    this.renderDeliverableHeaders = this.renderDeliverableHeaders.bind(this);
+    this.renderDeliverables = this.renderDeliverables.bind(this);
+    this.renderGrades = this.renderGrades.bind(this);
+    this.renderOneStudent = this.renderOneStudent.bind(this);
+    this.renderStudents = this.renderStudents.bind(this);
   }
 
   componentDidMount() {

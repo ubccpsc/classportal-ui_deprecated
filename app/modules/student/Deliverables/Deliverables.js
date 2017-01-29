@@ -4,11 +4,17 @@ import { Modal, ModalHeader, ModalFooter, ModalBody, Button } from 'elemental';
 import Module from '../../../components/Module';
 
 class Deliverables extends React.Component {
-  getInitialState() {
-    return {
+  constructor() {
+    super();
+    this.state = {
       modalIsOpen: false,
       assnId: '',
     };
+    this.returnGradeAndComment = this.returnGradeAndComment.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.renderTable = this.renderTable.bind(this);
+    this.renderOneRow = this.renderOneRow.bind(this);
   }
 
   returnGradeAndComment(assnId) {

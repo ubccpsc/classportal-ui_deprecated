@@ -5,8 +5,14 @@ import { createTeamRequest } from '../../../../app/ajax';
 import config from '../../../config';
 
 class CreateTeam extends React.Component {
-  getInitialState() {
-    return { newTeamArray: [] };
+  constructor() {
+    super();
+    this.state = { newTeamArray: [] };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelect = this.handleSubmit.bind(this);
+    this.renderForm = this.renderForm.bind(this);
+    this.renderDropdown = this.renderDropdown.bind(this);
+    this.renderFirstDropdown = this.renderFirstDropdown.bind(this);
   }
 
   handleSubmit(e) {
