@@ -15,6 +15,11 @@ const config = {
   url: 'https://ubc-classportal.firebaseapp.com',
   project: 'ubc-classportal',
   trackingID: '',
+  routes: [
+    '/',
+    '/login',
+    '/register',
+  ],
 };
 
 const tasks = new Map(); // The collection of automation tasks ('clean', 'build', 'publish', etc.)
@@ -45,6 +50,17 @@ tasks.set('html', () => {
 });
 
 //
+// Generate sitemap.xml
+// -----------------------------------------------------------------------------
+tasks.set('sitemap', () => {
+  const urls = config.routes;
+  const template = fs.readFileSync('./public/sitemap.ejs', 'utf8');
+  const render = ejs.compile(template, { filename: './public/sitemap.ejs' });
+  const output = render({ config, urls });
+  fs.writeFileSync('public/sitemap.xml', output, 'utf8');
+});
+
+//
 // Bundle JavaScript, CSS and image files with Webpack
 // -----------------------------------------------------------------------------
 tasks.set('bundle', () => {
@@ -69,7 +85,8 @@ tasks.set('build', () => {
   return Promise.resolve()
     .then(() => run('clean'))
     .then(() => run('bundle'))
-    .then(() => run('html'));
+    .then(() => run('html'))
+    .then(() => run('sitemap'));
 });
 
 //
