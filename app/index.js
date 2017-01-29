@@ -7,15 +7,15 @@ import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
 import PostloginPage from './pages/postlogin';
 import ErrorPage from './pages/error';
-import { requireNoAuth, requireAuth } from './auth';
+import * as auth from './auth';
 
 render((
   <Router history={browserHistory}>
     <Route path="/" component={Layout}>
-      <IndexRoute component={Portal} onEnter={requireAuth} />
-      <Route path="login" component={LoginPage} onEnter={requireNoAuth} />
-      <Route path="postlogin" component={PostloginPage} onEnter={requireNoAuth} />
-      <Route path="register" component={RegisterPage} onEnter={requireNoAuth} />
+      <IndexRoute component={Portal} onEnter={auth.loggedIn} />
+      <Route path="login" component={LoginPage} onEnter={auth.notLoggedIn} />
+      <Route path="register" component={RegisterPage} onEnter={auth.notLoggedIn} />
+      <Route path="postlogin" component={PostloginPage} onEnter={auth.postLogin} />
       <Route path="*" component={ErrorPage} />
     </Route>
   </Router>

@@ -2,7 +2,7 @@
  * Allow entry only if user is not logged in.
  * If the user is logged in, redirect to '/'
  */
-function requireNoAuth(nextState, replace) {
+function notLoggedIn(nextState, replace) {
   if (localStorage.token) {
     // console.log(localStorage: ${JSON.stringify(localStorage)}`);
     replace({
@@ -15,7 +15,7 @@ function requireNoAuth(nextState, replace) {
 /**
  * Allow entry only if user is logged in.
  */
-function requireAuth(nextState, replace) {
+function loggedIn(nextState, replace) {
   if (!localStorage.token) {
     // console.log(localStorage: ${JSON.stringify(localStorage)}`);
     replace({
@@ -25,4 +25,17 @@ function requireAuth(nextState, replace) {
   }
 }
 
-export { requireNoAuth, requireAuth };
+/**
+ * Allow entry only if user is logged in.
+ */
+function postLogin(nextState, replace) {
+  if (!localStorage.temp) {
+    // console.log(localStorage: ${JSON.stringify(localStorage)}`);
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname },
+    });
+  }
+}
+
+export { loggedIn, notLoggedIn, postLogin };
