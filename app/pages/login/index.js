@@ -1,13 +1,11 @@
 import React from 'react';
-import Login from './modules/Login';
-import Privacy from './modules/Privacy';
-import UploadClasslist from '../../components/AdminPortal/AdminStudents/UploadClasslist';
+import Login from '../../modules/common/Login';
+import Privacy from '../../modules/common/Privacy';
 
 const LoginPage = () => (
   <div>
     <Login />
     <Privacy />
-    <UploadClasslist />
   </div>
 );
 

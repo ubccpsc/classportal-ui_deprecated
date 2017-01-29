@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { browserHistory } from 'react-router';
-import PostLogin from './modules/PostLogin';
+import PostLogin from '../../modules/common/PostLogin';
 import { loginRequest } from '../../../app/ajax';
 
 function getCode() {
