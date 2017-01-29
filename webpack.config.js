@@ -97,10 +97,6 @@ const config = {
           'postcss-loader',
         ],
       },
-      {
-        test: /\.md$/,
-        loader: path.resolve(__dirname, './utils/markdown-loader.js'),
-      },
     ],
   },
 
