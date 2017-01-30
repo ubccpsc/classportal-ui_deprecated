@@ -1,10 +1,14 @@
+# Compiled output
+public/dist
+public/index.html
+public/sitemap.xml
+
 # Node.js and NPM
 node_modules
 npm-debug.log
 
-# Compiled output
-public/dist
-public/index.html
+# Firebase
+firebase-debug.log
 
 #VS Code Settings
 .vscode/
