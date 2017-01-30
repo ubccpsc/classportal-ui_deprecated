@@ -1,6 +1,8 @@
 import React from 'react';
 import Module from '../../../components/Module';
 
+const api = 'https://developer.github.com/v3/';
+
 const Privacy = () => (
   <Module title="Privacy Policy">
     <h5>
@@ -10,7 +12,7 @@ const Privacy = () => (
       At any time, you can view and/or revoke the access token granted, by accessing the
       &quot;OAuth Applications&quot; tab of your settings page on GitHub.<br /><br />
       For more information, visit:&nbsp;
-      <a href="https://developer.github.com/v3/" target="blank">https://developer.github.com/v3/</a>
+      <a href={api} target="blank">{api}</a>
     </h5>
   </Module>
 );

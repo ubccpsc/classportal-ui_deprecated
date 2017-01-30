@@ -5,15 +5,14 @@ const config = {
   env,
   title: 'UBC ClassPortal',
   subtitle: 'Advanced Software Engineering',
+  github: 'https://github.com/mksarge/classportal',
   appAddress: 'http://localhost:3000',
   apiAddress: 'http://localhost:5000',
   clientId: '7b22a00a9158cd0c43a1',
   teamSize: 2,
   studentsCanDisbandTeams: false,
-  github: {
-    clientID: process.env.GITHUB_CLIENTID,
-    clientSecret: process.env.GITHUB_SECRET,
-  },
+  githubClientID: process.env.GITHUB_CLIENTID,
+  githubclientSecret: process.env.GITHUB_SECRET,
 };
 
 // alternative settings for test environment

@@ -4,6 +4,8 @@ import Module from '../../../components/Module/Module';
 import { registerRequest } from '../../../../app/ajax';
 import config from '../../../config';
 
+const githubOauth = 'https://github.com/login/oauth/authorize';
+
 const handleSubmit = (e) => {
   e.preventDefault();
   const sid = e.target.elements[0].value;
@@ -19,7 +21,7 @@ const handleSubmit = (e) => {
       localStorage.setItem('csid', csid);
 
       // login with github
-      window.location = `https://github.com/login/oauth/authorize?client_id=${config.clientId}&redirect_uri=${config.appAddress}/postlogin`;
+      window.location = `${githubOauth}?client_id=${config.clientId}&redirect_uri=${config.appAddress}/postlogin`;
     })
     .catch(alert);
 };

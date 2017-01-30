@@ -4,6 +4,8 @@ import { Form, FormField, Button, Glyph, ButtonGroup } from 'elemental';
 import Module from '../../../components/Module';
 import config from '../../../config';
 
+const githubOauth = 'https://github.com/login/oauth/authorize';
+
 function registerButton(e) {
   e.preventDefault();
   browserHistory.push('/register');
@@ -12,7 +14,7 @@ function registerButton(e) {
 function loginButton(e) {
   e.preventDefault();
   const redirectUri = `${config.appAddress}/postlogin`;
-  window.location = `https://github.com/login/oauth/authorize?client_id=${config.clientId}&redirect_uri=${redirectUri}`;
+  window.location = `${githubOauth}?client_id=${config.clientId}&redirect_uri=${redirectUri}`;
 }
 
 const Login = () => (
