@@ -25,17 +25,4 @@ function loggedIn(nextState, replace) {
   }
 }
 
-/**
- * Allow entry only if user is logged in.
- */
-function postLogin(nextState, replace) {
-  if (!localStorage.temp) {
-    // console.log(localStorage: ${JSON.stringify(localStorage)}`);
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname },
-    });
-  }
-}
-
-export { loggedIn, notLoggedIn, postLogin };
+export { loggedIn, notLoggedIn };

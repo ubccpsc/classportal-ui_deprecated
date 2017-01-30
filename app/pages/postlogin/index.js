@@ -8,21 +8,14 @@ import { loginRequest } from '../../../app/ajax';
 function getCode() {
   return new Promise((resolve, reject) => {
     try {
-      console.log('getting stuff (takes 5 secs..)');
-      setTimeout(() => {
-        console.log('got it now.');
-
-        const url = window.location.href;
-        const validAuthCode = /[?]code=([\w\/\-]+)/;
-
-        if (validAuthCode.test(url)) {
-          const authcode = url.split('code=')[1];
-          // console.log("PostLogin.js| Obtained authcode: " + authcode)
-          resolve(authcode);
-        } else {
-          reject('oops');
-        }
-      }, 5000);
+      const url = window.location.href;
+      const validAuthCode = /[?]code=([\w\/\-]+)/;
+      if (validAuthCode.test(url)) {
+        const authcode = url.split('code=')[1];
+        resolve(authcode);
+      } else {
+        reject('Error: Invalid authcode.');
+      }
     } catch (err) {
       reject(err);
     }
@@ -34,60 +27,50 @@ class PostLoginPage extends React.Component {
     super();
     this.state = { error: false };
     this.sendCode = this.sendCode.bind(this);
+    this.handleError = this.handleError.bind(this);
   }
 
   componentDidMount() {
     getCode()
       .then(this.sendCode)
-      .catch(alert);
+      .catch(this.handleError);
   }
+
+  /**
+ * .catch() handler for postloging authentication.
+ * Alerts the user with the error, then redirects to login page.
+ */
+  handleError(error) {
+    alert(error);
+    localStorage.clear();
+    this.setState({ error: true }, () => {
+      // display error message for 3 seconds before redirecting to login
+      setTimeout(() => {
+        browserHistory.push('/');
+      }, 2500);
+    });
+  }
+
 
   sendCode(authcode) {
     loginRequest(localStorage.csid ? localStorage.csid : '', localStorage.sid ? localStorage.sid : '', authcode)
       .then((response) => {
-        console.log('ajaxsuccess!');
-        // console.log('PostLogin.js| Authentication success!
-        // Response: ' + JSON.stringify(response));
-        const admin = response.admin;
-        const username = response.username;
         const token = response.token;
-
-        // clear any previously saved values in localstorage
-        localStorage.clear();
+        const username = response.username;
+        const admin = response.admin;
 
         if (!!username && !!token) {
-          if (admin === true) {
-            // console.log("PostLogin.js| Admin login! Redirecting..");
-            localStorage.setItem('username', username);
-            localStorage.setItem('token', token);
-            localStorage.setItem('admin', 'true');
-            browserHistory.push('/admin');
-          } else {
-            // console.log("PostLogin.js| Student login! Redirecting..");
-            localStorage.setItem('username', username);
-            localStorage.setItem('token', token);
-            browserHistory.push('/');
-          }
+          localStorage.clear();
+          localStorage.setItem('token', token);
+          localStorage.setItem('username', username);
+          localStorage.setItem('admin', admin);
+          browserHistory.push('/');
+          return Promise.resolve();
         } else {
-          // bad login, so send back to login page
-          this.setState({ error: true }, () => {
-            // console.log('Login failed! Redirecting..');
-            setTimeout(() => {
-              browserHistory.push('/');
-            }, 2500);
-          });
+          return Promise.reject('Error loading user info.');
         }
       })
-      .catch((error) => {
-        alert(error);
-        localStorage.clear();
-        this.setState({ error: true }, () => {
-          // display error message for 3 seconds before redirecting to login
-          setTimeout(() => {
-            browserHistory.push('/');
-          }, 2500);
-        });
-      });
+      .catch(this.handleError);
   }
 
   render() {

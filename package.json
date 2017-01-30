@@ -2,7 +2,7 @@
   "name": "classportal",
   "version": "1.0.0",
   "author": "Michael Sargent",
-  "description": "classportal",
+  "description": "classportal frontend",
   "license": "MIT",
   "keywords": [
     "react"
@@ -11,6 +11,10 @@
     "type": "git",
     "homepage": "https://github.com/mksarge/classportal",
     "bugs": "https://github.com/mksarge/classportal/issues"
+  },
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3.8"
   },
   "dependencies": {
     "elemental": "^0.6.1",

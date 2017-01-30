@@ -14,7 +14,7 @@ function getJson(response) {
 
 function checkNetworkError(response) {
   const serverDownMessage = 'NetworkError when attempting to fetch resource.';
-  const alternativeMessage = 'Oops! Looks like the ClassPortal server is down right now. Sorry!';
+  const alternativeMessage = 'Oops, the ClassPortal server is down right now! Please try again later.';
   if (response instanceof TypeError && response.message === serverDownMessage) {
     return Promise.reject(alternativeMessage);
   } else {
