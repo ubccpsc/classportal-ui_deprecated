@@ -33,6 +33,8 @@ const config = {
   // The entry point for the bundle
   entry: [
     /* Reset CSS */
+    '!!style-loader!css-loader!./public/elementalui.min.css',
+    /* Reset CSS */
     '!!style-loader!css-loader!./public/index.css',
     /* The main entry point of your JavaScript application */
     './app/index.js',
