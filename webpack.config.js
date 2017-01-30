@@ -8,7 +8,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-/* eslint-disable global-require */
+/* eslint-disable global-require, max-len */
 
 const path = require('path');
 const webpack = require('webpack');
@@ -32,8 +32,6 @@ const config = {
 
   // The entry point for the bundle
   entry: [
-    /* Import styles for Elemental-UI */
-    '!!style-loader!css-loader!./public/elementalui.min.css',
     /* Reset CSS */
     '!!style-loader!css-loader!./public/index.css',
     /* The main entry point of your JavaScript application */
@@ -118,6 +116,21 @@ const config = {
             loader: 'postcss-loader',
           },
         ],
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+        },
+      },
+      {
+        test: /\.(eot|ttf|wav|mp3)$/,
+        loader: 'file-loader',
       },
     ],
   },
