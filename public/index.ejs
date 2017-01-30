@@ -1,14 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
+    <title><%= config.title %></title>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=config.title%></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,400italic,500,500italic,700,700italic,900">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
   </head>
   <body>
     <div id="app"></div>
-    <script src=".<%= bundle %>"></script>
+    <script src="<%= bundle %>"></script>
     <%_ if (!debug && config.trackingID) { _%>
     <script>
       window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
