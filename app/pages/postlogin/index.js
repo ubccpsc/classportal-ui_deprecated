@@ -66,9 +66,8 @@ class PostLoginPage extends React.Component {
           localStorage.setItem('admin', admin);
           browserHistory.push('/');
           return Promise.resolve();
-        } else {
-          return Promise.reject('Error loading user info.');
         }
+        return Promise.reject('Error loading user info.');
       })
       .catch(this.handleError);
   }

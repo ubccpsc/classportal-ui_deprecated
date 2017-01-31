@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Form, FormField, FormSelect, Button } from 'elemental';
 import Module from '../../../components/Module/Module';
 import { createTeamRequest } from '../../../../app/ajax';
@@ -116,5 +116,11 @@ class CreateTeam extends React.Component {
     );
   }
 }
+
+CreateTeam.propTypes = {
+  isAdmin: PropTypes.bool,
+  namesArray: PropTypes.any, // eslint-disable-line
+  studentName: PropTypes.string,
+};
 
 export default CreateTeam;

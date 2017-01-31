@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import s from './Module.css';
 
 // parent component for all content modules.
@@ -8,5 +8,10 @@ const Module = (props) => (
     <div className={s.subcontainer} >{props.children}</div>
   </div>
 );
+
+Module.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.any, //eslint-disable-line
+};
 
 export default Module;

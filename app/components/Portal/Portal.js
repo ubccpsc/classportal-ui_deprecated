@@ -15,6 +15,7 @@ class Portal extends React.Component {
   componentWillMount() {
     loadPortalRequest()
       .then((response) => {
+        console.log(response);
         this.setState({ data: response, loaded: true });
       })
       .catch(alert);

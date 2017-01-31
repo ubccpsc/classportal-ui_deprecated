@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormInput, FormIconField, Glyph, Button, InputGroup } from 'elemental';
 import Module from '../../../components/Module';
 import { disbandTeamRequest } from '../../../ajax';
@@ -15,69 +15,51 @@ function disbandTeam(props) {
   }
 }
 
-function renderMembers(props) {
-  const members = [];
-  let memberName;
-
-  for (let index = 0; index < config.teamSize; index++) {
-    memberName = props.teammateNames[index];
-    members[index] =
-      (<InputGroup.Section key={index} grow>
-        <FormIconField iconPosition="left" iconKey="mortar-board">
-          <FormInput placeholder={` ${memberName}`} size="sm" disabled />
-        </FormIconField>
-      </InputGroup.Section>);
-  }
-  return members;
+function renderMembers(teammates) {
+  return teammates.map((val, index) => (<InputGroup.Section key={index} grow>
+    <FormIconField iconPosition="left" iconKey="mortar-board">
+      <FormInput placeholder={` ${val}`} size="sm" disabled />
+    </FormIconField>
+  </InputGroup.Section>));
 }
 
-function renderRepoButton(props) {
-  function alertOnClick() {
-    alert('Team repository has not yet been set by the prof.');
-  }
-
-  let button;
-
-  if (!props.myTeamFile.url) {
-    button = (
-      <InputGroup.Section>
-        <Button size="sm" onClick={alertOnClick}>
-          <Glyph icon="organization" />&nbsp; Repo
-          </Button>
-      </InputGroup.Section >);
-  } else {
-    button = (
-      <InputGroup.Section>
-        <a href={props.myTeamFile.url} target="blank" >
-          <Button size="sm" ><Glyph icon="organization" />
-            &nbsp; Repo
+const RepoButton = (props) => (props.url
+  ? (<InputGroup.Section>
+    <a href={props.url} target="blank" >
+      <Button size="sm" ><Glyph icon="organization" />
+        &nbsp; Repo
             </Button>
-        </a>
-      </InputGroup.Section>);
-  }
+    </a>
+  </InputGroup.Section>)
+  : (<InputGroup.Section>
+    <Button size="sm" onClick={() => alert('Team repository has not yet been set by the prof.')}>
+      <Glyph icon="organization" />&nbsp; Repo
+          </Button>
+  </InputGroup.Section >));
 
-  return button;
-}
+RepoButton.propTypes = {
+  url: PropTypes.string,
+};
 
-function renderTeam() {
-  return (
+const DisplayTeam = (props) => (
+  <Module title={`Team ${props.myTeamFile.id}`} initialHideContent={false}>
     <div>
       <InputGroup >
-        {renderMembers()}
+        {renderMembers(props.myTeamFile.members)}
         {config.studentsCanDisbandTeams &&
           (<InputGroup.Section>
             <Button size="sm" onClick={disbandTeam}><Glyph icon="tools" />&nbsp; Disband</Button>
           </InputGroup.Section>)}
-        {renderRepoButton()}
+        <RepoButton url={props.myTeamFile.url} />
       </InputGroup>
     </div>
-  );
-}
-
-const DisplayTeam = (props) => (
-  <Module id="display-team-module" title={`Team ${props.myTeamFile.id}`} initialHideContent={false}>
-    {renderTeam}
   </Module>
 );
+
+DisplayTeam.propTypes = {
+  myStudentFile: PropTypes.any, // eslint-disable-line
+  myTeamFile: PropTypes.any, // eslint-disable-line
+  namesArray: PropTypes.any, // eslint-disable-line
+};
 
 export default DisplayTeam;

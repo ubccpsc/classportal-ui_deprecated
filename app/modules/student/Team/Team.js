@@ -1,27 +1,24 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import DisplayTeam from '../DisplayTeam';
 import CreateTeam from '../../common/CreateTeam';
 
-function renderTeamDisplay(props) {
-  let renderTeam;
-  if (props.myStudentFile.hasTeam === true) {
-    renderTeam = (
-      <DisplayTeam
-        myTeamFile={props.myTeamFile}
-        teammateNames={props.namesArray}
-      />
-    );
-  } else {
-    renderTeam = (
-      <CreateTeam
-        namesArray={props.namesArray}
-        isAdmin="false"
-        studentName={`${props.myStudentFile.firstname} ${props.myStudentFile.lastname}`}
-      />);
-  }
-  return renderTeam;
-}
+const Team = (props) => (
+  (props.myStudentFile.hasTeam === true)
+    ? (<DisplayTeam
+      myTeamFile={props.myTeamFile}
+      teammateNames={props.namesArray}
+    />)
+    : (<CreateTeam
+      namesArray={props.namesArray}
+      isAdmin={false}
+      studentName={`${props.myStudentFile.firstname} ${props.myStudentFile.lastname}`}
+    />)
+);
 
-const Team = () => renderTeamDisplay();
+Team.propTypes = {
+  myStudentFile: PropTypes.any, // eslint-disable-line
+  myTeamFile: PropTypes.any, // eslint-disable-line
+  namesArray: PropTypes.any, // eslint-disable-line
+};
 
 export default Team;

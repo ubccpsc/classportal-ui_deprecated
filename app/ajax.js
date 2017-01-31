@@ -3,9 +3,8 @@ import config from './config';
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
-  } else {
-    return Promise.reject(response);
   }
+  return Promise.reject(response);
 }
 
 function getJson(response) {
@@ -17,11 +16,10 @@ function checkNetworkError(response) {
   const alternativeMessage = 'Oops, the ClassPortal server is down right now! Please try again later.';
   if (response instanceof TypeError && response.message === serverDownMessage) {
     return Promise.reject(alternativeMessage);
-  } else {
-    return Promise.resolve()
-      .then(() => getJson(response))
-      .then((text) => Promise.reject(`${response.status} ${response.statusText}\n${text.error}`));
   }
+  return Promise.resolve()
+    .then(() => getJson(response))
+    .then((text) => Promise.reject(`${response.status} ${response.statusText}\n${text.error}`));
 }
 
 export function loginRequest(csid, sid, authcode) {
