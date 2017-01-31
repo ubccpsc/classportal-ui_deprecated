@@ -2,6 +2,7 @@ import React from 'react';
 import { loadPortalRequest } from '../../../app/ajax';
 import AdminPortal from './AdminPortal';
 import StudentPortal from './StudentPortal';
+import LoadingMessage from '../../modules/common/LoadingMessage';
 
 class PortalPage extends React.Component {
   constructor() {
@@ -22,10 +23,12 @@ class PortalPage extends React.Component {
   }
 
   render() {
-    return this.state.loaded &&
-      (this.state.data.userType === 'admin'
+    if (!this.state.loaded) {
+      return (<LoadingMessage />);
+    }
+    return (this.state.data.userType === 'admin'
       ? (<AdminPortal data={this.state.data} />)
-        : (<StudentPortal data={this.state.data} />));
+      : (<StudentPortal data={this.state.data} />));
   }
 }
 
