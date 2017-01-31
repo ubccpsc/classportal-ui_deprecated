@@ -1,5 +1,3 @@
-/* eslint-disable no-useless-escape */
-
 import React from 'react';
 import { browserHistory } from 'react-router';
 import PostLogin from '../../modules/common/PostLogin';
@@ -9,7 +7,7 @@ function getCode() {
   return new Promise((resolve, reject) => {
     try {
       const url = window.location.href;
-      const validAuthCode = /[?]code=([\w\/\-]+)/;
+      const validAuthCode = /[?]code=([\w\/\-]+)/; // eslint-disable-line no-useless-escape
       if (validAuthCode.test(url)) {
         const authcode = url.split('code=')[1];
         resolve(authcode);

@@ -11,7 +11,7 @@ const Module = (props) => (
 
 Module.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.any, //eslint-disable-line
+  children: PropTypes.node,
 };
 
 export default Module;

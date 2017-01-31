@@ -119,7 +119,7 @@ class CreateTeam extends React.Component {
 
 CreateTeam.propTypes = {
   isAdmin: PropTypes.bool,
-  namesArray: PropTypes.any, // eslint-disable-line
+  namesArray: PropTypes.arrayOf(PropTypes.string),
   studentName: PropTypes.string,
 };
 

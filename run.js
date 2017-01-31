@@ -3,7 +3,7 @@
  * https://github.com/kriasoft/react-static-boilerplate
  */
 
-/* eslint-disable no-console, global-require, no-plusplus */
+/* eslint-disable no-console, global-require */
 
 const fs = require('fs');
 const del = require('del');

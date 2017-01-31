@@ -57,9 +57,7 @@ const DisplayTeam = (props) => (
 );
 
 DisplayTeam.propTypes = {
-  myStudentFile: PropTypes.any, // eslint-disable-line
   myTeamFile: PropTypes.any, // eslint-disable-line
-  namesArray: PropTypes.any, // eslint-disable-line
 };
 
 export default DisplayTeam;

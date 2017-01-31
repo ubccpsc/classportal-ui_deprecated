@@ -1,5 +1,3 @@
-/* eslint-disable react/no-did-mount-set-state */
-
 import React, { PropTypes } from 'react';
 import { Form, FormField, FormInput, FormSelect, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'elemental';
 import _ from 'lodash';
@@ -40,7 +38,7 @@ class AdminStudents extends React.Component {
     this.renderStudents = this.renderStudents.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const delivs = this.props.deliverables;
     const labelArray = [];
     for (let index = 0; index < delivs.length; index++) {

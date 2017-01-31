@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+
 import React from 'react';
 import { browserHistory } from 'react-router';
 import s from './Header.css';
