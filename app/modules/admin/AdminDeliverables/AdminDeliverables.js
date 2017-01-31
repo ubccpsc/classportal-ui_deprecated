@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Module from '../../../components/Module';
 
 class AdminDeliverables extends React.Component {
@@ -43,5 +43,9 @@ class AdminDeliverables extends React.Component {
     );
   }
 }
+
+AdminDeliverables.propTypes = {
+  deliverables: PropTypes.any, // eslint-disable-line
+};
 
 export default AdminDeliverables;

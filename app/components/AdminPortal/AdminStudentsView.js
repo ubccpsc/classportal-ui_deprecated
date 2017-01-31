@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import AdminStudents from '../../modules/admin/AdminStudents';
 import UploadClasslist from '../../modules/admin/UploadClass';
 
@@ -17,5 +17,9 @@ const AdminStudentsView = (props) => (
     }
   </div>
 );
+
+AdminStudentsView.propTypes = {
+  files: PropTypes.any, // eslint-disable-line
+};
 
 export default AdminStudentsView;

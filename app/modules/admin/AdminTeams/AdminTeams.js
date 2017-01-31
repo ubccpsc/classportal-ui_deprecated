@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Form, FormField, Button } from 'elemental';
 import Module from '../../../components/Module';
 import { assignTeamRequest, disbandTeamRequest } from '../../../ajax';
@@ -181,5 +181,12 @@ class AdminTeams extends React.Component {
     );
   }
 }
+
+AdminTeams.propTypes = {
+  myAdminIndex: PropTypes.any, // eslint-disable-line
+  admins: PropTypes.any, // eslint-disable-line
+  teams: PropTypes.any, // eslint-disable-line
+  students: PropTypes.any, // eslint-disable-line
+};
 
 export default AdminTeams;

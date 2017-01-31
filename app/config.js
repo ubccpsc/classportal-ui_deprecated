@@ -10,7 +10,7 @@ const config = {
   apiAddress: 'http://localhost:5000',
   clientId: '7b22a00a9158cd0c43a1',
   teamSize: 2,
-  studentsCanDisbandTeams: false,
+  studentsCanDisbandTeams: true,
   githubClientID: process.env.GITHUB_CLIENTID,
   githubclientSecret: process.env.GITHUB_SECRET,
 };

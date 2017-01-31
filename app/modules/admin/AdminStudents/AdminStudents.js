@@ -1,6 +1,6 @@
 /* eslint-disable react/no-did-mount-set-state */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Form, FormField, FormInput, FormSelect, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'elemental';
 import _ from 'lodash';
 import Module from '../../../components/Module';
@@ -371,5 +371,13 @@ class AdminStudents extends React.Component {
     );
   }
 }
+
+AdminStudents.propTypes = {
+  teams: PropTypes.any, // eslint-disable-line
+  grades: PropTypes.any, // eslint-disable-line
+  deliverables: PropTypes.any, // eslint-disable-line
+  students: PropTypes.any, // eslint-disable-line
+  myTeams: PropTypes.any, // eslint-disable-line
+};
 
 export default AdminStudents;

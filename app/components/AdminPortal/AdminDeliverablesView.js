@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import AdminDeliverables from '../../modules/admin/AdminDeliverables';
 
 const AdminDeliverablesView = (props) => (
@@ -6,5 +6,9 @@ const AdminDeliverablesView = (props) => (
     <AdminDeliverables deliverables={props.files.deliverablesFile} />
   </div>
 );
+
+AdminDeliverablesView.propTypes = {
+  files: PropTypes.any, // eslint-disable-line
+};
 
 export default AdminDeliverablesView;
