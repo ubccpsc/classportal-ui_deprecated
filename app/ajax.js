@@ -18,26 +18,27 @@ function checkNetworkError(response) {
   if (response instanceof TypeError && response.message === serverDownMessage) {
     return Promise.reject(alternativeMessage);
   } else {
-    console.log(response);
-    return Promise.reject(response);
+    return Promise.resolve()
+      .then(() => getJson(response))
+      .then((text) => Promise.reject(`${response.status} ${response.statusText}\n${text.error}`));
   }
 }
 
 export function loginRequest(csid, sid, authcode) {
   return fetch(`${config.apiAddress}/api/login`, {
     method: 'post',
+    mode: 'cors',
     headers: {
-      'Content-type': 'application/json',
+      'Content-Type': 'application/json',
       Accept: 'application/json',
       username: 'temp',
       token: 'temp',
-      admin: '',
     },
-    body: {
+    body: JSON.stringify({
       csid,
       sid,
       authcode,
-    },
+    }),
   })
     .then(checkStatus)
     .then(getJson)
@@ -45,12 +46,19 @@ export function loginRequest(csid, sid, authcode) {
 }
 
 export function registerRequest(csid, sid) {
-  return fetch(`${config.apiAddress}/api/register?csid=${csid}&sid=${sid}`, {
-    method: 'get',
+  return fetch(`${config.apiAddress}/api/register`, {
+    method: 'post',
+    mode: 'cors',
     headers: {
-      'Content-type': 'application/json',
+      'Content-Type': 'application/json',
       Accept: 'application/json',
+      username: 'temp',
+      token: 'temp',
     },
+    body: JSON.stringify({
+      csid,
+      sid,
+    }),
   })
     .then(checkStatus)
     .then(getJson)
@@ -60,6 +68,7 @@ export function registerRequest(csid, sid) {
 export function logoutRequest() {
   return fetch(`${config.apiAddress}/api/logout`, {
     method: 'post',
+    mode: 'cors',
     headers: {
       'Content-type': 'application/json',
       Accept: 'application/json',
@@ -75,7 +84,8 @@ export function logoutRequest() {
 
 export function loadPortalRequest() {
   return fetch(`${config.apiAddress}/api/load`, {
-    method: 'get',
+    method: 'post',
+    mode: 'cors',
     headers: {
       'Content-type': 'application/json',
       Accept: 'application/json',
@@ -92,6 +102,7 @@ export function loadPortalRequest() {
 export function createTeamRequest(teamMembers) {
   return fetch(`${config.apiAddress}/api/team`, {
     method: 'put',
+    mode: 'cors',
     headers: {
       'Content-type': 'application/json',
       Accept: 'application/json',
@@ -99,7 +110,9 @@ export function createTeamRequest(teamMembers) {
       token: localStorage.token,
       admin: localStorage.admin,
     },
-    body: { teamMembers },
+    body: JSON.stringify({
+      teamMembers,
+    }),
   })
     .then(checkStatus)
     .then(getJson)
@@ -109,6 +122,7 @@ export function createTeamRequest(teamMembers) {
 export function disbandTeamRequest(teamId) {
   return fetch(`${config.apiAddress}/api/team/${teamId}`, {
     method: 'del',
+    mode: 'cors',
     headers: {
       'Content-type': 'application/json',
       Accept: 'application/json',
@@ -125,6 +139,7 @@ export function disbandTeamRequest(teamId) {
 export function assignTeamRequest(newTA, teamId) {
   return fetch(`${config.apiAddress}/api/team/${teamId}`, {
     method: 'post',
+    mode: 'cors',
     headers: {
       'Content-type': 'application/json',
       Accept: 'application/json',
@@ -132,7 +147,7 @@ export function assignTeamRequest(newTA, teamId) {
       token: localStorage.token,
       admin: localStorage.admin,
     },
-    body: { newTA },
+    body: JSON.stringify({ newTA }),
   })
     .then(checkStatus)
     .then(getJson)
@@ -142,6 +157,7 @@ export function assignTeamRequest(newTA, teamId) {
 export function submitGradeRequest(sid, assnId, grade, comment) {
   return fetch(`${config.apiAddress}/api/submitGrade`, {
     method: 'post',
+    mode: 'cors',
     headers: {
       'Content-type': 'application/json',
       Accept: 'application/json',
@@ -149,12 +165,12 @@ export function submitGradeRequest(sid, assnId, grade, comment) {
       token: localStorage.token,
       admin: localStorage.admin,
     },
-    body: {
+    body: JSON.stringify({
       sid,
       assnId,
       grade,
       comment,
-    },
+    }),
   })
     .then(checkStatus)
     .then(getJson)
@@ -164,6 +180,7 @@ export function submitGradeRequest(sid, assnId, grade, comment) {
 export function updateClassRequest(csvFormData) {
   return fetch(`${config.apiAddress}/api/class`, {
     method: 'post',
+    mode: 'cors',
     headers: {
       Accept: 'application/json',
     },
@@ -176,9 +193,9 @@ export function updateClassRequest(csvFormData) {
 
 export function pingRequest() {
   return fetch(`${config.apiAddress}/api/ping`, {
-    method: 'get',
+    method: 'post',
+    mode: 'cors',
     headers: {
-      'Content-type': 'application/json',
       Accept: 'application/json',
     },
   })
