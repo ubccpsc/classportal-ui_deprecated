@@ -18,7 +18,7 @@ const Team = (props) => (
 Team.propTypes = {
   myStudentFile: PropTypes.any, // eslint-disable-line
   myTeamFile: PropTypes.any, // eslint-disable-line
-  namesArray: PropTypes.arrayOf(PropTypes.string),
+  namesArray: PropTypes.arrayOf(PropTypes.any),
 };
 
 export default Team;

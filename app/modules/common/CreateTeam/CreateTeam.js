@@ -9,10 +9,8 @@ class CreateTeam extends React.Component {
     super();
     this.state = { newTeamArray: [] };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleSelect = this.handleSubmit.bind(this);
-    this.renderForm = this.renderForm.bind(this);
-    this.renderDropdown = this.renderDropdown.bind(this);
-    this.renderFirstDropdown = this.renderFirstDropdown.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.renderDropdowns = this.renderDropdowns.bind(this);
   }
 
   handleSubmit(e) {
@@ -41,7 +39,6 @@ class CreateTeam extends React.Component {
     if (confirm(alertMessage)) {
       createTeamRequest(newTeamArray)
         .then((response) => {
-          // console.log("CreateTeam.js| Success: " + response);
           alert(`Success: Team ${response} created!`);
           window.location.reload(true);
         })
@@ -49,63 +46,40 @@ class CreateTeam extends React.Component {
     }
   }
 
-  handleSelect(index, value) {
-    if (value) {
-      // this.state is immutable, so setState a new array
-      const temp = this.state.newTeamArray;
-      temp[index] = value;
-      this.setState({ newTeamArray: temp });
-    } else {
-      alert('Error: Bad selection');
-    }
+  handleSelect(value, index) {
+    const temp = this.state.newTeamArray;
+    temp[index] = value;
+    this.setState({ newTeamArray: temp });
   }
 
-  renderForm() {
-    const oneOrMoreDropdowns = [];
-
-    // build array of dropdown menus depending on specified team size
+  renderDropdowns() {
+    const arr = [];
     for (let index = 0; index < config.teamSize; index++) {
-      if (index === 0 && this.props.isAdmin !== 'true') {
-        oneOrMoreDropdowns[index] = this.renderFirstDropdown();
-      } else {
-        oneOrMoreDropdowns[index] = this.renderDropdown(index);
-      }
-    }
-
-    return (
-      <Form onSubmit={this.handleSubmit}>
-        <FormField id="text-center">
-          {oneOrMoreDropdowns}
-          <Button size="sm" submit>Form Team</Button>
-        </FormField>
-      </Form>);
-  }
-
-  renderDropdown(index) {
-    return (
-      <FormSelect
+      arr.push((<FormSelect
         key={index.toString()}
-        options={this.props.namesArray}
+        options={
+          (index === 0 && this.props.isAdmin !== 'true')
+            ? [{ label: this.props.studentName }]
+            : this.props.namesArray
+        }
         firstOption="Select"
-        onChange={this.handleSelect(this, index)}
-      />);
-  }
-
-  renderFirstDropdown() {
-    return (
-      <FormSelect
-        key="first"
-        options={[{ label: this.props.studentName }]}
-        firstOption="Select"
-        onChange={this.handleSelect(this, 0)}
-      />);
+        onChange={(e) => this.handleSelect(e, index)}
+      />));
+    }
+    return arr;
   }
 
   render() {
     return (
-      <Module id="create-team" title="Create Team" initialHideContent={false}>
+      <Module title="Create Team" initialHideContent={false}>
         {this.props.namesArray
-          ? this.renderForm()
+          ? (
+            <Form onSubmit={this.handleSubmit}>
+              <FormField id="text-center">
+                {this.renderDropdowns()}
+                <Button size="sm" submit>Form Team</Button>
+              </FormField>
+            </Form>)
           : (
             <div>
               <h4>Error: No classlist provided.</h4>
@@ -119,7 +93,7 @@ class CreateTeam extends React.Component {
 
 CreateTeam.propTypes = {
   isAdmin: PropTypes.bool,
-  namesArray: PropTypes.arrayOf(PropTypes.string),
+  namesArray: PropTypes.arrayOf(PropTypes.any),
   studentName: PropTypes.string,
 };
 
