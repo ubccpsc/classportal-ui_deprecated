@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import AdminDeliverables from '../../modules/admin/AdminDeliverables';
+import AdminDeliverables from '../../../modules/admin/AdminDeliverables';
 
 const AdminDeliverablesView = (props) => (
   <div>

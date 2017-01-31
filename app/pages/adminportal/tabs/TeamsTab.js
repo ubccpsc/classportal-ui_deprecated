@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import AdminTeams from '../../modules/admin/AdminTeams';
-import CreateProjects from '../../modules/admin/CreateProjects';
-import CreateTeam from '../../modules/common/CreateTeam';
+import AdminTeams from '../../../modules/admin/AdminTeams';
+import CreateProjects from '../../../modules/admin/CreateProjects';
+import CreateTeam from '../../../modules/common/CreateTeam';
 
 const AdminTeamsView = (props) => (
   <div>

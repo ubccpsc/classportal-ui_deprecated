@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import Logout from '../../modules/common/Logout';
-// import Deliverables from '../../modules/student/Deliverables';
-// import Grades from '../../modules/student/Grades';
+import Deliverables from '../../modules/student/Deliverables';
 import Team from '../../modules/student/Team';
 
 const StudentPortal = (props) => (
@@ -16,28 +15,15 @@ const StudentPortal = (props) => (
       myTeamFile={props.data.myTeamFile}
       namesArray={props.data.namesArray}
     />
+    <Deliverables
+      deliverables={props.data.deliverablesFile}
+      grades={props.data.myGradesFile.grades}
+    />
   </div>
 );
 
-/*
-<Deliverables deliverables={props.data.deliverables} grades={props.data.grades} />
-<Grades />
-*/
 StudentPortal.propTypes = {
   data: PropTypes.any, // eslint-disable-line
 };
-  /* shape({
-    student: PropTypes.shape({
-      username: PropTypes.string,
-      csid: PropTypes.string,
-      snum: PropTypes.string,
-      firstname: PropTypes.string,
-      lastname: PropTypes.string,
-    }),
-  }),
-  /* team: PropTypes.object,
-  grades: PropTypes.object,
-  deliverables: PropTypes.object,
-  studentsWithoutTeams: PropTypes.array,*/
 
 export default StudentPortal;

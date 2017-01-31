@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import AdminStudents from '../../modules/admin/AdminStudents';
-import UploadClasslist from '../../modules/admin/UploadClass';
+import AdminStudents from '../../../modules/admin/AdminStudents';
+import UploadClasslist from '../../../modules/admin/UploadClass';
 
 const AdminStudentsView = (props) => (
   <div>
