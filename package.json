@@ -93,7 +93,7 @@
     ]
   },
   "scripts": {
-    "eslint": "eslint src/ run.js webpack.config.js",
+    "eslint": "eslint app test run.js webpack.config.js",
     "stylelint": "stylelint stylelint \"app/**/*.css\" \"public/index.css\"",
     "lint": "npm run eslint && npm run stylelint",
     "test": "npm run lint; NODE_ENV='test' node_modules/.bin/_mocha test/**/*.spec.js",
