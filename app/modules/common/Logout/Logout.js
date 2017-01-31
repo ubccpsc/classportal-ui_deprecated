@@ -1,6 +1,7 @@
-import React from 'react';
-import { FormInput, FormIconField, Glyph, Button, InputGroup } from 'elemental';
+import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
+import { FormInput, FormIconField, Glyph, Button, InputGroup } from 'elemental';
+import Module from '../../../components/Module';
 import { logoutRequest } from '../../../ajax';
 
 function logoutSubmit(event) {
@@ -17,14 +18,14 @@ function logoutSubmit(event) {
     });
 }
 
-const Logout = () => (
-  <div className="module">
-    <h3>Welcome, {this.props.firstname}!</h3>
+const Logout = (props) => (
+  <Module title="Logout">
+    <h3>Welcome, {props.firstname}!</h3>
     <InputGroup >
       <InputGroup.Section grow >
         <FormIconField iconKey="mortar-board" >
           <FormInput
-            placeholder={` ${this.props.sid}`}
+            placeholder={` ${props.sid}`}
             size="sm"
             disabled
           />
@@ -33,7 +34,7 @@ const Logout = () => (
       <InputGroup.Section grow>
         <FormIconField iconKey="mark-github" >
           <FormInput
-            placeholder={` ${this.props.username}`}
+            placeholder={` ${props.username}`}
             size="sm"
             disabled
           />
@@ -45,7 +46,13 @@ const Logout = () => (
             </Button>
       </InputGroup.Section>
     </InputGroup>
-  </div>
+  </Module>
 );
+
+Logout.propTypes = {
+  firstname: PropTypes.string,
+  username: PropTypes.string,
+  sid: PropTypes.string,
+};
 
 export default Logout;
