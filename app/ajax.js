@@ -120,7 +120,7 @@ export function createTeamRequest(teamMembers) {
 }
 
 export function disbandTeamRequest(teamId) {
-  return fetch(`${config.apiAddress}/api/team/${teamId}`, {
+  return fetch(`${config.apiAddress}/api/team`, {
     method: 'del',
     mode: 'cors',
     headers: {
@@ -130,6 +130,9 @@ export function disbandTeamRequest(teamId) {
       token: localStorage.token,
       admin: localStorage.admin,
     },
+    body: JSON.stringify({
+      teamId,
+    }),
   })
     .then(checkStatus)
     .then(getJson)
@@ -137,7 +140,7 @@ export function disbandTeamRequest(teamId) {
 }
 
 export function assignTeamRequest(newTA, teamId) {
-  return fetch(`${config.apiAddress}/api/team/${teamId}`, {
+  return fetch(`${config.apiAddress}/api/team`, {
     method: 'post',
     mode: 'cors',
     headers: {
@@ -147,7 +150,10 @@ export function assignTeamRequest(newTA, teamId) {
       token: localStorage.token,
       admin: localStorage.admin,
     },
-    body: JSON.stringify({ newTA }),
+    body: JSON.stringify({
+      newTA,
+      teamId,
+    }),
   })
     .then(checkStatus)
     .then(getJson)
