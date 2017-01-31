@@ -13,13 +13,13 @@ function getJson(response) {
 
 function checkNetworkError(response) {
   const serverDownMessage = 'NetworkError when attempting to fetch resource.';
-  const alternativeMessage = 'Oops, the ClassPortal server is down right now! Please try again later.';
+  const alternativeMessage = 'Oops, it looks like the ClassPortal server is down right now! Please try again later.';
   if (response instanceof TypeError && response.message === serverDownMessage) {
     return Promise.reject(alternativeMessage);
   }
   return Promise.resolve()
     .then(() => getJson(response))
-    .then((text) => Promise.reject(`${response.status} ${response.statusText}\n${text.error}`));
+    .then((json) => Promise.reject(`${response.status} ${response.statusText}\n${json.response}`));
 }
 
 export function loginRequest(csid, sid, authcode) {
@@ -97,9 +97,9 @@ export function loadPortalRequest() {
     .catch(checkNetworkError);
 }
 
-export function createTeamRequest(teamMembers) {
-  return fetch(`${config.apiAddress}/api/team`, {
-    method: 'put',
+export function createTeamRequest(newTeam) {
+  return fetch(`${config.apiAddress}/api/createTeam`, {
+    method: 'post',
     mode: 'cors',
     headers: {
       'Content-type': 'application/json',
@@ -109,7 +109,7 @@ export function createTeamRequest(teamMembers) {
       admin: localStorage.admin,
     },
     body: JSON.stringify({
-      teamMembers,
+      newTeam,
     }),
   })
     .then(checkStatus)
@@ -118,8 +118,8 @@ export function createTeamRequest(teamMembers) {
 }
 
 export function disbandTeamRequest(teamId) {
-  return fetch(`${config.apiAddress}/api/team`, {
-    method: 'del',
+  return fetch(`${config.apiAddress}/api/disbandTeam`, {
+    method: 'post',
     mode: 'cors',
     headers: {
       'Content-type': 'application/json',
