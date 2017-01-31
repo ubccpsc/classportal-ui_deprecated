@@ -19,7 +19,11 @@ class PortalContainer extends React.Component {
         console.log(response);
         this.setState({ data: response, loaded: true });
       })
-      .catch(alert);
+      .catch((error) => {
+        alert(error);
+        localStorage.clear();
+        window.location.reload(true);
+      });
   }
 
   render() {
