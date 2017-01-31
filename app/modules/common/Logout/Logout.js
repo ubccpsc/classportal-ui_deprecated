@@ -19,8 +19,7 @@ function logoutSubmit(event) {
 }
 
 const Logout = (props) => (
-  <Module title="Logout">
-    <h3>Welcome, {props.firstname}!</h3>
+  <Module title={`Welcome, ${props.firstname}!`}>
     <InputGroup >
       <InputGroup.Section grow >
         <FormIconField iconKey="mortar-board" >
