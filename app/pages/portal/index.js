@@ -1,9 +1,9 @@
 import React from 'react';
 import { loadPortalRequest } from '../../../app/ajax';
-import AdminPortal from '../AdminPortal';
-import StudentPortal from '../StudentPortal';
+import AdminPortal from './AdminPortal';
+import StudentPortal from './StudentPortal';
 
-class Portal extends React.Component {
+class PortalPage extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -29,4 +29,4 @@ class Portal extends React.Component {
   }
 }
 
-export default Portal;
+export default PortalPage;

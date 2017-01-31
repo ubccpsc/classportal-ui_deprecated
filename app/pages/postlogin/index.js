@@ -20,7 +20,7 @@ function getCode() {
   });
 }
 
-class PostLoginPage extends React.Component {
+class PostloginPage extends React.Component {
   constructor() {
     super();
     this.state = { error: false };
@@ -78,4 +78,4 @@ class PostLoginPage extends React.Component {
 
 }
 
-export default PostLoginPage;
+export default PostloginPage;

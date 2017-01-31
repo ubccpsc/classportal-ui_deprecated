@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Logout from '../../modules/common/Logout';
-import AdminStudentsView from './AdminStudentsView';
+// import AdminStudentsView from './Admin/AdminStudentsView';
 
 function renderLogout(files) {
   let firstname = null;
@@ -23,9 +23,10 @@ function renderLogout(files) {
 const AdminPortal = (props) => (
   <div>
     {renderLogout(props.data.files)}
-    <AdminStudentsView data={props.data} />
   </div>
 );
+
+// <AdminStudentsView data={props.data} />
 
 AdminPortal.propTypes = {
   data: PropTypes.any, // eslint-disable-line

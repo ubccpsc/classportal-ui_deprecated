@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import Layout from './components/Layout/Layout';
-import Portal from './components/Portal';
+import PortalPage from './pages/portal';
 import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
 import PostloginPage from './pages/postlogin';
@@ -12,7 +12,7 @@ import * as auth from './auth';
 render((
   <Router history={browserHistory}>
     <Route path="/" component={Layout}>
-      <IndexRoute component={Portal} onEnter={auth.loggedIn} />
+      <IndexRoute component={PortalPage} onEnter={auth.loggedIn} />
       <Route path="login" component={LoginPage} onEnter={auth.notLoggedIn} />
       <Route path="register" component={RegisterPage} onEnter={auth.notLoggedIn} />
       <Route path="postlogin" component={PostloginPage} onEnter={auth.notLoggedIn} />
