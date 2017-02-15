@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import Logout from '../../modules/common/Logout';
 import Deliverables from '../../modules/student/Deliverables';
-import Team from '../../modules/student/Team';
+import DisplayTeam from '../../modules/student/DisplayTeam';
+import CreateTeam from '../../modules/common/CreateTeam';
 
 const StudentPortal = (props) => (
   <div>
@@ -10,11 +11,16 @@ const StudentPortal = (props) => (
       firstname={props.data.myStudentFile.firstname}
       sid={props.data.myStudentFile.sid}
     />
-    <Team
-      myStudentFile={props.data.myStudentFile}
-      myTeamFile={props.data.myTeamFile}
-      namesArray={props.data.namesArray}
-    />
+    {(props.data.myStudentFile.hasTeam === true)
+      ? (<DisplayTeam
+        myTeamFile={props.data.myTeamFile}
+        teammateNames={props.data.namesArray}
+      />)
+      : (<CreateTeam
+        namesArray={props.data.namesArray}
+        isAdmin={false}
+        studentName={`${props.data.myStudentFile.firstname} ${props.data.myStudentFile.lastname}`}
+      />)}
     <Deliverables
       deliverables={props.data.deliverablesFile}
       grades={props.data.myGradesFile.grades}
