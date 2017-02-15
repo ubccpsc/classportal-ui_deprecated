@@ -10,5 +10,8 @@ npm-debug.log
 # Firebase
 firebase-debug.log
 
-#VS Code Settings
+# VS Code Settings
 .vscode/
+
+# Istanbul coverage report
+coverage
