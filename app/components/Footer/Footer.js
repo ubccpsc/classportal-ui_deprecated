@@ -1,11 +1,12 @@
 import React from 'react';
-import s from './Footer.css';
+import css from './Footer.css';
 import config from '../../config';
 
 const Footer = () => (
-  <footer className={s.footer}>
+  <footer className={css.footer}>
     <p>
-      ClassPortal is on <a href={config.github}>GitHub</a>.
+      ClassPortal is on&nbsp;
+      <a href={config.github}>GitHub</a>.
       <br />
       <a href={`${config.github}/wiki`}>Docs</a>
       &nbsp;&middot;&nbsp;

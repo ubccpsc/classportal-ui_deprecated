@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { browserHistory } from 'react-router';
-import s from './Header.css';
+import css from './Header.css';
 import config from '../../config';
 
 function redirect(e) {
@@ -11,10 +11,10 @@ function redirect(e) {
 }
 
 const Header = () => (
-  <div className={s.header} onClick={redirect} >
-    <img className={s.logo} alt="" src="ubc.png" />
-    <p className={s.title} >{config.title}</p>
-    <p className={s.subtitle}>{config.subtitle}</p>
+  <div className={css.header} onClick={redirect} >
+    <img className={css.logo} alt="" src="ubc.png" />
+    <p className={css.title} >{config.title}</p>
+    <p className={css.subtitle}>{config.subtitle}</p>
   </div>
 );
 
