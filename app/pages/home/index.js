@@ -4,7 +4,7 @@ import StudentPortal from '../studentportal';
 import LoadingMessage from '../../modules/common/LoadingMessage';
 import { loadPortalRequest } from '../../../app/ajax';
 
-class PortalContainer extends React.Component {
+class HomePage extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -36,4 +36,4 @@ class PortalContainer extends React.Component {
   }
 }
 
-export default PortalContainer;
+export default HomePage;
