@@ -1,8 +1,8 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import { Form, FormField, Button, Glyph, ButtonGroup } from 'elemental';
-import Module from '../../../components/Module';
-import config from '../../../config';
+import Module from '../../components/Module';
+import config from '../../config';
 
 const githubOauth = 'https://github.com/login/oauth/authorize';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Module from '../../../components/Module';
+import Module from '../../components/Module';
 
 const api = 'https://developer.github.com/v3/';
 

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
 import { Modal, ModalHeader, ModalFooter, ModalBody, Button } from 'elemental';
-import Module from '../../../components/Module';
+import Module from '../../components/Module';
 
 class Deliverables extends React.Component {
   constructor() {

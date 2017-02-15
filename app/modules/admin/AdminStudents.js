@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Form, FormField, FormInput, FormSelect, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'elemental';
 import _ from 'lodash';
-import Module from '../../../components/Module';
-import { submitGradeRequest } from '../../../ajax';
+import Module from '../../components/Module';
+import { submitGradeRequest } from '../../ajax';
 
 class AdminStudents extends React.Component {
   constructor() {

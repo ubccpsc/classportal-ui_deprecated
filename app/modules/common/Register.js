@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form, Button, FormInput, FormIconField, Glyph } from 'elemental';
-import Module from '../../../components/Module/Module';
-import { registerRequest } from '../../../../app/ajax';
-import config from '../../../config';
+import Module from '../../components/Module/Module';
+import { registerRequest } from '../../../app/ajax';
+import config from '../../config';
 
 const githubOauth = 'https://github.com/login/oauth/authorize';
 

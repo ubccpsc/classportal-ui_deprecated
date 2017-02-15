@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Form, FormField, Button } from 'elemental';
-import Module from '../../../components/Module';
-import { assignTeamRequest, disbandTeamRequest } from '../../../ajax';
+import Module from '../../components/Module';
+import { assignTeamRequest, disbandTeamRequest } from '../../ajax';
 
 function include(arr, obj) {
   const result = (arr.indexOf(obj) !== -1);

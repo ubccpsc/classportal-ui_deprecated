@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, FormField, Button } from 'elemental';
-import Module from '../../../components/Module';
+import Module from '../../components/Module';
 
 function createProjects(e) {
   e.preventDefault();

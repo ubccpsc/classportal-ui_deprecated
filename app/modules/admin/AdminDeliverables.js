@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Module from '../../../components/Module';
+import Module from '../../components/Module';
 
 class AdminDeliverables extends React.Component {
   renderDeliverables() {

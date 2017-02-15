@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { FormInput, FormIconField, Glyph, Button, InputGroup } from 'elemental';
-import Module from '../../../components/Module';
-import { logoutRequest } from '../../../ajax';
+import Module from '../../components/Module';
+import { logoutRequest } from '../../ajax';
 
 function logoutSubmit(event) {
   event.preventDefault();

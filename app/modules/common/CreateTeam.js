@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Form, FormField, FormSelect, Button } from 'elemental';
-import Module from '../../../components/Module/Module';
-import { createTeamRequest } from '../../../../app/ajax';
-import config from '../../../config';
+import Module from '../../components/Module/Module';
+import { createTeamRequest } from '../../../app/ajax';
+import config from '../../config';
 
 class CreateTeam extends React.Component {
   constructor() {
