@@ -15,7 +15,7 @@ render((
       <IndexRoute component={HomePage} onEnter={auth.loggedIn} />
       <Route path="login" component={LoginPage} onEnter={auth.notLoggedIn} />
       <Route path="register" component={RegisterPage} onEnter={auth.notLoggedIn} />
-      <Route path="postlogin" component={PostloginPage} onEnter={auth.notLoggedIn} />
+      <Route path="postLogin" component={PostloginPage} onEnter={auth.notLoggedIn} />
       <Route path="*" component={ErrorPage} />
     </Route>
   </Router>

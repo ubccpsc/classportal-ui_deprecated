@@ -7,7 +7,7 @@ const config = {
   subtitle: 'UBC CPSC',
   github: 'https://github.com/mksarge/classportal',
   appAddress: 'http://localhost:3000',
-  apiAddress: 'https://localhost:5000',
+  apiAddress: 'http://localhost:5000',
   clientId: '7b22a00a9158cd0c43a1',
   teamSize: 2,
   studentsCanDisbandTeams: true,

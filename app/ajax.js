@@ -23,7 +23,7 @@ function checkNetworkError(response) {
 }
 
 export function loginRequest(csid, sid, authcode) {
-  return fetch(`${config.apiAddress}/api/login`, {
+  return fetch(`${config.apiAddress}/auth/login`, {
     method: 'post',
     mode: 'cors',
     headers: {

@@ -12,7 +12,7 @@ const webpack = require('webpack');
 
 const config = {
   title: 'UBC ClassPortal',
-  url: 'https://ubc-classportal.firebaseapp.com',
+  url: 'localhost:3000',
   project: 'ubc-classportal',
   trackingID: '',
   routes: [
