@@ -181,6 +181,43 @@ export function submitGradeRequest(sid, assnId, grade, comment) {
     .catch(checkNetworkError);
 }
 
+export function testGet() {
+  return fetch(`${config.apiAddress}/710/admin/students`, {
+    method: 'get',
+    mode: 'cors',
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+    },
+  })  
+  .then(  
+    function(response) {  
+      if (response.status !== 200) {  
+        console.log('Looks like there was a problem. Status Code: ' +  
+          response.status);  
+        return;  
+      }
+
+      // Examine the text in the response  
+      response.json().then(function(data) {  
+        console.log(data);  
+      });  
+    }  
+  )  
+  .catch(function(err) {  
+    console.log('Fetch Error :-S', err);  
+  })
+    .then(responsive => {
+      console.log('test');
+      console.log(responsive.blob().then( res => {
+        console.log(res);
+      }));
+    })
+    .then(checkStatus)
+    .then(getJson)
+    .catch(checkNetworkError);
+}
+
 export function updateClassRequest(csvFormData) {
   return fetch(`${config.apiAddress}/api/class`, {
     method: 'post',

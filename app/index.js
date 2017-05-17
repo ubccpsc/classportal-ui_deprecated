@@ -5,7 +5,7 @@ import Layout from './components/Layout/Layout';
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
-import PostloginPage from './pages/postlogin';
+import PostLoginPage from './pages/postLogin';
 import ErrorPage from './pages/error';
 import * as auth from './auth';
 
@@ -15,7 +15,7 @@ render((
       <IndexRoute component={HomePage} onEnter={auth.loggedIn} />
       <Route path="login" component={LoginPage} onEnter={auth.notLoggedIn} />
       <Route path="register" component={RegisterPage} onEnter={auth.notLoggedIn} />
-      <Route path="postLogin" component={PostloginPage} onEnter={auth.notLoggedIn} />
+      <Route path="postLogin" component={PostLoginPage} onEnter={auth.notLoggedIn} />
       <Route path="*" component={ErrorPage} />
     </Route>
   </Router>

@@ -12,7 +12,7 @@ const webpack = require('webpack');
 
 const config = {
   title: 'UBC ClassPortal',
-  url: 'localhost:3000',
+  url: 'localhost',
   project: 'ubc-classportal',
   trackingID: '',
   routes: [
