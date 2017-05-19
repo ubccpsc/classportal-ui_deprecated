@@ -1,27 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import Layout from './components/Layout/Layout';
-import HomePage from './pages/home';
-import LoginPage from './pages/login';
-import RegisterPage from './pages/register';
-import PostLoginPage from './pages/postLogin';
-import ErrorPage from './pages/error';
-import * as auth from './auth';
+import { Provider } from 'react-redux'; // this is where we connect Redux and React together.
+import { store } from './redux/store';
+import Routes from './Routes';
 
 render((
-  <Router history={browserHistory}>
-    <Route path="/" component={Layout}>
-      <IndexRoute component={HomePage} onEnter={auth.loggedIn} />
-      <Route path="login" component={LoginPage} onEnter={auth.notLoggedIn} />
-      <Route path="register" component={RegisterPage} onEnter={auth.notLoggedIn} />
-      <Route path="postLogin" component={PostLoginPage} onEnter={auth.notLoggedIn} />
-      <Route path="*" component={ErrorPage} />
-    </Route>
-  </Router>
-), document.getElementById('app'));
+  <Provider store={store}>
+    <Routes/>
+  </Provider>
+), document.getElementById('root'));
+
 
 // Enable Hot Module Replacement (HMR)
 if (module.hot) {
   module.hot.accept();
 }
+

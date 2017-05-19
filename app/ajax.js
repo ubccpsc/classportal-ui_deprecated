@@ -188,6 +188,7 @@ export function testGet() {
     credentials: 'include',
     headers: {
       Accept: 'application/json',
+      
     },
   })  
   .then(  
