@@ -2,10 +2,14 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { logger } from 'redux-logger';
+import thunk from 'redux-thunk';
+import promiseMiddleware from 'redux-promise-middleware';
 import rootReducer from './reducers';
 
 const middleware = [
+  thunk,
   logger,
+  promiseMiddleware(),
 ];
 
 const enhancers = compose(

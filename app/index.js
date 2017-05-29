@@ -2,12 +2,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux'; // this is where we connect Redux and React together.
-import { store } from './redux/store';
+import { store, history } from './store';
 import Routes from './Routes';
 
 render((
   <Provider store={store}>
-    <Routes/>
+    <Routes history={history} routes={Routes}/>
   </Provider>
 ), document.getElementById('root'));
 
