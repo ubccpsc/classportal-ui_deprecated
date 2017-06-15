@@ -6,8 +6,8 @@ import Layout from './components/Layout/Layout';
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
-import PostLoginPage from './pages/postLogin';
-import UsersTable from './components/users/users.table';
+import PostLoginPage from './pages/postlogin';
+import UsersTable from './components/Users/users.table';
 import ErrorPage from './pages/error';
 import App from './App';
 
