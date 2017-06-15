@@ -1,4 +1,3 @@
-import from './config/env'
 
 /**
  * Adapted from React Static Boilerplate
