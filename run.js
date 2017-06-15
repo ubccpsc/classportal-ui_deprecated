@@ -1,3 +1,5 @@
+import from './config/env'
+
 /**
  * Adapted from React Static Boilerplate
  * https://github.com/kriasoft/react-static-boilerplate
@@ -140,6 +142,10 @@ tasks.set('start', () => {
               require('webpack-hot-middleware')(compiler),
               require('connect-history-api-fallback')(),
             ],
+          },
+          https: {
+            key: '/etc/ssl/certs/portal.cs.ubc.ca.key',
+            cert: '/etc/ssl/certs/portal.cs.ubc.ca.crt',
           },
         }, resolve);
       }

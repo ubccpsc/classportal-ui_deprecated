@@ -17,6 +17,7 @@
     "npm": ">=3.8"
   },
   "dependencies": {
+    "dotenv": "^4.0.0",
     "elemental": "^0.6.1",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.3.2",
@@ -33,12 +34,13 @@
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^6.7.1",
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.0",
     "babel-loader": "^6.2.10",
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-preset-airbnb": "^2.2.3",
-    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-1": "^6.22.0",
     "babel-register": "^6.22.0",
@@ -111,6 +113,6 @@
     "cover": "npm run lint && node_modules/.bin/istanbul cover node_modules/.bin/_mocha --require test/.setup.js \"test/**/*.spec.js\"",
     "build": "node run build",
     "start": "node run",
-    "publish": "npm run lint && NODE_ENV='production' node run publish"
+    "publish": "NODE_ENV='production' node run publish"
   }
 }
