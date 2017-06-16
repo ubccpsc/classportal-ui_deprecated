@@ -6,11 +6,16 @@
 
 /* eslint-disable no-console, global-require */
 
-const config = require('./app/config')
+const express = require('express');
+const https = require('https');
+const path = require('path');
+const app = express();
+const config = require('./app/config');
 const fs = require('fs');
 const del = require('del');
 const ejs = require('ejs');
 const webpack = require('webpack');
+
 
 const configFirebase = {
   title: 'UBC ClassPortal',
@@ -95,14 +100,53 @@ tasks.set('build', () => {
 // Build and publish the website
 // -----------------------------------------------------------------------------
 tasks.set('publish', () => {
-  const firebase = require('firebase-tools');
-  return run('build')
-    .then(() => firebase.login({ nonInteractive: false }))
-    .then(() => firebase.deploy({
-      project: configFirebase.project,
-      cwd: __dirname,
-    }))
-    .then(() => { setTimeout(() => process.exit()); });
+  let count = 0;
+  global.HMR = !process.argv.includes('--no-hmr'); // Hot Module Replacement (HMR)
+  return run('clean').then(() => new Promise((resolve) => {
+    const WebpackDevServer = require('webpack-dev-server');
+    const webpackConfig = require('./webpack.config');
+    const compiler = webpack(webpackConfig);
+    // Node.js middleware that compiles application in watch mode with HMR support
+    // http://webpack.github.io/docs/webpack-dev-middleware.html
+    const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
+      publicPath: webpackConfig.output.publicPath,
+      stats: webpackConfig.stats,
+    });
+    compiler.plugin('done', (stats) => {
+      // Generate index.html page
+      const bundle = stats.compilation.chunks.find((x) => x.name === 'main').files[0];
+      const template = fs.readFileSync('./public/index.ejs', 'utf8');
+      const render = ejs.compile(template, { filename: './public/index.ejs' });
+      const output = render({ debug: true, bundle: `/dist/${bundle}`, config });
+      fs.writeFileSync('./public/index.html', output, 'utf8');
+
+      if (++count === 1) {
+
+        // configure express app
+        app.use(require('connect-history-api-fallback')());
+        app.use(webpackDevMiddleware);
+        app.use(require('webpack-hot-middleware')(compiler));
+        app.use(express.static('public'));
+        app.get('*', function(req, res) {
+          res.sendFile(path.resolve(__dirname, 'public/index.html'));
+        })
+
+        let sslCert = fs.readFileSync(config.sslCertPath, 'utf8')
+        let sslKey = fs.readFileSync(config.sslKeyPath, 'utf8')
+
+        // create server SSL credentials
+        let options = { cert: sslCert, key: sslKey }
+
+        let server = https.createServer(options, app);
+        server.listen(4000);
+
+        // app.listen(80, function(err) {
+        //   if (err) { console.log(err) }
+        //   console.log('Server running in production mode on port 80');
+        // })
+      }
+    });
+  }));
 });
 
 //
@@ -113,7 +157,6 @@ tasks.set('start', () => {
   global.HMR = !process.argv.includes('--no-hmr'); // Hot Module Replacement (HMR)
   return run('clean').then(() => new Promise((resolve) => {
     const WebpackDevServer = require('webpack-dev-server');
-    const bs = require('browser-sync').create();
     const webpackConfig = require('./webpack.config');
     const compiler = webpack(webpackConfig);
     // Node.js middleware that compiles application in watch mode with HMR support
