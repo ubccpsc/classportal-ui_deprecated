@@ -6,6 +6,7 @@
 
 /* eslint-disable no-console, global-require */
 
+const express = require('express');
 const fs = require('fs');
 const del = require('del');
 const ejs = require('ejs');
@@ -111,6 +112,7 @@ tasks.set('start', () => {
   let count = 0;
   global.HMR = !process.argv.includes('--no-hmr'); // Hot Module Replacement (HMR)
   return run('clean').then(() => new Promise((resolve) => {
+    const WebpackDevServer = require('webpack-dev-server');
     const bs = require('browser-sync').create();
     const webpackConfig = require('./webpack.config');
     const compiler = webpack(webpackConfig);
@@ -128,25 +130,28 @@ tasks.set('start', () => {
       const output = render({ debug: true, bundle: `/dist/${bundle}`, config });
       fs.writeFileSync('./public/index.html', output, 'utf8');
 
-      // Launch Browsersync after the initial bundling is complete
-      // For more information visit https://browsersync.io/docs/options
       if (++count === 1) {
-        bs.init({
-          port: process.env.PORT || 3000,
-          ui: { port: Number(process.env.PORT || 3000) + 1 },
-          server: {
-            baseDir: 'public',
-            middleware: [
-              webpackDevMiddleware,
-              require('webpack-hot-middleware')(compiler),
-              require('connect-history-api-fallback')(),
-            ],
+        new WebpackDevServer(compiler, {
+          https: true,
+          hot: true,
+          contentBase: 'public',
+          historyApiFallback: true,
+          setup: function(app) {
+            app.use(webpackDevMiddleware);
+            app.use(require('webpack-hot-middleware')(compiler));
+            app.use(require('connect-history-api-fallback')());
           },
           https: {
-            key: '/etc/ssl/certs/portal.cs.ubc.ca.key',
-            cert: '/etc/ssl/certs/portal.cs.ubc.ca.crt',
-          },
-        }, resolve);
+            cert: fs.readFileSync('/etc/ssl/certs/portal.cs.ubc.ca.crt'),
+            key: fs.readFileSync('/etc/ssl/certs/portal.cs.ubc.ca.key')
+          }
+        })
+        .listen(process.env.PORT || 3000, 'localhost', function(err, result) {
+          if (err) {
+            console.log(err);
+          }
+          console.log('The Dev server is running on https://localhost:' + process.env.PORT || 3000);
+        })
       }
     });
   }));
