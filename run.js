@@ -6,7 +6,6 @@
 
 /* eslint-disable no-console, global-require */
 
-const express = require('express');
 const fs = require('fs');
 const del = require('del');
 const ejs = require('ejs');
@@ -146,11 +145,11 @@ tasks.set('start', () => {
             key: fs.readFileSync('/etc/ssl/certs/portal.cs.ubc.ca.key')
           }
         })
-        .listen(process.env.PORT || 3000, 'localhost', function(err, result) {
+        .listen(3000, 'localhost', function(err, result) {
           if (err) {
             console.log(err);
           }
-          console.log('The Dev server is running on https://localhost:' + process.env.PORT || 3000);
+          console.log('The Dev server is running on https://localhost:' + 3000);
         })
       }
     });
