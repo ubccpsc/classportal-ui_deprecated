@@ -2,7 +2,9 @@ const env = process.env.NODE_ENV || 'development';
 
 // config settings for development environment
 const config = {
-  env,
+  localHost: process.env.LOCAL_HOST || 'localhost',
+  sslCertPath: '/etc/ssl/certs/portal.cs.ubc.ca.crt',
+  sslKeyPath: '/etc/ssl/certs/portal.cs.ubc.ca.key',
   title: 'ClassPortal',
   subtitle: 'UBC CPSC',
   github: 'https://github.com/mksarge/classportal',
@@ -23,4 +25,4 @@ if (env === 'production') {
   config.apiAddress = 'https://classportal.mksarge.com';
 }
 
-export default config;
+module.exports = config;

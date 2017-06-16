@@ -6,12 +6,13 @@
 
 /* eslint-disable no-console, global-require */
 
+const config = require('./app/config')
 const fs = require('fs');
 const del = require('del');
 const ejs = require('ejs');
 const webpack = require('webpack');
 
-const config = {
+const configFirebase = {
   title: 'UBC ClassPortal',
   url: 'localhost',
   project: 'ubc-classportal',
@@ -54,7 +55,7 @@ tasks.set('html', () => {
 // Generate sitemap.xml
 // -----------------------------------------------------------------------------
 tasks.set('sitemap', () => {
-  const urls = config.routes.map((x) => ({ loc: x }));
+  const urls = configFirebase.routes.map((x) => ({ loc: x }));
   const template = fs.readFileSync('./public/sitemap.ejs', 'utf8');
   const render = ejs.compile(template, { filename: './public/sitemap.ejs' });
   const output = render({ config, urls });
@@ -98,7 +99,7 @@ tasks.set('publish', () => {
   return run('build')
     .then(() => firebase.login({ nonInteractive: false }))
     .then(() => firebase.deploy({
-      project: config.project,
+      project: configFirebase.project,
       cwd: __dirname,
     }))
     .then(() => { setTimeout(() => process.exit()); });
@@ -141,11 +142,11 @@ tasks.set('start', () => {
             app.use(require('connect-history-api-fallback')());
           },
           https: {
-            cert: fs.readFileSync('/etc/ssl/certs/portal.cs.ubc.ca.crt'),
-            key: fs.readFileSync('/etc/ssl/certs/portal.cs.ubc.ca.key')
+            cert: fs.readFileSync(config.sslCertPath),
+            key: fs.readFileSync(config.sslKeyPath)
           }
         })
-        .listen(3000, 'portal.cs.ubc.ca', function(err, result) {
+        .listen(3000, config.localHost, function(err, result) {
           if (err) {
             console.log(err);
           }
