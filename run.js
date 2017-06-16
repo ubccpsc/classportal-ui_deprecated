@@ -150,6 +150,7 @@ tasks.set('start', () => {
           if (err) {
             console.log(err);
           }
+          console.log('config + ' + config.localHost);
           console.log('The Dev server is running on https://localhost:' + 3000);
         })
       }
