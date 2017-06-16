@@ -145,7 +145,7 @@ tasks.set('start', () => {
             key: fs.readFileSync('/etc/ssl/certs/portal.cs.ubc.ca.key')
           }
         })
-        .listen(3000, 'localhost', function(err, result) {
+        .listen(3000, 'portal.cs.ubc.ca', function(err, result) {
           if (err) {
             console.log(err);
           }
