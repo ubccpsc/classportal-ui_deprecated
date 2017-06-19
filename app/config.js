@@ -5,6 +5,7 @@ const config = {
   localHost: process.env.LOCAL_HOST || 'localhost',
   sslCertPath: '/etc/ssl/certs/portal.cs.ubc.ca.crt',
   sslKeyPath: '/etc/ssl/certs/portal.cs.ubc.ca.key',
+  sslIntCert: '/etc/ssl/certs/portal.cs.ubc.ca-cacerts.pem',
   title: 'ClassPortal',
   subtitle: 'UBC CPSC',
   github: 'https://github.com/mksarge/classportal',

@@ -130,13 +130,14 @@ tasks.set('publish', () => {
         app.use(express.static('public'));
         app.get('*', function(req, res) {
           res.sendFile(path.resolve(__dirname, 'public/index.html'));
-        })
+        });
 
-        let sslCert = fs.readFileSync(config.sslCertPath, 'utf8')
-        let sslKey = fs.readFileSync(config.sslKeyPath, 'utf8')
+        let sslCert = fs.readFileSync(config.sslCertPath, 'utf8');
+        let sslKey = fs.readFileSync(config.sslKeyPath, 'utf8');
+        let sslIntCert = fs.readFileSync(config.sslIntCert, 'utf8');
 
         // create server SSL credentials
-        let options = { cert: sslCert, key: sslKey }
+        let options = { cert: sslCert, key: sslKey, ca: sslIntCert };
 
         // config http --> https redirect
         let redirectApp = new express();
