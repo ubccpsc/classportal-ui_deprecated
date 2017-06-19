@@ -7,6 +7,7 @@
 /* eslint-disable no-console, global-require */
 
 const express = require('express');
+const http = require('http');
 const https = require('https');
 const path = require('path');
 const app = express();
@@ -137,13 +138,26 @@ tasks.set('publish', () => {
         // create server SSL credentials
         let options = { cert: sslCert, key: sslKey }
 
-        let server = https.createServer(options, app);
-        server.listen(4000);
+        // config http --> https redirect
+        let redirectApp = new express();
+        redirectApp.get('*', function(req, res) {
+          res.redirect('https://' + req.hostname + req.url);
+        });
 
-        // app.listen(80, function(err) {
-        //   if (err) { console.log(err) }
-        //   console.log('Server running in production mode on port 80');
-        // })
+        // create servers
+        let httpServer = http.createServer(redirectApp);
+        let httpsServer = https.createServer(options, app);
+
+        // start servers
+        httpServer.listen(80, function(err) {
+          if (err) { console.log('Error: ' + err)}
+          console.log('Started server in production mode on 80 for redirects to 443');
+        });
+
+        httpsServer.listen(443, function(err) {
+          if (err) { console.log('Error: ' + err)}
+          console.log('Started server in production mode on 443');
+        });
       }
     });
   }));
