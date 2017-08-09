@@ -1,11 +1,13 @@
 import fetch from 'isomorphic-fetch'
 import config from '../config';
 
-console.log('made it in the class');
+
+let options = {
+
+}
 
 class UserApi {
   static fetchAllUsers(courseNum: number) {
-      console.log('hello. inside UsersAPI class.');
       return fetch(`${config.apiAddress}/${courseNum}/students`)
         .then(users => {
           return users.json();
