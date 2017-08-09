@@ -182,26 +182,25 @@ export function submitGradeRequest(sid, assnId, grade, comment) {
 }
 
 export function testGet() {
-  return fetch(`${config.apiAddress}/710/admin/students`, {
+  return fetch(`${config.apiAddress}/710/students`, {
     method: 'get',
     mode: 'cors',
     credentials: 'include',
     headers: {
       Accept: 'application/json',
-      
     },
   })  
   .then(  
     function(response) {  
+      console.log(response);
       if (response.status !== 200) {  
-        console.log('Looks like there was a problem. Status Code: ' +  
-          response.status);  
+        console.log('Looks like there was a problem. Status Code: ' + response.status);  
         return;  
       }
 
       // Examine the text in the response  
       response.json().then(function(data) {  
-        console.log(data);  
+        console.log('ze ' + data);  
       });  
     }  
   )  

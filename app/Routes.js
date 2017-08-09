@@ -7,6 +7,7 @@ import HomePage from './pages/home';
 import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
 import PostLoginPage from './pages/postlogin';
+import AdminPage from './pages/adminportal';
 import UsersTable from './components/Users/users.table';
 import ErrorPage from './pages/error';
 import App from './App';
@@ -22,6 +23,7 @@ export default () => (
       <Route path="login" component={LoginPage} onEnter={auth.notLoggedIn} />
       <Route path="register" component={RegisterPage} onEnter={auth.notLoggedIn} />
       <Route path="postLogin" component={PostLoginPage} onEnter={auth.notLoggedIn} />
+      <Route path="admin" component={AdminPage} onEnter={auth.notLoggedIn} />
       <Route path="*" component={ErrorPage} />
     </Route>
   </Router>
