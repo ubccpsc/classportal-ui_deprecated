@@ -52,6 +52,11 @@ function loggedIn(nextState, replace) {
     replace({
       pathname: '/login',
       state: { nextPathname: nextState.location.pathname },
+    })
+    .catch(err => {
+      localStorage.token = false;
+      localStorage.loggedIn = false;
+      console.log(`auth::requireAuth() ERROR: ${err}`);
     });
   }
 }
