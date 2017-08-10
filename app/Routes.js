@@ -16,7 +16,7 @@ import App from './App';
 export default () => (
   <Router history={history}>
     <Route path="/" component={Layout}>
-      <IndexRoute component={HomePage} onEnter={auth.loggedIn} />
+      <IndexRoute component={HomePage} onEnter={auth.loggedIn, auth.requireAuth} />
       <Route path="users" component={UsersTable} >
         <Route path="/users/:id" component={UsersTable} />
       </Route>

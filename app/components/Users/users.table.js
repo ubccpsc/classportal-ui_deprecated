@@ -6,7 +6,7 @@ import UserList from './user.list';
 class UsersTable extends React.Component {
   
   componentWillMount() {
-    this.props.dispatch(userActions.fetchAllUsers());
+    this.props.dispatch(userActions.getAllUsers());
   }
   
   constructor(props) {
