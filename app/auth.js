@@ -2,6 +2,12 @@ import fetch from 'isomorphic-fetch';
 import config from './config';
 import * as options from './api/api.settings';
 
+/* *********** NOTE: ************
+ * *********** localStorage.token is deprecated and being replaced with
+ * localStorage.isLoggedIn boolean.
+ */ 
+
+
 /**
  * Allow entry only if user is not logged in.
  * If the user is logged in, redirect to '/'
