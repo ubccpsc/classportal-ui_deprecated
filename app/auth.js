@@ -34,30 +34,25 @@ function loggedIn(nextState, replace) {
  * Since this will hammer the API, ideally this will be only used on 
  * Admin routes
  */
-function requireAuth(nextState, replace) {
+ function requireAuth(nextState, replace) {
   if (!localStorage.token) {
-    return fetch(`${config.apiAddress}/isAuthenticated`, { credentials: 'include' })
-      .then(response => {
-        console.log(response.json());
-        return response.json();
+    fetch(`${config.apiAddress}/isAuthenticated`, { credentials: 'include' })
+      .then(data => {
+        return data.json();
       })
       .then(isLoggedIn => {
-        if (isLoggedIn) {
-          logger.info('logged in!');
+        if (isLoggedIn.response === true) {
+          localStorage.loggedIn = true;
           localStorage.token = true;
-        }
-        else {
-          logger.info('logged out!');
-          localStoage.token = false;
-          return replace({
-            pathname: '/login',
-            state: { nextPathname: nextState.location.pathname },
-          });
+        } else {
+          localStorage.token = false;
+          localStorage.loggedIn = false;
         }
       })
-      .catch(err => {
-        console.log(err);
-      });
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname },
+    });
   }
 }
 
