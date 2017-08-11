@@ -9,7 +9,7 @@ class UserApi {
         return users.json();
       })
       .catch(err => {
-        console.log(err + 'error!');
+        console.log(`user.api::getAllUsers() ERROR: No response from API: ${err}`);
       });
   }
 
@@ -19,7 +19,7 @@ class UserApi {
         return response.json();
       })
       .catch(err => {
-        console.log(err + 'error!');
+        console.log(`user.api::getUserDetails() ERROR: No response from API: ${err}`);
       });
   }
 
@@ -29,7 +29,7 @@ class UserApi {
         return response.json();
       })
       .catch(err => {
-        return `user.api::getCurrentUser() ERROR: No response from API: ${err}`;
+        console.log(`user.api::getCurrentUser() ERROR: No response from API: ${err}`);
       });
   }
 
