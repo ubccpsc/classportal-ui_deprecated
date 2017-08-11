@@ -13,6 +13,7 @@ class PostloginPage extends React.Component {
   }
 
   componentDidMount() {
+    this.props.dispatch(userActions.isAuthenticated());
     this.props.dispatch(userActions.getCurrentUser());
 
     return Promise.resolve()
