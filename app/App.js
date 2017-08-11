@@ -1,4 +1,5 @@
 import React from 'react';
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 
 const App = () => (
   <div>

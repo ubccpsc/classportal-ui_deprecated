@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import * as authActions from '../../actions/auth.actions';
 import * as userActions from '../../actions/user.actions';
 import { browserHistory } from 'react-router';
 import PostLogin from '../../modules/common/PostLogin';
@@ -13,8 +14,10 @@ class PostloginPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(userActions.isAuthenticated());
-    this.props.dispatch(userActions.getCurrentUser());
+    this.props.dispatch(authActions.isAuthenticated())
+      .then(() => {
+        return this.props.dispatch(userActions.getCurrentUser());
+      });
 
     return Promise.resolve()
         .then(() => {
@@ -61,11 +64,13 @@ class PostloginPage extends React.Component {
 
 PostloginPage.propTypes = {
   user: PropTypes.object.isRequired,
+  authStatus: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     user: state.user,
+    authStatus: state.authStatus,
   }
 };
 

@@ -8,3 +8,10 @@ export function logout() {
     payload: AuthApi.logout(),
   }
 }
+
+export function isAuthenticated() {
+	return {
+		type: types.IS_AUTHENTICATED,
+		payload: AuthApi.isAuthenticated(),
+	}
+}
