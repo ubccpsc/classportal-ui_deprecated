@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
 import * as auth from './auth';
 import { history } from './store';
+import LayoutDeux from './components/LayoutDeux/LayoutDeux';
 import Layout from './components/Layout/Layout';
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
@@ -15,7 +16,7 @@ import App from './App';
 
 export default () => (
   <Router history={history}>
-    <Route path="/" component={Layout}>
+    <Route path="/" component={LayoutDeux}>
       <IndexRoute component={HomePage} onEnter={auth.checkAuthenticated, auth.requireAuthentication} />
       <Route path="users" component={UsersTable} >
         <Route path="/users/:id" component={UsersTable} />

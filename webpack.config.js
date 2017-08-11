@@ -12,7 +12,6 @@ const path = require('path');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 const pkg = require('./package.json');
-
 const isDebug = global.DEBUG === false ? false : !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose') || process.argv.includes('-v');
 const useHMR = !!global.HMR; // Hot Module Replacement (HMR)
@@ -93,6 +92,10 @@ const config = {
         ],
         loader: 'babel-loader',
         options: babelConfig,
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader?sourceMap'
       },
       {
         test: /\.css/,

@@ -4,6 +4,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import css from './Header.css';
 import config from '../../config';
+import Foundation from 'react-foundation';
 
 function redirect(e) {
   e.preventDefault();
