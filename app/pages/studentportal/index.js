@@ -5,26 +5,13 @@ import DisplayTeam from '../../modules/student/DisplayTeam';
 import CreateTeam from '../../modules/common/CreateTeam';
 
 const StudentPortal = (props) => (
-  <div>
+  <div>{JSON.stringify(props)}
     <Logout
-      username={props.data.myStudentFile.username}
-      firstname={props.data.myStudentFile.firstname}
-      sid={props.data.myStudentFile.sid}
+      username={props.username}
+      firstname={props.fname}
+      sid={props.sid}
     />
-    {(props.data.myStudentFile.hasTeam === true)
-      ? (<DisplayTeam
-        myTeamFile={props.data.myTeamFile}
-        teammateNames={props.data.namesArray}
-      />)
-      : (<CreateTeam
-        namesArray={props.data.namesArray}
-        isAdmin={false}
-        studentName={`${props.data.myStudentFile.firstname} ${props.data.myStudentFile.lastname}`}
-      />)}
-    <Deliverables
-      deliverables={props.data.deliverablesFile}
-      grades={props.data.myGradesFile.grades}
-    />
+
   </div>
 );
 

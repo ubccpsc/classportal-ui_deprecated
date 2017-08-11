@@ -16,14 +16,14 @@ import App from './App';
 export default () => (
   <Router history={history}>
     <Route path="/" component={Layout}>
-      <IndexRoute component={HomePage} onEnter={auth.loggedIn, auth.requireAuth} />
+      <IndexRoute component={HomePage} onEnter={auth.checkAuthenticated, auth.requireAuthentication} />
       <Route path="users" component={UsersTable} >
         <Route path="/users/:id" component={UsersTable} />
       </Route>
-      <Route path="login" component={LoginPage} onEnter={auth.notLoggedIn} />
-      <Route path="register" component={RegisterPage} onEnter={auth.notLoggedIn} />
-      <Route path="postLogin" component={PostLoginPage} onEnter={auth.notLoggedIn} />
-      <Route path="admin" component={AdminPage} onEnter={auth.notLoggedIn} />
+      <Route path="login" component={LoginPage} onEnter={auth.checkUnauthenticated} />
+      <Route path="register" component={RegisterPage} onEnter={auth.checkUnauthenticated} />
+      <Route path="postLogin" component={PostLoginPage} onEnter={auth.checkUnauthenticated} />
+      <Route path="admin" component={AdminPage} onEnter={auth.checkUnauthenticated} />
       <Route path="*" component={ErrorPage} />
     </Route>
   </Router>

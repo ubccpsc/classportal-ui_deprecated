@@ -13,14 +13,17 @@ class PostloginPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(userActions.getCurrentUser())
+    this.props.dispatch(userActions.getCurrentUser());
 
     return Promise.resolve()
         .then(() => {
-          if(this.state.user == true) {
-            console.log('mention it is true!');
-            console.log('the truth' + this.state.user);
-          }
+        const url = window.location.href;
+        // this is where we should put the "isLoggedIn() API call"
+        const validAuthCode = /[?]code=([\w\/\-]+)/; // eslint-disable-line no-useless-escape
+        if (validAuthCode.test(url)) {
+          const authcode = url.split('code=')[1];
+          return Promise.resolve(authcode);
+        }
         return Promise.reject('Error: Invalid authcode.');
       })
       .then((authcode) => 
@@ -57,7 +60,6 @@ class PostloginPage extends React.Component {
 
 PostloginPage.propTypes = {
   user: PropTypes.object.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {

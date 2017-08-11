@@ -1,39 +1,46 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import AdminPortal from '../adminportal';
 import StudentPortal from '../studentportal';
 import LoadingMessage from '../../modules/common/LoadingMessage';
 import { loadPortalRequest } from '../../../app/ajax';
+import * as userActions from '../../actions/user.actions';
+import { browserHistory } from 'react-router';
+import PostLogin from '../../modules/common/PostLogin';
 
 class HomePage extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      loaded: false,
-      data: {},
-    };
-  }
 
   componentWillMount() {
-    loadPortalRequest()
-      .then((response) => {
-        console.log(response);
-        this.setState({ data: response, loaded: true });
-      })
-      .catch((error) => {
-        alert(error);
-        localStorage.clear();
-        window.location.reload(true);
-      });
+    this.props.dispatch(userActions.getCurrentUser());
+  }
+
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
   }
 
   render() {
-    if (!this.state.loaded) {
+    if (!this.props.user) {
       return (<LoadingMessage />);
     }
-    return (this.state.data.userType === 'admin'
-      ? (<AdminPortal data={this.state.data} />)
-      : (<StudentPortal data={this.state.data} />));
+    console.log(this.props.user.userrole)
+    return (this.props.user.userrole == 'admin'
+      ? (<AdminPortal user={this.props.user} />)
+      : (<StudentPortal user={this.props.user} />)
+    );
   }
 }
 
-export default HomePage;
+HomePage.propTypes = {
+  user: PropTypes.object.isRequired,
+};
+
+function mapStateToProps(state, ownProps) {
+  return {
+    user: state.user,
+  }
+};
+
+export default connect(mapStateToProps)(HomePage);

@@ -12,7 +12,7 @@ import * as options from './api/api.settings';
  * Allow entry only if user is not logged in.
  * If the user is logged in, redirect to '/'
  */
-function notLoggedIn(nextState, replace) {
+function checkUnauthenticated(nextState, replace) {
   if (localStorage.token) {
     // console.log(localStorage: ${JSON.stringify(localStorage)}`);
     replace({
@@ -25,7 +25,7 @@ function notLoggedIn(nextState, replace) {
 /**
  * Allow entry only if user is logged in.
  */
-function loggedIn(nextState, replace) {
+function checkAuthenticated(nextState, replace) {
   if (!localStorage.token) {
     // console.log(localStorage: ${JSON.stringify(localStorage)}`);
     replace({
@@ -40,31 +40,26 @@ function loggedIn(nextState, replace) {
  * Since this will hammer the API, ideally this will be only used on 
  * Admin routes
  */
- function requireAuth(nextState, replace) {
-  if (!localStorage.token) {
-    fetch(`${config.apiAddress}/isAuthenticated`, { credentials: 'include' })
-      .then(data => {
-        return data.json();
-      })
-      .then(isLoggedIn => {
-        if (isLoggedIn.response === true) {
-          localStorage.loggedIn = true;
-          localStorage.token = true;
-        } else {
-          localStorage.token = false;
-          localStorage.loggedIn = false;
-        }
-      })
-    replace({
-      pathname: '/login',
-      state: { nextPathname: nextState.location.pathname },
+ function requireAuthentication(nextState, replace) {
+  fetch(`${config.apiAddress}/isAuthenticated`, { credentials: 'include' })
+    .then(data => {
+      return data.json();
+    })
+    .then(isLoggedIn => {
+      if (isLoggedIn.response === true) {
+        localStorage.loggedIn = true;
+        localStorage.token = true;
+      } else {
+        localStorage.token = false;
+        localStorage.loggedIn = false;
+      }
+      checkAuthenticated(nextState, replace);
     })
     .catch(err => {
       localStorage.token = false;
       localStorage.loggedIn = false;
       console.log(`auth::requireAuth() ERROR: ${err}`);
     });
-  }
 }
 
-export { loggedIn, notLoggedIn, requireAuth };
+export { checkAuthenticated, checkUnauthenticated, requireAuthentication };

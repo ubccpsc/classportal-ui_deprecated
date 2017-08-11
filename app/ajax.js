@@ -64,34 +64,14 @@ export function registerRequest(csid, sid) {
 }
 
 export function logoutRequest() {
-  return fetch(`${config.apiAddress}/api/logout`, {
-    method: 'post',
-    mode: 'cors',
-    headers: {
-      'Content-type': 'application/json',
-      Accept: 'application/json',
-      username: localStorage.username,
-      token: localStorage.token,
-      admin: localStorage.admin,
-    },
-  })
+  return fetch(`${config.apiAddress}/logout`, { credentials: 'include' })
     .then(checkStatus)
     .then(getJson)
     .catch(checkNetworkError);
 }
 
 export function loadPortalRequest() {
-  return fetch(`${config.apiAddress}/api/load`, {
-    method: 'post',
-    mode: 'cors',
-    headers: {
-      'Content-type': 'application/json',
-      Accept: 'application/json',
-      username: localStorage.username,
-      token: localStorage.token,
-      admin: localStorage.admin,
-    },
-  })
+  return fetch(`${config.apiAddress}/currentUser`, { credentials: 'include' })
     .then(checkStatus)
     .then(getJson)
     .catch(checkNetworkError);
@@ -200,7 +180,7 @@ export function testGet() {
 
       // Examine the text in the response  
       response.json().then(function(data) {  
-        console.log('ze ' + data);  
+        console.log(data);  
       });  
     }  
   )  

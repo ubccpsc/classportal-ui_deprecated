@@ -1,18 +1,27 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import * as UserActions from '../../actions/user.actions';
 import Logout from '../../modules/common/Logout';
 // import AdminStudentsView from './Admin/AdminStudentsView';
 
 const AdminPortal = (props) => (
-  <div/>
-    // <Logout
-    //   firstname={props.data.adminsFile[props.data.myAdminIndex].firstname}
-    //   sid={props.data.adminsFile[props.data.myAdminIndex].prof ? 'Prof' : 'TA'}
-    //   username={localStorage.username}
-    // />
+  <div>
+  console.log("admin" + props);
+    <Logout
+      firstname={props.user.fname}
+      username={props.user.username}
+    />
+  </div>
 );
 
 AdminPortal.propTypes = {
-  data: PropTypes.any, // eslint-disable-line
+  user: PropTypes.object
 };
+
+// function mapStateToProps(state, ownProps) {
+// 	return {
+// 	    user: state.user,
+// 	}
+// }
 
 export default AdminPortal;
