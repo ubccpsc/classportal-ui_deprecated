@@ -1,3 +1,10 @@
+$subnav-hero-bg: $primary-color;
+$subnav-hero-link-padding: 0.9rem 1rem;
+$subnav-hero-font-size: 0.75rem;
+$subnav-hero-link-opacity: 0.15;
+$subnav-hero-height: 300px;
+$subnav-hero-transition: all 0.35s ease-in-out;
+
 .footer {
   position: absolute;
   width: 100%;
@@ -6,7 +13,7 @@
   padding: 20px 0 15px;
   margin: 0 auto;
   text-align: center;
-  background-color: #002145;
+  background-color: $subnav-hero-bg;
   background-image: linear-gradient(135deg, #002145, #2c76ff);
 }
 
@@ -19,3 +26,5 @@
   color: #fff;
   font-size: 16px;
 }
+
+

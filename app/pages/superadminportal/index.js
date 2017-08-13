@@ -12,10 +12,10 @@ const AdminPortal = (props) => (
 		</Row>
   </div>
 
-    <Logout
-      firstname={props.user.fname}
-      username={props.user.username}
-    />
+  <Logout
+    firstname={props.user.fname}
+    username={props.user.username}
+  />
   </div>
 );
 

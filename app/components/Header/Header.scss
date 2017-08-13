@@ -1,0 +1,22 @@
+$subnav-hero-bg: $primary-color;
+$subnav-hero-link-padding: 0.9rem 1rem;
+$subnav-hero-font-size: 0.75rem;
+$subnav-hero-link-opacity: 0.15;
+$subnav-hero-height: 300px;
+$subnav-hero-transition: all 0.35s ease-in-out;
+
+.subnav-hero-section {
+  text-align: center;
+  background: $subnav-hero-bg;
+  background-size: cover;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $subnav-hero-height;
+
+  .subnav-hero-headline {
+    color: $white;
+  }
+}

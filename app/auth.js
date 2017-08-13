@@ -39,25 +39,29 @@ function checkAuthenticated(nextState, replace) {
  * Require Authentication Check through Restify when placed on Route
  * Since this will hammer the API, ideally this will be only used on 
  * Admin routes
+ * // By DEFAULT, uses checkAuthenticated. * do not include twice with routes *
  */
  function requireAuthentication(nextState, replace) {
   fetch(`${config.apiAddress}/isAuthenticated`, { credentials: 'include' })
     .then(data => {
+      console.log('data returned')
       return data.json();
     })
     .then(isLoggedIn => {
       if (isLoggedIn.response === true) {
+        console.log('logged in');
         localStorage.loggedIn = true;
         localStorage.token = true;
       } else {
+        console.log('the else ... not logged in')
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('token');
       }
       checkAuthenticated(nextState, replace);
     })
     .catch(err => {
-      localStorage.removeItem('loggedIn');
-      localStorage.removeItem('token');
+      // localStorage.removeItem('loggedIn');
+      // localStorage.removeItem('token');
       console.log(`auth::requireAuth() ERROR:` + err);
     });
 }

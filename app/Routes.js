@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
 import * as auth from './auth';
 import { history } from './store';
-import LayoutDeux from './components/LayoutDeux/LayoutDeux';
 import Layout from './components/Layout/Layout';
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
@@ -16,15 +15,14 @@ import App from './App';
 
 export default () => (
   <Router history={history}>
-    <Route path="/" component={LayoutDeux}>
-      <IndexRoute component={HomePage} onEnter={auth.requireAuthentication, auth.checkAuthenticated} />
+    <Route path="/" component={Layout}>
+      <IndexRoute component={HomePage} onEnter={auth.requireAuthentication} />
       <Route path="users" component={UsersTable} >
         <Route path="/users/:id" component={UsersTable} />
       </Route>
       <Route path="login" component={LoginPage} onEnter={auth.checkUnauthenticated} />
-      <Route path="register" component={RegisterPage} onEnter={auth.checkUnauthenticated} />
-      <Route path="postLogin" component={PostLoginPage} onEnter={auth.checkUnauthenticated} />
-      <Route path="admin" component={AdminPage} onEnter={auth.checkUnauthenticated} />
+      <Route path="admin" component={AdminPage} onEnter={auth.requireAuthentication} />
+      <Route path="postLogin" component={PostLoginPage} onEnter={auth.requireAuthentication, auth.checkUnauthenticated} />
       <Route path="*" component={ErrorPage} />
     </Route>
   </Router>
