@@ -17,7 +17,7 @@ import App from './App';
 export default () => (
   <Router history={history}>
     <Route path="/" component={LayoutDeux}>
-      <IndexRoute component={HomePage} onEnter={auth.checkAuthenticated, auth.requireAuthentication} />
+      <IndexRoute component={HomePage} onEnter={auth.requireAuthentication, auth.checkAuthenticated} />
       <Route path="users" component={UsersTable} >
         <Route path="/users/:id" component={UsersTable} />
       </Route>

@@ -4,16 +4,13 @@ import * as UserActions from '../../actions/user.actions';
 import Logout from '../../modules/common/Logout';
 import { Row, Column } from 'react-foundation';
 
-// import AdminStudentsView from './Admin/AdminStudentsView';
-
 const AdminPortal = (props) => (
   <div>
-
 		<div className="grid-center-example">
 		  <Row className="display">
 		    <Column small={12} centerOnLarge>12 centered, large</Column>
-		  </Row>
-		</div>
+		</Row>
+  </div>
 
     <Logout
       firstname={props.user.fname}
@@ -25,11 +22,5 @@ const AdminPortal = (props) => (
 AdminPortal.propTypes = {
   user: PropTypes.object
 };
-
-// function mapStateToProps(state, ownProps) {
-// 	return {
-// 	    user: state.user,
-// 	}
-// }
 
 export default AdminPortal;

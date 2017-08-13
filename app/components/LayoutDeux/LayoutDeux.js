@@ -3,7 +3,6 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import config from '../../config';
-import Foundation from 'react-foundation';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
@@ -19,7 +18,7 @@ const LayoutDeux = (props) => (
         <h1 className="subnav-hero-headline">UBC ClassPortal<small> by CS Department</small></h1>
         <ul className="subnav-hero-subnav">
           <li><a href="#">Deliverables</a></li>
-          <li><a href="#" class="is-active">Grades</a></li>
+          <li><a href="#" className="is-active">Grades</a></li>
           <li><a target="_blank" href="http://zurb.com/responsive">Repositories</a></li>
         </ul>
       </header>

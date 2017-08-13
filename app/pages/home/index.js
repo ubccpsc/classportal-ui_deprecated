@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import AdminPortal from '../adminportal';
+import SuperAdminPortal from '../superadminportal';
 import StudentPortal from '../studentportal';
 import LoadingMessage from '../../modules/common/LoadingMessage';
 import { loadPortalRequest } from '../../../app/ajax';
@@ -25,11 +26,18 @@ class HomePage extends React.Component {
     if (!this.props.user) {
       return (<LoadingMessage />);
     }
-    console.log(this.props.user.userrole)
-    return (this.props.user.userrole == 'admin'
-      ? (<AdminPortal user={this.props.user} />)
-      : (<StudentPortal user={this.props.user} />)
-    );
+
+    switch(this.props.user.userrole) {
+      case 'superadmin':
+        return (<SuperAdminPortal user={this.props.user} />)
+      case 'admin':
+        return (<AdminPortal user={this.props.user} />);
+      case 'student':
+        return (<StudentPortal user={this.props.user} />);
+      default:
+        return null;
+    }
+
   }
 }
 

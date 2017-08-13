@@ -50,15 +50,15 @@ function checkAuthenticated(nextState, replace) {
         localStorage.loggedIn = true;
         localStorage.token = true;
       } else {
-        localStorage.token = false;
-        localStorage.loggedIn = false;
+        localStorage.removeItem('loggedIn');
+        localStorage.removeItem('token');
       }
       checkAuthenticated(nextState, replace);
     })
     .catch(err => {
-      localStorage.token = false;
-      localStorage.loggedIn = false;
-      console.log(`auth::requireAuth() ERROR: ${err}`);
+      localStorage.removeItem('loggedIn');
+      localStorage.removeItem('token');
+      console.log(`auth::requireAuth() ERROR:` + err);
     });
 }
 
