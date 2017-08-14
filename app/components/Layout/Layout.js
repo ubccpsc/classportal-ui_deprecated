@@ -23,7 +23,6 @@ class Layout extends React.Component {
 	render () {
 		return (
 		  <div>
-		  	{JSON.stringify(this.props.user)}
 		    <div className="grid-center-example">
 		      <Header user={this.props.user} />
 		    </div>

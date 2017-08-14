@@ -5,6 +5,9 @@ import { browserHistory } from 'react-router';
 import config from '../../config';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import StudentLinks from './StudentLinks';
+import SuperAdminLinks from './SuperAdminLinks';
+import AdminLinks from './AdminLinks';
 import { connect } from 'react-redux';
 
 class Links extends React.Component {
@@ -14,13 +17,16 @@ class Links extends React.Component {
 	}
 
 	render () {
-		return (
-			<ul className="links-hero-subnav">
-	      <li><a href="#">Deliverables</a></li>
-	      <li><a href="#" className="is-active">Grades</a></li>
-	      <li><a target="_blank" href="http://zurb.com/responsive">Repositories</a></li>
-    	</ul>
-		);
+		switch(this.props.user.userrole) {
+			case 'superadmin':
+				return (<SuperAdminLinks />);
+			case 'admin':
+				return (<AdminLinks />);
+			case 'student':
+				return (<StudentLinks />);
+			default:
+				return null;
+		}
 	}
 }
 
