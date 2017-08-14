@@ -4,7 +4,7 @@ import * as options from './api.settings';
 
 class StudentApi {
   static getAllStudents(courseNum) {
-    return fetch(`${config.apiAddress}/${courseNum}/admin/students`, options.authenticated)
+    return fetch(`${config.apiAddress}/${courseNum}/students`, options.authenticated)
       .then(students => {
         return students.json();
       })
@@ -13,15 +13,15 @@ class StudentApi {
       });
   }
 
-  static uploadClassList(courseNum, csvFormData) {
+  static uploadClassList(courseNum, classList) {
 
   	const AUTHENTICATED_FILE_POST = {
+  		credentials: 'include',
 		method: 'post',
-		credentials: 'include',
-		body: csvFormData,
+		body: classList,
 	}
 
-  	return fetch(`${config.apiAddress}/${courseNum}/`, AUTHENTICATED_FILE_POST)
+  	return fetch(`${config.apiAddress}/${courseNum}/admin/students`, AUTHENTICATED_FILE_POST)
   	  .then(result => {
   	  	return result.json();
   	  })
@@ -32,17 +32,3 @@ class StudentApi {
 }
 
 export default StudentApi;
-
-export function updateClassRequest(csvFormData) {
-  return fetch(`${config.apiAddress}/api/class`, {
-    method: 'post',
-    mode: 'cors',
-    headers: {
-      Accept: 'application/json',
-    },
-    body: csvFormData,
-  })
-    .then(checkStatus)
-    .then(getJson)
-    .catch(checkNetworkError);
-}

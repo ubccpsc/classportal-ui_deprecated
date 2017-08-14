@@ -3,5 +3,6 @@ export default {
   user: {},
   courses: [],
   course: {},
+  classList: {},
   authStatus: "Unauthenticated",
 }

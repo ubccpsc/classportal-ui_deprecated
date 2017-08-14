@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as studentActions from '../../actions/student.actions';
 import StudentCourseList from './StudentCourseList';
 import LoadingMessage from '../../modules/common/LoadingMessage';
+import StudentCourseListUpload from './StudentCourseListUpload';
 
 class StudentCourseTable extends React.Component {
   
@@ -22,10 +23,11 @@ class StudentCourseTable extends React.Component {
     }
     else {
       return (
-        <div className='col-md-12'>
+        <div className=''>
           <h1>Students</h1>
-          <div className='col-md-4'>
+          <div className=''>
             <StudentCourseList students={this.props.students}/>
+            <StudentCourseListUpload user={this.props.user}/>
           </div>
         </div>
         );

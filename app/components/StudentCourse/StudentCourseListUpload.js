@@ -2,8 +2,10 @@ import React from 'react';
 import { Form, FormField, Button } from 'elemental';
 import Module from '../../components/Module';
 import { updateClassRequest } from '../../ajax';
+import * as studentActions from '../../actions/student.actions';
+import { connect } from 'react-redux';
 
-class ClassListUpload extends React.Component {
+class StudentCourseListUpload extends React.Component {
   constructor() {
     super();
     this.state = { files: [] };
@@ -24,10 +26,10 @@ class ClassListUpload extends React.Component {
     } else {
       // transform uploaded csv into formData for sending via ajax
       const csv = new FormData();
-      csv.append(0, this.state.files[0]);
+      csv.append('classList', this.state.files[0]);
 
       // POST api/class/list
-      updateClassRequest(csv)
+      this.props.dispatch(studentActions.uploadClassList("310", csv))
         .then((response) => {
           alert(`Success: ${response}`);
         })
@@ -49,4 +51,11 @@ class ClassListUpload extends React.Component {
   }
 }
 
-export default ClassListUpload;
+function mapStateToProps(state, ownState) {
+  return {
+    students: state.students,
+    classList: state.classList,
+  }
+}
+
+export default connect(mapStateToProps)(StudentCourseListUpload);
