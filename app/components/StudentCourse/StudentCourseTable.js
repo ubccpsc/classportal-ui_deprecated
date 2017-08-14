@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as studentActions from '../../actions/student.actions';
-import StudentList from './StudentList';
+import StudentCourseList from './StudentCourseList';
 import LoadingMessage from '../../modules/common/LoadingMessage';
 
-class StudentTable extends React.Component {
+class StudentCourseTable extends React.Component {
   
   componentWillMount() {
     this.props.dispatch(studentActions.getAllStudents(310));
@@ -25,7 +25,7 @@ class StudentTable extends React.Component {
         <div className='col-md-12'>
           <h1>Students</h1>
           <div className='col-md-4'>
-            <StudentList students={this.props.students}/>
+            <StudentCourseList students={this.props.students}/>
           </div>
         </div>
         );
@@ -33,7 +33,7 @@ class StudentTable extends React.Component {
   }
 }
 
-StudentTable.propTypes = {
+StudentCourseTable.propTypes = {
   students: PropTypes.array.isRequired,
 };
 
@@ -43,4 +43,4 @@ function mapStateToProps(state, ownProps) {
   }
 };
 
-export default connect(mapStateToProps)(StudentTable);
+export default connect(mapStateToProps)(StudentCourseTable);

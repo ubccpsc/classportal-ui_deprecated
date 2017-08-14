@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StudentList = ({students}) => {
+const StudentCourseList = ({students}) => {
   return (
     <table className="table">
       <thead>
@@ -18,4 +18,4 @@ const StudentList = ({students}) => {
 };
 
 
-export default StudentList;
+export default StudentCourseList;
