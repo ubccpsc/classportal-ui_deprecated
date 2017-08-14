@@ -1,10 +1,13 @@
 import React from 'react';
 
 const CourseListRow = (props) => {
+
+	let courseUsersLink = "./" + props.course.courseId + "/students";
+
 	return (
 		<tbody>
 			<tr className="table-expand-row" data-open-details>
-		  	<td>{props.course.courseId}</td>
+		  	<td><a href={courseUsersLink}>{props.course.courseId}</a></td>
 		  	<td>deliverables</td>
 		  	<td className="text-right">{props.course.name}</td>
 		  	<td>{props.course.icon}<span className="expand-icon"></span></td>

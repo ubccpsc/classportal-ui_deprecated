@@ -18,8 +18,8 @@ class SuperAdminPortal extends React.Component {
 		return (
 		  <div>
 				<div className="grid-center-example">
-				  <Row className="display">
-				    <Column small={12} centerOnLarge><CourseList/></Column>
+				  <Row className="main-child-component-area">
+				    <Column small={12} centerOnLarge>{this.props.children}</Column>
 				</Row>
 		  </div>
 		  

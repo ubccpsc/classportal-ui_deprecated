@@ -1,5 +1,5 @@
 export default {
-  users: [],
+  students: [],
   user: {},
   courses: [],
   course: {},

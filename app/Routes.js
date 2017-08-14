@@ -9,7 +9,7 @@ import RegisterPage from './pages/register';
 import PostLoginPage from './pages/postlogin';
 import AdminPage from './pages/adminportal';
 import SuperAdminPage from './pages/superadminportal';
-import UsersTable from './components/Users/users.table';
+import StudentTable from './components/Student/StudentTable';
 import ErrorPage from './pages/error';
 import App from './App';
 import CourseList from './components/Course/CourseList';
@@ -19,12 +19,14 @@ export default () => (
   <Router history={history}>
     <Route path="/" component={Layout}>
       <IndexRoute component={HomePage} onEnter={auth.requireAuthentication}/>
-      <Route path="usersExample" component={UsersTable}>
-        <Route path="/usersExample/:id" component={UsersTable}/>
+      <Route path="usersExample" component={StudentTable}>
+        <Route path="/usersExample/:id" component={StudentTable}/>
       </Route>
       <Route path="login" component={LoginPage} onEnter={auth.checkUnauthenticated}/>
       <Route path="/superadmin" component={SuperAdminPage}>
-        <Route path="/superadmin/courses"/>
+        <Route path="/superadmin/courses" component={CourseList}/>
+        <Route path="/superadmin/students" component={StudentTable} />
+        <Route path="/superadmin/:courses/students" component={StudentTable} />
       </Route>
       <Route path="postLogin" component={PostLoginPage} onEnter={auth.requireAuthentication, auth.checkUnauthenticated}/>
       <Route path="*" component={ErrorPage}/>
