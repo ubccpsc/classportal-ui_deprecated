@@ -16,7 +16,7 @@ class StudentCourseTable extends React.Component {
   }
 
   render() {
-    if (this.props.students.length < 1) {
+    if (!this.props.students) {
       return (
         <LoadingMessage />
       );
