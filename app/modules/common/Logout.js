@@ -22,6 +22,7 @@ let logoutHandler = function(dispatch) {
 class Logout extends React.Component {
 
   componentWillMount() {
+    this.props.dispatch(authActions.isAuthenticated());
   }
 
   constructor(props) {
@@ -32,42 +33,20 @@ class Logout extends React.Component {
   }
 
   render () {
-    return (
-      <Module title={`Welcome, ${this.props.firstname}!`}>
-        <InputGroup >
-          <InputGroup.Section grow >
-            <FormIconField iconKey="mortar-board" >
-              <FormInput
-                placeholder={` ${this.props.sid}`}
-                size="sm"
-                disabled
-              />
-            </FormIconField>
-          </InputGroup.Section>
-          <InputGroup.Section grow>
-            <FormIconField iconKey="mark-github" >
-              <FormInput
-                placeholder={` ${this.props.username}`}
-                size="sm"
-                disabled
-              />
-            </FormIconField>
-          </InputGroup.Section>
-          <InputGroup.Section>
-            <Button size="sm" onClick={() => logoutHandler(this.props.dispatch)}>
-              <Glyph icon="sign-out" />&nbsp; Log out
-                </Button>
-          </InputGroup.Section>
-        </InputGroup>
-      </Module>
-    );
+    if (this.props.authStatus === "Logged in") {
+      return (
+        <Button className="subnav-hero-signout" size="sm" onClick={() => logoutHandler(this.props.dispatch)}>
+          <Glyph icon="sign-out" />&nbsp; Log out
+        </Button>
+      );
+    }
+    else {
+      return null;
+    }
   }
 }
 
 Logout.propTypes = {
-  firstname: PropTypes.string,
-  username: PropTypes.string,
-  sid: PropTypes.string,
   authStatus: PropTypes.string,
 };
 

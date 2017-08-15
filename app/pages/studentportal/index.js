@@ -1,29 +1,45 @@
 import React, { PropTypes } from 'react';
-import Logout from '../../modules/common/Logout';
-import Deliverables from '../../modules/student/Deliverables';
-import DisplayTeam from '../../modules/student/DisplayTeam';
-import CreateTeam from '../../modules/common/CreateTeam';
-import { Row, Column } from 'react-foundation';
 import { connect } from 'react-redux';
+import * as userActions from '../../actions/user.actions';
+import Logout from '../../modules/common/Logout';
+import { Row, Column } from 'react-foundation';
+import CourseList from '../../components/Course/CourseList';
 
+class SuperAdminPortal extends React.Component {
+  constructor() {
+    super()
+  }
 
-const StudentPortal = (props) => (
-  <div>
-    <div className="grid-center-example">
-      <Row className="display">
-        <Column small={12} centerOnLarge>12 centered, large</Column>
-    </Row>
-  </div>
+  componentWillMount() {
+    this.props.dispatch(userActions.getCurrentUser());
+  }
 
-  <Logout
-    firstname={props.user.fname}
-    username={props.user.username}
-  />
-  </div>
-);
+  render() {
+    return (
+      <div>
+        <div className="grid-center-example">
+          <Row className="main-child-component-area">
+            <Column small={12} centerOnLarge>{this.props.children}</Column>
+        </Row>
+        </div>
+      
+        <Logout
+          firstname={this.props.user.fname}
+          username={this.props.user.username}
+        />
+      </div>
+    );
+  }
+}
 
-StudentPortal.propTypes = {
-  user: PropTypes.object, // eslint-disable-line
+function mapStateToProps(state, ownProps) {
+  return {
+    user: state.user
+  }
+}
+
+SuperAdminPortal.propTypes = {
+  user: PropTypes.object
 };
 
-export default StudentPortal;
+export default connect(mapStateToProps)(SuperAdminPortal);

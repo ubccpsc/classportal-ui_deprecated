@@ -2,8 +2,9 @@ import fetch from 'isomorphic-fetch'
 import config from '../config';
 import * as options from './api.settings';
 
-class StudentApi {
-  static getAllStudents(courseNum) {
+class ClassListApi {
+  static getClassList(courseNum) {
+
     return fetch(`${config.apiAddress}/${courseNum}/admin/students`, options.authenticated)
       .then(students => {
         return students.json();
@@ -31,4 +32,4 @@ class StudentApi {
   }
 }
 
-export default StudentApi;
+export default ClassListApi;

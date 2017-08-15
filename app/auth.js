@@ -1,6 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import config from './config';
 import * as options from './api/api.settings';
+import { connect } from 'react-redux';
+import React, { PropTypes } from 'react';
 
 /* *********** NOTE: ************
  * *********** localStorage.token is deprecated and being replaced with

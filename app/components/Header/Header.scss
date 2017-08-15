@@ -20,5 +20,17 @@ $subnav-hero-transition: all 0.35s ease-in-out;
 
   .subnav-hero-headline {
     color: $white;
+    position: absolute;
+  }
+
+  .subnav-hero-signout {
+  	position: relative;
+  	left: 0;
+  }
+
+  .subnav-logout-button-area {
+  	min-width: 75rem;
+  	right: 0;
+  	text-align: right;
   }
 }
