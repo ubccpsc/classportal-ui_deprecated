@@ -1,11 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const StudentLinks = () => {
 	return (
 		<ul className="links-hero-subnav">
-	    <li><a href="#">Deliverables</a></li>
-	    <li><a href="#" className="is-active">Grades</a></li>
-	    <li><a target="_blank" href="http://zurb.com/responsive">Repositories</a></li>
+	    <li><Link to="/students/courses" activeClassName="is-active">Courses</Link></li>
+	    <li><Link to="/students/deliverables" activeClassName="is-active">Deliverables</Link></li>
+	    <li><Link to="/students/grades" activeClassName="is-active">Grades</Link></li>
+	    <li><Link to="/test" activeClassName="is-active">Repositories</Link></li>
 	  </ul>
 	)
 }

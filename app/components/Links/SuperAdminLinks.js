@@ -1,12 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const SuperAdminLinks = () => {
 	return (
 		<ul className="links-hero-subnav">
-	    <li><a href="/superadmin/courses">Courses</a></li>
-	    <li><a href="/superadmin/deliverables">Deliverables</a></li>
-	    <li><a href="/superadmin/users" className="is-active">Users</a></li>
-	    <li><a target="/superadmin/administrators" href="./administrators">Administrators</a></li>
+		    <li><Link to="/superadmin/courses" activeClassName="is-active">Class Lists</Link></li>
+		    <li><Link to="/superadmin/courses/settings" activeClassName="is-active">Class Settings</Link></li>
+		    <li><Link to="/superadmin/deliverables" activeClassName="is-active">Deliverables</Link></li>
+		    <li><Link to="/superadmin/users" activeClassName="is-active">Users</Link></li>
+		    <li><Link to="./administrators" activeClassName="is-active">Administrators</Link></li>
 	  </ul>
 	)
 }
