@@ -14,7 +14,7 @@ const CourseListRow = (props) => {
 			</tr>
 
 			<tr className="table-expand-row-content">
-			  <td colspan="8" className="table-expand-row-nested">
+			  <td colSpan="8" className="table-expand-row-nested">
 			    <p>info</p>
 			  </td>
 			</tr>

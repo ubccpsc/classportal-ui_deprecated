@@ -32,7 +32,7 @@ class CourseList extends React.Component {
 				    </tr>
 				  </thead>
 		        {this.props.courses.map(course => 
-		        	<CourseListRow course={course}/>
+		        	<CourseListRow key={course.courseId} course={course}/>
 		        )}
 				</table>
 			);

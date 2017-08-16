@@ -4,6 +4,7 @@ import * as userActions from '../../actions/user.actions';
 import Logout from '../../modules/common/Logout';
 import { Row, Column } from 'react-foundation';
 import CourseList from '../../components/Course/CourseList';
+import DeliverableListTable from '../../components/Deliverable/DeliverableListTable';
 
 class SuperAdminPortal extends React.Component {
   constructor() {

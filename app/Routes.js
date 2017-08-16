@@ -11,7 +11,7 @@ import AdminPage from './pages/adminportal';
 import StudentPage from './pages/studentportal';
 import SuperAdminPage from './pages/superadminportal';
 import ClassListTable from './components/ClassList/ClassListTable';
-import DeliverableList from './components/ClassList/ClassListTable';
+import DeliverableListTable from './components/Deliverable/DeliverableListTable';
 import ErrorPage from './pages/error';
 import App from './App';
 import CourseList from './components/Course/CourseList';
@@ -28,11 +28,12 @@ export default () => (
       <Route path="/superadmin" component={SuperAdminPage}>
         <Route path="/superadmin/courses" component={CourseList}/>
         <Route path="/superadmin/:courses/students" component={ClassListTable} />
+        <Route path="/superadmin/:courses/deliverables" component={DeliverableListTable}/>
         <Route path="/superadmin/students" component={ClassListTable} />
       </Route>
       <Route path="students" component={StudentPage}>
         <Route path="/students/courses" component={CourseList}/>
-        <Route path="/students/:courses/deliverables" component={DeliverableList}/>
+        <Route path="/students/:courses/deliverables" component={DeliverableListTable}/>
       </Route>
       <Route path="postLogin" component={PostLoginPage} onEnter={auth.requireAuthentication, auth.checkUnauthenticated}/>
       <Route path="*" component={ErrorPage}/>
