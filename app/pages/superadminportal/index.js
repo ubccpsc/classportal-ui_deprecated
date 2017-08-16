@@ -20,13 +20,8 @@ class SuperAdminPortal extends React.Component {
 				<div className="grid-center-example">
 				  <Row className="main-child-component-area">
 				    <Column small={12} centerOnLarge>{this.props.children}</Column>
-				</Row>
-		  </div>
-		  
-		  <Logout
-		    firstname={this.props.user.fname}
-		    username={this.props.user.username}
-		  />
+					</Row>
+		  	</div>
 		  </div>
 		);
 	}
