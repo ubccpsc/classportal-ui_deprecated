@@ -12,19 +12,22 @@ class CourseApi {
       	return courses;
       })
       .catch(err => {
-        console.log(`course.api::getAllCourses() ERROR: No response from API: ${err}`);
+        console.log(`course.api::getAllCourses() ERROR: ${err}`);
       });
   }
 
-  // static getCourseDetails(courseNum) {
-  //   return fetch(`${config.apiAddress}/${courseNum}/`)
-  //     .then(response => {
-  //       return response.json();
-  //     })
-  //     .catch(err => {
-  //       console.log(`course.api::getCourseDetails(courseNum) ERROR: No response from API: ${err}`);
-  //     });
-  // 
+  static getCourseSettings(courseNum) {
+    return fetch(`${config.apiAddress}/${courseNum}/admin/courseSettings`, options.authenticated)
+      .then(courseSettings => {
+        return courseSettings.json();
+      })
+      .then(courseSettings => {
+        return courseSettings;
+      })
+      .catch(err => {
+        console.log(`course.api::getCourseSettings(courseNum) ERROR: ${err}`);
+      });
+  }
 }
 
 export default CourseApi;

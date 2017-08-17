@@ -6,6 +6,7 @@ import courses from './courses.reducer';
 import classList from './classList.reducer';
 import authStatus from './auth.reducer';
 import deliverables from './deliverables.reducer';
+import courseSettings from './courseSettings.reducer';
 import * as types from '../actions/types.helper';
 
 
@@ -36,6 +37,7 @@ const appReducer = combineReducers({
   courses,
   classList,
   deliverables,
+  courseSettings,
   helloWorld: () => ['hello', 'ubc'],
 });
 

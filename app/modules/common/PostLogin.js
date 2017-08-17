@@ -3,7 +3,7 @@ import { Spinner } from 'elemental';
 import Module from '../../components/Module/Module';
 
 const PostLogin = (props) => (
-  <Module title={props.error ? 'Error! Redirecting to Login' : 'Connecting to GitHub'}>
+  <Module title={'Connecting to GitHub'}>
     <Spinner size="lg" type="primary" />
   </Module>
 );

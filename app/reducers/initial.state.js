@@ -5,5 +5,6 @@ export default {
   course: {},
   classList: [],
   deliverables: [],
+  courseSettings: {},
   authStatus: "Unauthenticated",
 }

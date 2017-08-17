@@ -47,7 +47,7 @@ class PostloginPage extends React.Component {
       })
       .catch((error) => {
         this.setState({ error: true }, () => {
-          alert(error);
+          console.log(error);
           localStorage.clear();
           setTimeout(() => {
             browserHistory.push('/');

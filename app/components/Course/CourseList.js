@@ -26,9 +26,11 @@ class CourseList extends React.Component {
 				  <thead>
 				    <tr className="table-expand-row">
 				      <th width="200">Course Number</th>
-				      <th>Deliverables</th>
-				      <th className="text-right" width="150">Course Name</th>
+				      <th>Name</th>
+				      <th>Min Team Size</th>
+				      <th width="150">Max Team Size</th>
 				      <th width="150">Students Set Teams</th>
+				      <th></th>
 				    </tr>
 				  </thead>
 		        {this.props.courses.map(course => 

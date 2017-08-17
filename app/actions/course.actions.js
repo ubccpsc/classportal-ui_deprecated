@@ -16,3 +16,10 @@ export function getCourseDetails(courseNum) {
         payload: CourseApi.getCourseDetails(courseNum),
     }
 }
+
+export function getCourseSettings(courseNum) {
+	return {
+		type: types.GET_COURSE_SETTINGS,
+		payload: CourseApi.getCourseSettings(courseNum),
+	}
+}

@@ -15,7 +15,7 @@ function redirect(e) {
 const Header = (props) => (
 	<div>
   <header className="subnav-hero-section">
-	    <h1 className="subnav-hero-headline">UBC ClassPortal<small> by CS Department</small></h1>
+	    <h1 className="subnav-hero-headline">UBC ClassPortal<small> with AutoTest</small></h1>
 		    <div className="subnav-logout-button-area">
 			   	<Logout/>
 		    </div>
