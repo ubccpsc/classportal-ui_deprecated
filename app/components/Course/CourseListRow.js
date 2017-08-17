@@ -3,13 +3,13 @@ import { Link } from 'react-router';
 
 const CourseListRow = (props) => {
 
-	let courseUsersHref = "./" + props.course.courseId + "/students";
-	let courseSettingsHref = "./" + props.course.courseId + "/settings";
+	let courseUsersHref = "https://localhost:3000/superadmin/" + props.course.courseId + "/students";
+	let courseSettingsHref = "https://localhost:3000/superadmin/" + props.course.courseId + "/settings";
 
 	return (
 		<tbody>
 			<tr className="table-expand-row" data-open-details>
-		  	<td><a href={courseUsersHref}>{props.course.courseId}</a></td>
+		  	<td><Link to={courseUsersHref}>{props.course.courseId}</Link></td>
 		  	<td>{props.course.name}</td>
 		  	<td>{props.course.minTeamSize}</td>
 		  	<td>{props.course.maxTeamSize}</td>
