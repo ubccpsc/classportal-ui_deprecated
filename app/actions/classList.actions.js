@@ -16,3 +16,11 @@ export function uploadClassList(courseNum, csvFormData) {
 		payload: classListApi.uploadClassList(courseNum, csvFormData),
 	}
 }
+
+// clears the class list in Redux, such as before retrieving a new one
+export function clearClassList() {
+	return {
+		type: types.CLEAR_CLASS_LIST,
+		payload: null,
+	}
+}

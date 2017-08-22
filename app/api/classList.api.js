@@ -18,8 +18,8 @@ class ClassListApi {
 
   	const AUTHENTICATED_FILE_POST = {
   		credentials: 'include',
-		method: 'post',
-		body: classList,
+  		method: 'post',
+  		body: classList,
 	}
 
   	return fetch(`${config.apiAddress}/${courseNum}/admin/students`, AUTHENTICATED_FILE_POST)

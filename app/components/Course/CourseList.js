@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as courseActions from '../../actions/course.actions';
+import * as classListActions from '../../actions/classList.actions';
 import LoadingMessage from '../../modules/common/LoadingMessage';
 import CourseListRow from './CourseListRow';
 
@@ -8,6 +9,7 @@ import CourseListRow from './CourseListRow';
 class CourseList extends React.Component {
 	constructor(props) {
 		super(props);
+		this.props.dispatch(classListActions.clearClassList());
 	}
 
 	componentWillMount() {
@@ -27,10 +29,11 @@ class CourseList extends React.Component {
 				    <tr className="table-expand-row">
 				      <th width="200">Course Number</th>
 				      <th>Name</th>
+				      <th width="150">Students Set Teams</th>
 				      <th>Min Team Size</th>
 				      <th width="150">Max Team Size</th>
-				      <th width="150">Students Set Teams</th>
-				      <th></th>
+				      <th/>
+				      <th/>
 				    </tr>
 				  </thead>
 		        {this.props.courses.map(course => 

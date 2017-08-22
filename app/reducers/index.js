@@ -7,6 +7,7 @@ import classList from './classList.reducer';
 import authStatus from './auth.reducer';
 import deliverables from './deliverables.reducer';
 import courseSettings from './courseSettings.reducer';
+import teams from './teams.reducer';
 import * as types from '../actions/types.helper';
 
 
@@ -33,6 +34,7 @@ const appReducer = combineReducers({
   routing: routerReducer,
   students,
   user,
+  teams,
   authStatus,
   courses,
   classList,

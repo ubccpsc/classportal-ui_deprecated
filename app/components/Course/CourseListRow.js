@@ -5,16 +5,18 @@ const CourseListRow = (props) => {
 
 	let courseUsersHref = "https://localhost:3000/superadmin/" + props.course.courseId + "/students";
 	let courseSettingsHref = "https://localhost:3000/superadmin/" + props.course.courseId + "/settings";
+	let deliverablesHref = "https://localhost:3000/superadmin/" + props.course.courseId + "/deliverables";
 
 	return (
 		<tbody>
 			<tr className="table-expand-row" data-open-details>
 		  	<td><Link to={courseUsersHref}>{props.course.courseId}</Link></td>
 		  	<td>{props.course.name}</td>
+		  	<td>{props.course.studentsSetTeams ? "Enabled" : "Disabled" }<span className="expand-icon"></span></td>
 		  	<td>{props.course.minTeamSize}</td>
 		  	<td>{props.course.maxTeamSize}</td>
-		  	<td>{props.course.studentsSetTeams}<span className="expand-icon"></span></td>
-		  	<td><a href={courseSettingsHref} isActiveClass="active-crud-link">Settings</a></td>
+		  	<td><Link to={courseSettingsHref} isActiveClass="active-crud-link">Settings</Link></td>
+		  	<td><Link to={deliverablesHref} isActiveClass="active-crud-link">Deliverables</Link></td>
 			</tr>
 
 			<tr className="table-expand-row-content">

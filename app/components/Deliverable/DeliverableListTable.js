@@ -25,14 +25,15 @@ class DeliverableListTable extends React.Component {
 				<table className="table-expand">
 				  <thead>
 				    <tr className="table-expand-row">
-				      <th width="200">Deliverable Name</th>
+				      <th width="200">Deliverable</th>
 				      <th>Github Source URL</th>
 				      <th width="150">Open</th>
 				      <th width="150">Close</th>
+				      <th>Settings</th>
 				    </tr>
 				  </thead>
 		        	{this.props.deliverables.map(deliverable => 
-		        		<DeliverableListRow deliverable={deliverable}/ >
+		        		<DeliverableListRow courseId={this.props.params.courses} deliverable={deliverable}/ >
 		        	)}
 				</table>
 			);
