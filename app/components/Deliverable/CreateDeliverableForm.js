@@ -3,16 +3,33 @@ import { connect } from 'react-redux';
 import * as deliverableActions from '../../actions/deliverable.actions';
 import LoadingMessage from '../../modules/common/LoadingMessage';
 import DeliverableListRow from './DeliverableListRow';
-
+import { Link } from 'react-router';
+import { Button } from 'elemental';
+import { Switch } from 'react-foundation';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+require("react-datepicker/dist/react-datepicker-cssmodules.css");
 
 class DeliverableListTable extends React.Component {
 	constructor(props) {
-		super(props);
-		this.toggleEdit = false;
-	}
+    super(props);
+    this.state = {
+      startDateOpen: moment(),
+      startDateClose: moment(),
+    } 
+    this.handleChangeOpen = this.handleChangeOpen.bind(this);
+    this.handleChangeClose = this.handleChangeClose.bind(this);
+  }
+  
+  handleChangeClose(date) {
+    this.setState({ startDateClose: date });
+  }
+
+  handleChangeOpen(date){ 
+    this.setState({ startDateOpen: date });
+  }
 
 	componentWillMount() {
-		this.props.dispatch(deliverableActions.getDeliverablesFromCourse(this.props.params.courses));
 	}
 
 	render () {
@@ -24,54 +41,50 @@ class DeliverableListTable extends React.Component {
 		else {
 			return (
 				<div className="table-expand-container">
-          {/* <!-- Row Layout for forms --> */}
           <form>
-            <label>This is a label.</label>
-            <input type="text" placeholder="Standard Input" />
-            <label>Address</label>
-            <input type="text" className="twelve" placeholder="Street" />
-            <div className="row">
-              <div className="six columns">
-                <input type="text" placeholder="City" />
-              </div>
-              <div className="three columns">
-                <input type="text" placeholder="State" />
-              </div>
-              <div className="three columns">
-                <input type="text" placeholder="ZIP" />
-              </div>
-            </div>
-            <textarea placeholder="Message"></textarea>
-          </form>
+            <fieldset>
 
-          {/* <!-- Right aligned and inline labels --> */}
-          <form>
-            <div className="row">
-              <div className="two mobile-one columns">
-                <label className="right inline">Address Name:</label>
+              <legend>Create Deliverable</legend>
+
+              <label>Course Number</label>
+              <input type="text" value={this.props.courseId} readonly="readonly" />
+              <label>Deliverable Source Code</label>
+              <input type="text" placeholder="ie. https://github.ubc.ca/pcarter/cpsc210__deliverables" />
+              <label>Name</label>
+              <input type="text" class="two" placeholder="ie. 'd1', 'p1'" />
+              <div className="row">
+                <div className="two mobile-one columns">
+                  <label className="right inline">Open Date:</label>
+                </div>
+                <div className="ten mobile-three columns">
+                  <DatePicker
+                    selected={this.state.startDateOpen}
+                    onChange={this.handleChangeOpen}
+                  />
+                </div>
               </div>
-              <div className="ten mobile-three columns">
-                <input type="text" placeholder="e.g. Home" className="eight" />
+              <div className="row">
+                <div className="two mobile-one columns">
+                  <label className="right inline">Close Date:</label>
+                </div>
+                <div className="ten mobile-three columns">
+                  <DatePicker
+                    selected={this.state.startDateClose}
+                    onChange={this.handleChangeClose}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="row">
-              <div className="two mobile-one columns">
-                <label className="right inline">City:</label>
+              <div className="row">
+                <div className="two mobile-one columns">
+                  <label className="right inline">Grades Released</label>
+                </div>
+                <div className="ten mobile-three columns">
+                  <Switch input={{ name: 'gradesReleased' }} />
+                </div>
               </div>
-              <div className="ten mobile-three columns">
-                <input type="text" className="eight" />
-              </div>
-            </div>
-            <div className="row">
-              <div className="two mobile-one columns">
-                <label className="right inline">ZIP:</label>
-              </div>
-              <div className="ten mobile-three columns">
-                <input type="text" className="three" />
-              </div>
-            </div>
+            </fieldset>
           </form>
-					<Link onClick={this.toggleEdit} isActiveclassName="is-active"><Button>Create Deliverable</Button></Link>
+					<Link onClick={this.toggleEdit} isActiveclassName="is-active"><Button>Submit Deliverable</Button></Link>
 				</div>
 			);
 		}
@@ -79,12 +92,14 @@ class DeliverableListTable extends React.Component {
 }
 
 DeliverableListTable.propTypes = {
-	deliverables: PropTypes.array.isRequired,
+  deliverables: PropTypes.array.isRequired,
+  courses: PropTypes.array.isRequired,
 }
 
 function mapStateToProps(state, ownState) {
 	return {
-		deliverables: state.deliverables
+    deliverables: state.deliverables,
+    courses: state.courses
 	}
 }
 

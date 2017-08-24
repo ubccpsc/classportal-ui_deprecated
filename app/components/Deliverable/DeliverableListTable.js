@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import * as deliverableActions from '../../actions/deliverable.actions';
 import LoadingMessage from '../../modules/common/LoadingMessage';
 import DeliverableListRow from './DeliverableListRow';
+import CreateDeliverableForm from './CreateDeliverableForm';
 import { Button } from 'elemental';
 import config from '../../config';
 
@@ -51,7 +52,7 @@ class DeliverableListTable extends React.Component {
 		}
 		else if (this.state.isCreating) {
 			return (
-				<div>Creating a wonderful thing.</div>
+				<CreateDeliverableForm courseId={this.props.params.courses}/>
 			);
 		}
 		else {
