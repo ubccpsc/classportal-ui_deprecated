@@ -16,17 +16,53 @@ class DeliverableListTable extends React.Component {
     this.state = {
       startDateOpen: moment(),
       startDateClose: moment(),
+      newDeliverable: {
+        url: '',
+        open: "1999-01-18T02:21:07.200Z",
+        close: "2000-01-18T04:01:55.200Z",
+        courseId: this.props.courseId,
+        gradesReleased: false,
+      }
     } 
+
+    this.handleChange = this.handleChange.bind(this);
+    this.submitDeliverable = this.submitDeliverable.bind(this);
     this.handleChangeOpen = this.handleChangeOpen.bind(this);
     this.handleChangeClose = this.handleChangeClose.bind(this);
   }
   
-  handleChangeClose(date) {
-    this.setState({ startDateClose: date });
-  }
-
   handleChangeOpen(date){ 
     this.setState({ startDateOpen: date });
+    this.setState({ open: date.toDate() });
+  }
+
+  handleChangeClose(date) {
+    this.setState({ startDateClose: date });
+    this.setState({ close : date.toDate() });
+  }
+
+  handleChange(e) {
+  this.setState({ [e.target.name] : e.target.value })
+  console.log(this.state);
+  console.log(this.state[e.target.name]);
+  }
+
+  createDeliverableObj() {
+    let that = this;
+    return {
+      name: this.state.name,
+      url: this.state.url,
+      open: this.state.open,
+      close: this.state.close,
+      gradesReleased: this.state.gradesReleased
+    }
+  }
+
+  submitDeliverable(event) {
+    event.preventDefault();
+    console.log('creating deliverable object');
+    console.log(this.createDeliverableObj())
+    console.log(event);
   }
 
 	componentWillMount() {
@@ -47,17 +83,22 @@ class DeliverableListTable extends React.Component {
               <legend>Create Deliverable</legend>
 
               <label>Course Number</label>
-              <input type="text" value={this.props.courseId} readonly="readonly" />
+              <input type="text" value={this.props.courseId} onChange={this.handleChange}
+                name="courseId" readOnly="readonly" />
               <label>Deliverable Source Code</label>
-              <input type="text" placeholder="ie. https://github.ubc.ca/pcarter/cpsc210__deliverables" />
+              <input type="text" name="url" onChange={this.handleChange} value={this.state.url}
+                placeholder="ie. https://github.ubc.ca/pcarter/cpsc210__deliverables" />
               <label>Name</label>
-              <input type="text" class="two" placeholder="ie. 'd1', 'p1'" />
+              <input type="text" className="two" name="name" value={this.state.name}
+                placeholder="ie. 'd1', 'p1'" onChange={this.handleChange} />
               <div className="row">
                 <div className="two mobile-one columns">
                   <label className="right inline">Open Date:</label>
                 </div>
                 <div className="ten mobile-three columns">
                   <DatePicker
+                    name="open"
+                    value={this.state.startDateOpen.toDate()}
                     selected={this.state.startDateOpen}
                     onChange={this.handleChangeOpen}
                   />
@@ -69,6 +110,8 @@ class DeliverableListTable extends React.Component {
                 </div>
                 <div className="ten mobile-three columns">
                   <DatePicker
+                    close="close"
+                    value={this.state.startDateClose.toDate()}
                     selected={this.state.startDateClose}
                     onChange={this.handleChangeClose}
                   />
@@ -79,12 +122,12 @@ class DeliverableListTable extends React.Component {
                   <label className="right inline">Grades Released</label>
                 </div>
                 <div className="ten mobile-three columns">
-                  <Switch input={{ name: 'gradesReleased' }} />
+                  <Switch input={{ name: 'gradesReleased' }} onChange={this.handleChange} />
                 </div>
               </div>
             </fieldset>
           </form>
-					<Link onClick={this.toggleEdit} isActiveclassName="is-active"><Button>Submit Deliverable</Button></Link>
+					<Link onClick={this.submitDeliverable}><Button>Submit Deliverable</Button></Link>
 				</div>
 			);
 		}
