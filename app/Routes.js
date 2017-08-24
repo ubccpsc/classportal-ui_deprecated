@@ -19,7 +19,10 @@ import TeamListTable from './components/Team/TeamListTable';
 import CourseSettingsListTable from './components/CourseSettings/CourseSettingsListTable';
 import ErrorPage from './pages/error';
 import App from './App';
-import CourseList from './components/Course/CourseList';
+import SuperAdminCourseList from './components/Course/SuperAdminCourseList';
+import AdminCourseListTable from './components/Course/AdminCourseListTable';
+import StudentCourseListTable from './components/Course/StudentCourseListTable';
+
 
 export default () => (
   <Provider store={store}>
@@ -31,17 +34,24 @@ export default () => (
         </Route>
         <Route path="login" component={LoginPage} onEnter={auth.checkUnauthenticated}/>
         <Route path="/superadmin" component={SuperAdminPage}>
-          <Route path="/superadmin/courses" component={CourseList}/>
+          <Route path="/superadmin/courses" component={SuperAdminCourseList}/>
           <Route path="/superadmin/:courses/students" component={ClassListTable} />
           <Route path="/superadmin/:courses/deliverables" component={DeliverableListTable}/>
           <Route path="/superadmin/:courses/settings" component={CourseSettingsListTable}/>
-          <Route path="/superadmin/labs" component={CourseList}/>
+          <Route path="/superadmin/labs" component={SuperAdminCourseList}/>
           <Route path="/superadmin/:courses/labs" component={LabListTable}/>
           <Route path="/superadmin/:courses/teams" component={TeamListTable}/>
           <Route path="/superadmin/students" component={ClassListTable} />
         </Route>
+        <Route path="admin" component={AdminPage}>
+          <Route path="/admin/courses" component={AdminCourseListTable}/>
+          <Route path="/admin/:courses/settings" component={CourseSettingsListTable}/>
+          <Route path="/admin/:courses/settings" component={CourseSettingsListTable}/>
+          <Route path="/admin/:courses/settings" component={CourseSettingsListTable}/>
+          <Route path="/admin/:courses/deliverable" component={CourseSettingsListTable}/>
+        </Route>
         <Route path="students" component={StudentPage}>
-          <Route path="/students/courses" component={CourseList}/>
+          <Route path="/students/courses" component={StudentCourseListTable}/>
           <Route path="/students/:courses/deliverables" component={DeliverableListTable}/>
           <Route path="/students/:courses/teams" component={TeamListTable}/>
         </Route>

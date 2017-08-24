@@ -9,6 +9,7 @@ const AdminLinks = () => {
 		<ul className="links-hero-subnav">
       <li><Link to={`${appRootPath}/admin/courses`}>Courses</Link></li>
       <li><Link to={`${appRootPath}/admin/courses/deliverables`}>Deliverables</Link></li>
+      <li><Link to={`${appRootPath}/admin/courses/deliverables`}>Teams</Link></li>
       <li><Link to={`${appRootPath}/admin/courses/grades`} className="is-active">Grades</Link></li>
       <li><Link to={`${appRootPath}/admin/courses/grades`}>Repositories</Link></li>
     </ul>

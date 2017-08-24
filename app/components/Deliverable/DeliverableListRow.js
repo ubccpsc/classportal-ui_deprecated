@@ -16,13 +16,13 @@ const DeliverableListRow = (props) => {
 			  	<td>{props.deliverable.open}</td>
 			  	<td>{props.deliverable.close}</td>
 			  	<td>{props.deliverable.gradesReleased ? 'True' : 'False'}</td>
-			  	<td><Link to={courseSettingsHref} isActiveClass="is-active"><Button>Settings</Button></Link></td>
-			  	<td><Link onClick={this.toggleEdit} isActiveClass="is-active"><Button>Edit</Button></Link></td>
+			  	<td><Link to={courseSettingsHref} activeClassName="is-active"><Button>Settings</Button></Link></td>
+			  	<td><Link onClick={this.toggleEdit} activeClassName="is-active"><Button>Edit</Button></Link></td>
 
 			</tr>
 
 			<tr className="table-expand-row-content">
-			  <td colspan="8" className="table-expand-row-nested">
+			  <td colSpan="8" className="table-expand-row-nested">
 			  </td>
 			</tr>
 		</tbody>

@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import * as courseActions from '../../actions/course.actions';
 import * as classListActions from '../../actions/classList.actions';
 import LoadingMessage from '../../modules/common/LoadingMessage';
-import CourseListRow from './CourseListRow';
+import AdminCourseListRow from './AdminCourseListRow';
 
 
-class CourseList extends React.Component {
+class AdminCourseListTable extends React.Component {
 	constructor(props) {
 		super(props);
 		this.props.dispatch(classListActions.clearClassList());
@@ -38,7 +38,7 @@ class CourseList extends React.Component {
 				    </tr>
 				  </thead>
 		        {this.props.courses.map(course => 
-		        	<CourseListRow key={course.courseId} course={course}/>
+		        	<AdminCourseListRow key={course.courseId} course={course}/>
 		        )}
 				</table>
 			);
@@ -46,7 +46,7 @@ class CourseList extends React.Component {
 	}
 }
 
-CourseList.propTypes = {
+AdminCourseListTable.propTypes = {
 	courses: PropTypes.array.isRequired,
 }
 
@@ -57,4 +57,4 @@ function mapStateToProps(state, ownState) {
 }
 
 
-export default connect(mapStateToProps)(CourseList);
+export default connect(mapStateToProps)(AdminCourseListTable);

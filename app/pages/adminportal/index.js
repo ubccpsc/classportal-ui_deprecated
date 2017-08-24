@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as userActions from '../../actions/user.actions';
 import Logout from '../../modules/common/Logout';
 import { Row, Column } from 'react-foundation';
-import CourseList from '../../components/Course/CourseList';
+import SuperAdminCourseList from '../../components/Course/SuperAdminCourseList';
 
 class SuperAdminPortal extends React.Component {
 	constructor() {
