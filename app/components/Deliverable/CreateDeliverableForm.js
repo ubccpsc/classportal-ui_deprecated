@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as deliverableActions from '../../actions/deliverable.actions';
+import * as delivActions from '../../actions/deliverable.actions';
 import LoadingMessage from '../../modules/common/LoadingMessage';
 import DeliverableListRow from './DeliverableListRow';
 import { Link } from 'react-router';
@@ -16,13 +16,11 @@ class DeliverableListTable extends React.Component {
     this.state = {
       startDateOpen: moment(),
       startDateClose: moment(),
-      newDeliverable: {
-        url: '',
-        open: "1999-01-18T02:21:07.200Z",
-        close: "2000-01-18T04:01:55.200Z",
-        courseId: this.props.courseId,
-        gradesReleased: false,
-      }
+      url: null,
+      open: null,
+      close: null,
+      courseId: this.props.courseId,
+      gradesReleased: null,
     } 
 
     this.handleChange = this.handleChange.bind(this);
@@ -54,15 +52,15 @@ class DeliverableListTable extends React.Component {
       url: this.state.url,
       open: this.state.open,
       close: this.state.close,
-      gradesReleased: this.state.gradesReleased
+      gradesReleased: this.state.gradesReleased,
+      courseId: this.state.courseId
     }
   }
 
   submitDeliverable(event) {
     event.preventDefault();
-    console.log('creating deliverable object');
-    console.log(this.createDeliverableObj())
-    console.log(event);
+    console.log(`CreateDeliverableForm::submitDeliverable() $(this.createDeliverableObj)`);
+    this.props.dispatch(delivActions.createDeliverable(this.createDeliverableObj()));
   }
 
 	componentWillMount() {
@@ -122,7 +120,7 @@ class DeliverableListTable extends React.Component {
                   <label className="right inline">Grades Released</label>
                 </div>
                 <div className="ten mobile-three columns">
-                  <Switch input={{ name: 'gradesReleased' }} onChange={this.handleChange} />
+                  <Switch input={{ type: 'radio', name: 'gradesReleased' }} onChange={this.handleChange} />
                 </div>
               </div>
             </fieldset>

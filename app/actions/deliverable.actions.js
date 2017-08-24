@@ -8,3 +8,17 @@ export function getDeliverablesFromCourse(courseNum) {
     payload: DeliverableApi.getDeliverablesFromCourse(courseNum),
   }
 }
+
+export function createDeliverable(newDeliv) {
+  return {
+    type: types.CREATE_DELIVERABLE,
+    payload: DeliverableApi.createDeliverable(newDeliv),
+  }
+}
+
+export function updateDeliverable(updatedDeliv) {
+  return {
+    type: types.UPDATE_DELIVERABLE,
+    payload: DeliverableApi.updateDeliverable(updatedDeliv),
+  }
+}

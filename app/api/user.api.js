@@ -5,7 +5,7 @@ import * as options from './api.settings';
 class UserApi {
 
   static getUserDetails(username) {
-    return fetch(`${config.apiAddress}/${courseNum}/students`, options.authenticated)
+    return fetch(`${config.apiAddress}/${courseNum}/students`, options.AUTHENTICATED)
       .then(response => {
         return response.json();
       })
@@ -15,7 +15,7 @@ class UserApi {
   }
 
   static getCurrentUser() {
-    return fetch(`${config.apiAddress}/currentUser`, options.authenticated)
+    return fetch(`${config.apiAddress}/currentUser`, options.AUTHENTICATED)
       .then(response => {
         return response.json();
       })
@@ -25,7 +25,7 @@ class UserApi {
   }
 
   static getUserRole() {
-    return fetch(`${config.apiAddress}/currentUser`, options.authenticated)
+    return fetch(`${config.apiAddress}/currentUser`, options.AUTHENTICATED)
       .then(response => {
         return response.json()
       })
@@ -35,14 +35,14 @@ class UserApi {
   }
 
   static getMyCourses() {
-    return fetch(`${config.apiAddress}/myCourses`, options.authenticated)
+    return fetch(`${config.apiAddress}/myCourses`, options.AUTHENTICATED)
       .then(response => {
         return response.json()
       })
   }
 
   static getAllAdmins() {
-    return fetch(`${config.apiAddress}/getAllAdmins`, options.authenticated)
+    return fetch(`${config.apiAddress}/getAllAdmins`, options.AUTHENTICATED)
       .then(response => {
         return response.json()
       })

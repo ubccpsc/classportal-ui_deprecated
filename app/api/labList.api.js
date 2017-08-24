@@ -5,7 +5,7 @@ import * as options from './api.settings';
 class LabListApi {
   static getLabSectionsFromCourse(courseNum) {
 
-    return fetch(`${config.apiAddress}/${courseNum}/labSections`, options.authenticated)
+    return fetch(`${config.apiAddress}/${courseNum}/labSections`, options.AUTHENTICATED)
       .then(labSections => {
         return labSections.json();
       })

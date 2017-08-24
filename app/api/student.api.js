@@ -4,7 +4,7 @@ import * as options from './api.settings';
 
 class StudentApi {
   static getAllStudents(courseNum) {
-    return fetch(`${config.apiAddress}/${courseNum}/admin/students`, options.authenticated)
+    return fetch(`${config.apiAddress}/${courseNum}/admin/students`, options.AUTHENTICATED)
       .then(students => {
         return students.json();
       })

@@ -5,7 +5,7 @@ import * as options from './api.settings';
 class TeamApi {
 
   static getCourseTeams(courseNum) {
-    return fetch(`${config.apiAddress}/${courseNum}/error/teams`, options.authenticated)
+    return fetch(`${config.apiAddress}/${courseNum}/error/teams`, options.AUTHENTICATED)
       .then(teams => {
         return teams.json();
       })
@@ -15,7 +15,7 @@ class TeamApi {
   }
 
   static getCourseTeamsPerSection(courseNum, sectionNum) {
-    return fetch(`${config.apiAddress}/${courseNum}/admin/students`, options.authenticated)
+    return fetch(`${config.apiAddress}/${courseNum}/admin/students`, options.AUTHENTICATED)
       .then(teams => {
         return teams.json();
       })
@@ -25,7 +25,7 @@ class TeamApi {
   }
 
   static getCourseTeamsPerUser(courseNum, mongoUserId) {
-    return fetch(`${config.apiAddress}/${courseNum}/${mongoUserId}/teams`, options.authenticated)
+    return fetch(`${config.apiAddress}/${courseNum}/${mongoUserId}/teams`, options.AUTHENTICATED)
       .then(teams => {
         return teams.json();
       })

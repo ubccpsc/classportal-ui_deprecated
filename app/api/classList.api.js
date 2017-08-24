@@ -5,7 +5,7 @@ import * as options from './api.settings';
 class ClassListApi {
   static getClassList(courseNum) {
 
-    return fetch(`${config.apiAddress}/${courseNum}/admin/students`, options.authenticated)
+    return fetch(`${config.apiAddress}/${courseNum}/admin/students`, options.AUTHENTICATED)
       .then(students => {
         return students.json();
       })
@@ -16,11 +16,11 @@ class ClassListApi {
 
   static uploadClassList(courseNum, classList) {
 
-  	const AUTHENTICATED_FILE_POST = {
-  		credentials: 'include',
-  		method: 'post',
-  		body: classList,
-	}
+		const AUTHENTICATED_FILE_POST = {
+			credentials: 'include',
+			method: 'post',
+			body: classList
+		}
 
   	return fetch(`${config.apiAddress}/${courseNum}/admin/students`, AUTHENTICATED_FILE_POST)
   	  .then(result => {

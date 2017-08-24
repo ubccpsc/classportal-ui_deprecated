@@ -10,7 +10,7 @@ const UNAUTHENTICATED = "Unauthenticated";
 
 class AuthApi {
   static logout() {
-    return fetch(`${config.apiAddress}/logout`, options.authenticated)
+    return fetch(`${config.apiAddress}/logout`, options.AUTHENTICATED)
       .then(logoutStatus => {
         return logoutStatus.json();
       })
@@ -23,7 +23,7 @@ class AuthApi {
   }
 
   static isAuthenticated() {
-    return fetch(`${config.apiAddress}/isAuthenticated`, options.authenticated)
+    return fetch(`${config.apiAddress}/isAuthenticated`, options.AUTHENTICATED)
       .then(authenticationStatus => {
         return authenticationStatus.json();
       })

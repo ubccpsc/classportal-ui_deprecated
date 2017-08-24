@@ -4,7 +4,7 @@ import * as options from './api.settings';
 
 class CourseApi {
   static getAllCourses() {
-    return fetch(`${config.apiAddress}/courses`, options.authenticated)
+    return fetch(`${config.apiAddress}/courses`, options.AUTHENTICATED)
       .then(courses => {
         return courses.json();
       })
@@ -17,7 +17,7 @@ class CourseApi {
   }
 
   static getCourseSettings(courseNum) {
-    return fetch(`${config.apiAddress}/${courseNum}/admin/courseSettings`, options.authenticated)
+    return fetch(`${config.apiAddress}/${courseNum}/admin/courseSettings`, options.AUTHENTICATED)
       .then(courseSettings => {
         return courseSettings.json();
       })
