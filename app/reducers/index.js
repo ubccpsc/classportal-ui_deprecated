@@ -5,9 +5,14 @@ import user from './user.reducer';
 import courses from './courses.reducer';
 import classList from './classList.reducer';
 import authStatus from './auth.reducer';
+import labSections from './labSections.reducer';
 import deliverables from './deliverables.reducer';
 import courseSettings from './courseSettings.reducer';
+import myActiveCourse from './myActiveCourse.reducer';
+import myCourses from './myCourses.reducer';
 import teams from './teams.reducer';
+import labs from './labs.reducer';
+import admins from './admins.reducer';
 import * as types from '../actions/types.helper';
 
 
@@ -37,8 +42,13 @@ const appReducer = combineReducers({
   teams,
   authStatus,
   courses,
+  myActiveCourse,
+  myCourses,
+  labs,
   classList,
   deliverables,
+  admins,
+  labSections,
   courseSettings,
   helloWorld: () => ['hello', 'ubc'],
 });

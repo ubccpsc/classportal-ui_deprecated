@@ -31,8 +31,23 @@ class UserApi {
       })
       .then((user) => {
         return user.role;
+      });
+  }
+
+  static getMyCourses() {
+    return fetch(`${config.apiAddress}/myCourses`, options.authenticated)
+      .then(response => {
+        return response.json()
+      })
+  }
+
+  static getAllAdmins() {
+    return fetch(`${config.apiAddress}/getAllAdmins`, options.authenticated)
+      .then(response => {
+        return response.json()
       })
   }
 }
 
 export default UserApi;
+

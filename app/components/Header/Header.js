@@ -6,6 +6,7 @@ import config from '../../config';
 import Links from '../Links/Links';
 import Logout from '../../modules/common/Logout';
 import { FormInput, FormIconField, Glyph, Button, InputGroup } from 'elemental';
+// import CourseSelector from '../../modules/common/CourseSelector';
 
 function redirect(e) {
   e.preventDefault();
@@ -15,6 +16,7 @@ function redirect(e) {
 const Header = (props) => (
 	<div>
   <header className="subnav-hero-section">
+	{/* <CourseSelector /> */}
 	    <h1 className="subnav-hero-headline">UBC ClassPortal<small> with AutoTest</small></h1>
 		    <div className="subnav-logout-button-area">
 			   	<Logout/>

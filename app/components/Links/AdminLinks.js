@@ -1,11 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router';
+import config from '../../config';
+
+let appRootPath = `${config.appAddress}`;
 
 const AdminLinks = () => {
 	return (
 		<ul className="links-hero-subnav">
-      <li><a href="#">Deliverables</a></li>
-      <li><a href="#" className="is-active">Grades</a></li>
-      <li><a target="_blank" href="http://zurb.com/responsive">Repositories</a></li>
+      <li><Link to={`${appRootPath}/admin/courses`}>Courses</Link></li>
+      <li><Link to={`${appRootPath}/admin/courses/deliverables`}>Deliverables</Link></li>
+      <li><Link to={`${appRootPath}/admin/courses/grades`} className="is-active">Grades</Link></li>
+      <li><Link to={`${appRootPath}/admin/courses/grades`}>Repositories</Link></li>
     </ul>
   )
 }

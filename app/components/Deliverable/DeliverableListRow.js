@@ -1,6 +1,7 @@
 import React from 'react';
 import config from '../../config';
 import { Link } from 'react-router';
+import { Button } from 'elemental';
 
 const DeliverableListRow = (props) => {
 
@@ -14,12 +15,14 @@ const DeliverableListRow = (props) => {
 			  	<td>{props.deliverable.url}</td>
 			  	<td>{props.deliverable.open}</td>
 			  	<td>{props.deliverable.close}</td>
-			  	<td><Link to={courseSettingsHref} isActiveClass="is-active">Settings</Link></td>
+			  	<td>{props.deliverable.gradesReleased ? 'True' : 'False'}</td>
+			  	<td><Link to={courseSettingsHref} isActiveClass="is-active"><Button>Settings</Button></Link></td>
+			  	<td><Link onClick={this.toggleEdit} isActiveClass="is-active"><Button>Edit</Button></Link></td>
+
 			</tr>
 
 			<tr className="table-expand-row-content">
 			  <td colspan="8" className="table-expand-row-nested">
-			    <p>info</p>
 			  </td>
 			</tr>
 		</tbody>

@@ -29,7 +29,7 @@ class DeliverableListTable extends React.Component {
 				      <th>Github Source URL</th>
 				      <th width="150">Open</th>
 				      <th width="150">Close</th>
-				      <th>Settings</th>
+				      <th>Grades Released</th>
 				    </tr>
 				  </thead>
 		        	{this.props.deliverables.map(deliverable => 

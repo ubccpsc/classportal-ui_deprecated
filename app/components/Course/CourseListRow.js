@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { Button } from 'elemental';
 
 const CourseListRow = (props) => {
 
@@ -15,8 +16,9 @@ const CourseListRow = (props) => {
 		  	<td>{props.course.studentsSetTeams ? "Enabled" : "Disabled" }<span className="expand-icon"></span></td>
 		  	<td>{props.course.minTeamSize}</td>
 		  	<td>{props.course.maxTeamSize}</td>
-		  	<td><Link to={courseSettingsHref} isActiveClass="active-crud-link">Settings</Link></td>
-		  	<td><Link to={deliverablesHref} isActiveClass="active-crud-link">Deliverables</Link></td>
+				<td>{props.course.teamsMustBeInSameLab ? "Enabled" : "Disabled"}</td>
+		  	<td><Link to={courseSettingsHref} isActiveClass="active-crud-link"><Button>Settings</Button></Link></td>
+		  	<td><Link to={deliverablesHref} isActiveClass="active-crud-link"><Button>Deliverables</Button></Link></td>
 			</tr>
 
 			<tr className="table-expand-row-content">

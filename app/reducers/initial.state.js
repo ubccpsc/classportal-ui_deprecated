@@ -7,5 +7,10 @@ export default {
   deliverables: [],
   courseSettings: {},
   teams: [],
+  labSections: [],
+  labs: [],
+  myActiveCourse: {},
+  myCourses: [],
+  admins: [],
   authStatus: "Unauthenticated",
 }

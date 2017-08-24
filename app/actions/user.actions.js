@@ -8,3 +8,20 @@ export function getCurrentUser() {
 		payload: UserApi.getCurrentUser(),
 	}
 }
+
+export function getMyCourses() {
+	return { 
+		type: types.GET_MY_COURSES,
+		payload: UserApi.getMyCourses(),
+	}
+}
+
+
+// ADMIN FUNCTIONS 
+
+export function getAllAdmins() {
+	return {
+		type: types.GET_ALL_ADMINS,
+		payload: UserApi.getAllAdmins(),
+	}
+}

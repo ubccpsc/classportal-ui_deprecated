@@ -1,35 +1,40 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as UserActions from '../../actions/user.actions';
+import * as userActions from '../../actions/user.actions';
 import Logout from '../../modules/common/Logout';
 import { Row, Column } from 'react-foundation';
+import CourseList from '../../components/Course/CourseList';
 
-// import AdminStudentsView from './Admin/AdminStudentsView';
+class SuperAdminPortal extends React.Component {
+	constructor() {
+		super()
+	}
 
-const AdminPortal = (props) => (
-  <div>
+	componentWillMount() {
+		this.props.dispatch(userActions.getCurrentUser());
+	}
 
-		<div className="grid-center-example">
-		  <Row className="display">
-		    <Column small={12} centerOnLarge>12 centered, large</Column>
-		  </Row>
-		</div>
+	render() {
+		return (
+		  <div>
+				<div className="grid-center-example">
+				  <Row className="main-child-component-area">
+				    <Column small={12} centerOnLarge>{this.props.children}</Column>
+					</Row>
+		  	</div>
+		  </div>
+		);
+	}
+}
 
-    <Logout
-      firstname={props.user.fname}
-      username={props.user.username}
-    />
-  </div>
-);
+function mapStateToProps(state, ownProps) {
+	return {
+		user: state.user
+	}
+}
 
-AdminPortal.propTypes = {
+SuperAdminPortal.propTypes = {
   user: PropTypes.object
 };
 
-// function mapStateToProps(state, ownProps) {
-// 	return {
-// 	    user: state.user,
-// 	}
-// }
-
-export default AdminPortal;
+export default connect(mapStateToProps)(SuperAdminPortal);

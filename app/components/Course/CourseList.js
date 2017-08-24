@@ -32,6 +32,7 @@ class CourseList extends React.Component {
 				      <th width="150">Students Set Teams</th>
 				      <th>Min Team Size</th>
 				      <th width="150">Max Team Size</th>
+							<th>Teams In Same Lab</th>
 				      <th/>
 				      <th/>
 				    </tr>

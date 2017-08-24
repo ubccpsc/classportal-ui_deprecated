@@ -27,5 +27,5 @@ const store = createStore(
   enhancers
 );
 
-export const history = syncHistoryWithStore(browserHistory, store);
-export { store };
+const history = syncHistoryWithStore(browserHistory, store);
+export { store, history };
