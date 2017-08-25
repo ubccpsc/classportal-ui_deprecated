@@ -14,8 +14,15 @@ class DeliverableApi {
       });
   }
 
-  static createDeliverable(newDeliv) {
-    return fetch(`${config.apiAddress}/${newDeliv.courseId}/admin/deliverable`, options.AUTHENTICATED_PUT)
+  static createDeliverable(deliverable) {
+    const AUTHENTICATED_POST = {
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      method: 'put',
+      body: JSON.stringify({deliverable}),
+    }
+  
+    return fetch(`${config.apiAddress}/${deliverable.courseId}/admin/deliverable`, AUTHENTICATED_POST)
       .then(result => {
         return result.json();
       })
@@ -25,7 +32,13 @@ class DeliverableApi {
   }
 
   static updateDeliverable(updatedDeliv) {
-    return fetch(`${config.apiAddress}/${newDeliv.courseId}/admin/deliverable`, options.AUTHENTICATED_POST)
+
+    const AUTHENTICATED_POST = {
+	  credentials: 'include',
+	  method: 'post'
+    }
+
+    return fetch(`${config.apiAddress}/${newDeliv.courseId}/admin/deliverable`, AUTHENTICATED_POST)
       .then(result => {
         return result.json();
       })

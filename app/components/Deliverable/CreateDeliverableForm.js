@@ -59,7 +59,7 @@ class DeliverableListTable extends React.Component {
 
   submitDeliverable(event) {
     event.preventDefault();
-    console.log(`CreateDeliverableForm::submitDeliverable() $(this.createDeliverableObj)`);
+    console.log(`CreateDeliverableForm::submitDeliverable() ${JSON.stringify(this.createDeliverableObj())}`);
     this.props.dispatch(delivActions.createDeliverable(this.createDeliverableObj()));
   }
 
