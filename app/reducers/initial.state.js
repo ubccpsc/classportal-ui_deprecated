@@ -12,5 +12,6 @@ export default {
   myActiveCourse: {},
   myCourses: [],
   admins: [],
+  github: {},
   authStatus: "Unauthenticated",
 }

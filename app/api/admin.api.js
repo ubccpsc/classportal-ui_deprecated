@@ -7,7 +7,7 @@ class AdminApi {
   static getAllAdmins(courseId) {
     return fetch(`${config.apiAddress}/${courseId}/admin/admins`, options.AUTHENTICATED)
       .then(response => {
-        return response.json()
+        return response.json();
       });
   }
 }

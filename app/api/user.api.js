@@ -3,7 +3,6 @@ import config from '../config';
 import * as options from './api.settings';
 
 class UserApi {
-
   static getUserDetails(username) {
     return fetch(`${config.apiAddress}/${courseNum}/students`, options.AUTHENTICATED)
       .then(response => {

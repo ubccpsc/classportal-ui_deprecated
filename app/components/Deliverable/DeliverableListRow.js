@@ -6,7 +6,7 @@ import { Button } from 'elemental';
 const DeliverableListRow = (props) => {
 
 	let appRootPath = config.appAddress;
-  let courseSettingsHref = "https://localhost:3000/superadmin/" + props.courseId + `/${props.deliverable.name}/settings`;
+  let repoOptionsHref = "https://localhost:3000/admin/" + props.courseId + `/${props.deliverable.name}/repos`;
 
 	return (
 		<tbody>
@@ -15,10 +15,9 @@ const DeliverableListRow = (props) => {
 			  	<td>{props.deliverable.url}</td>
 			  	<td>{props.deliverable.open}</td>
 			  	<td>{props.deliverable.close}</td>
-			  	<td>{props.deliverable.gradesReleased ? 'True' : 'False'}</td>
-			  	<td><Link to={courseSettingsHref} activeClassName="is-active"><Button>Settings</Button></Link></td>
+			  	<td>{props.deliverable.gradesReleased ? 'True' : 'False' }</td>
+			  	<td><Link to={repoOptionsHref} activeClassName="is-active"><Button>Repo Settings</Button></Link></td>
 			  	<td><Link onClick={this.toggleEdit} activeClassName="is-active"><Button>Edit</Button></Link></td>
-
 			</tr>
 
 			<tr className="table-expand-row-content">

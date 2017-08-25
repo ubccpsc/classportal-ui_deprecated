@@ -3,7 +3,6 @@ import config from '../config';
 import * as options from './api.settings';
 
 class TeamApi {
-
   static getCourseTeams(courseNum) {
     return fetch(`${config.apiAddress}/${courseNum}/error/teams`, options.AUTHENTICATED)
       .then(teams => {
