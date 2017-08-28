@@ -4,7 +4,7 @@ import * as options from './api.settings';
 
 class GithubApi {
 
-  static createReposForTeams(courseNum, deliverableName) {
+  static createReposForTeamsWithBatchMarking(courseNum, deliverableName) {
 
     const AUTHENTICATED_POST = {
       credentials: 'include',
@@ -13,7 +13,12 @@ class GithubApi {
       body: JSON.stringify({deliverableName}),
     }
 
-    return fetch(`${config.apiAddress}/${courseNum}/admin/github/teams`, options.AUTHENTICATED)
+    console.log('deliverableName');
+    console.log(deliverableName);
+    console.log('courseNum');
+    console.log(courseNum);
+
+    return fetch(`${config.apiAddress}/${courseNum}/admin/github/team`, AUTHENTICATED_POST)
       .then(teams => {
       	console.log(`Github.Api::createReposForTeams(${courseNum}, ${deliverableName})`);
         return teams.json();
@@ -24,7 +29,7 @@ class GithubApi {
   }
 
   static createReposForUsers(courseNum, deliverableName) {
-    return fetch(`${config.apiAddress}/${courseNum}/admin/github/users`, options.AUTHENTICATED)
+    return fetch(`${config.apiAddress}/${courseNum}/admin/github/user`, options.AUTHENTICATED)
       .then(teams => {
         return teams.json();
       })

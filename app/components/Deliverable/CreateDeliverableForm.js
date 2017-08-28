@@ -85,7 +85,7 @@ class DeliverableListTable extends React.Component {
                 name="courseId" readOnly="readonly" />
               <label>Deliverable Source Code</label>
               <input type="text" name="url" onChange={this.handleChange} value={this.state.url}
-                placeholder="ie. https://github.ubc.ca/pcarter/cpsc210__deliverables" />
+                placeholder="ie. https://github.com/CPSC310-2017W-T2/cpsc310_starter_project" />
               <label>Name</label>
               <input type="text" className="two" name="name" value={this.state.name}
                 placeholder="ie. 'd1', 'p1'" onChange={this.handleChange} />

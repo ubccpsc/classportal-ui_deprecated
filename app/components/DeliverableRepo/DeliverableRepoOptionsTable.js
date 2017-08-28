@@ -63,8 +63,8 @@ class DeliverableRepoOptionsTable extends React.Component {
 							<tr className="table-expand-row">
 								<th width="200">Deliverable</th>
 								<th>Github Source URL</th>
-								<th width="150">Repos Created</th>
-								<th width="150">In Progress</th>
+								<th width="150">Repos Built</th>
+								<th width="150">Build In Progress</th>
 							</tr>
 						</thead>
 						{this.props.deliverables.map(deliverable => 

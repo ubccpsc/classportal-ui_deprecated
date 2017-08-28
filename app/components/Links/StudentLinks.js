@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import config from '../../config';
 
-let absolutePath = `${config.appAddress}`;
+let absolutePath = config.appAddress;
 
 const StudentLinks = () => {
 	return (

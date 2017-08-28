@@ -29,21 +29,22 @@ class TeamListTable extends React.Component {
 		else {
 			return (
   			<div>
-					<table className="table-expand">
-					  <thead>
-					    <tr className="table-expand-row">
-					      <th width="200">First Name</th>
-					      <th>Last Name</th>
-					      <th width="150">CSID</th>
-					      <th width="150">SNUM</th>
-					      <th>Username</th>
-                <th>Userrole</th>
-					    </tr>
-					  </thead>
-			        {this.props.teams.map(team => 
-			        	<TeamListRow key={team._id} team={team} courseId={this.props.params.courses}/>
-			        )}
-					</table>
+					<div data-closable="fade-out" class="todo-list-card card">
+					  <div class="card-divider">
+					    <h3>To Do List</h3>
+					    <button class="close-button" data-close>x</button>
+					  </div>
+					  <div class="card-section">
+					    <ul>
+					      <li><input id="item1" type="checkbox"></input><label for="item1"></label>Item 1</li>
+					      <li><input id="item2" type="checkbox"></input><label for="item2"></label>Item 2</li>
+					      <li><input id="item3" type="checkbox"></input><label for="item3"></label>Item 3</li>
+					      <li><input id="item4" type="checkbox"></input><label for="item4"></label>Item 4</li>
+					      <li><input id="item5" type="checkbox"></input><label for="item5"></label>Item 5</li>
+					      <li><input id="item6" type="checkbox"></input><label for="item6"></label>Item 6</li>
+					    </ul>
+					  </div>
+					</div>
 				</div>
 			)
 		}

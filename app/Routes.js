@@ -16,12 +16,12 @@ import AdminListTable from './components/Admin/AdminListTable';
 import LabListTable from './components/LabList/LabListTable';
 import DeliverableListTable from './components/Deliverable/DeliverableListTable';
 import DeliverableRepoOptions from './components/DeliverableRepo/DeliverableRepoOptionsTable';
-import TeamListTable from './components/Team/TeamListTable';
 import CourseSettingsListTable from './components/CourseSettings/CourseSettingsListTable';
 import ErrorPage from './pages/error';
 import App from './App';
 import SuperAdminCourseList from './components/Course/SuperAdminCourseList';
 import AdminCourseListTable from './components/Course/AdminCourseListTable';
+import TeamListTable from './modules/student/TeamListTable';
 import StudentCourseListTable from './components/Course/StudentCourseListTable';
 
 
@@ -51,6 +51,8 @@ export default () => (
           <Route path="/admin/:courses/settings" component={CourseSettingsListTable}/>
           <Route path="/admin/:courses/deliverable" component={CourseSettingsListTable}/>
           <Route path="/admin/:courses/:deliverableName/repos" component={DeliverableRepoOptions}/>
+          <Route path="/admin/teams" component={TeamListTable}/>
+          <Route path="/admin/:courses/teams" component={TeamListTable}/>
         </Route>
         <Route path="students" component={StudentPage}>
           <Route path="/students/courses" component={StudentCourseListTable}/>

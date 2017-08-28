@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
-import config from '../../config';
-
-let appRootPath = config.appAddress;
 
 const TeamListRow = (props) => {
 
-	let courseUsersHref = `${appRootPath}/superadmin/` + props.courseId + "/students";
-	let courseSettingsHref = `${appRootPath}/superadmin/` + props.courseId + "/settings";
+	let courseUsersHref = "https://localhost:3000/superadmin/" + props.courseId + "/students";
+	let courseSettingsHref = "https://localhost:3000/superadmin/" + props.courseId + "/settings";
 
 	return (
 		<tbody>

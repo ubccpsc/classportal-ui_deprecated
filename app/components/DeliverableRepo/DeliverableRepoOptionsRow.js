@@ -30,8 +30,8 @@ class DeliverableRepoOptionsRow extends React.Component {
 				  	<td>{this.props.deliverable.name}</td>
 				  	<td>{this.props.deliverable.url}</td>
 				  	<td>{this.props.deliverable.reposCreated ? 'True' : 'False'}</td>
-				  	<td>{this.props.deliverable.reposCreating ? 'True' : 'False'}</td>
-				  	<td><Link onClick={this.createRepos} activeClassName="is-active"><Button>Create Repos</Button></Link></td>
+				  	<td>{this.props.deliverable.buildingRepos ? 'True' : 'False'}</td>
+				  	<td><Link onClick={this.createRepos} activeClassName="is-active"><Button>Build Repos</Button></Link></td>
 				  	<td><Link onClick={console.log(null)} activeClassName="is-active"><Button>Edit</Button></Link></td>
 				</tr>
 
