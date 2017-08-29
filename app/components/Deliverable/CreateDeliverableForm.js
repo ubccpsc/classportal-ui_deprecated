@@ -8,6 +8,8 @@ import { Button } from 'elemental';
 import { Switch } from 'react-foundation';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import { browserHistory } from 'react-router';
+
 require("react-datepicker/dist/react-datepicker-cssmodules.css");
 
 class DeliverableListTable extends React.Component {
@@ -28,7 +30,7 @@ class DeliverableListTable extends React.Component {
     this.handleChangeOpen = this.handleChangeOpen.bind(this);
     this.handleChangeClose = this.handleChangeClose.bind(this);
   }
-  
+
   handleChangeOpen(date){ 
     this.setState({ startDateOpen: date });
     this.setState({ open: date.toDate() });
@@ -60,19 +62,20 @@ class DeliverableListTable extends React.Component {
   submitDeliverable(event) {
     event.preventDefault();
     console.log(`CreateDeliverableForm::submitDeliverable() ${JSON.stringify(this.createDeliverableObj())}`);
-    this.props.dispatch(delivActions.createDeliverable(this.createDeliverableObj()));
+    this.props.dispatch(delivActions.createDeliverable(this.createDeliverableObj()))
+      .then(response => {
+        let successTest = response.action.payload.response.indexOf("Successfully added Deliverable.") > -1;
+        if (successTest) {
+          browserHistory.push(`/superadmin/310/deliverables`);
+        }
+      });
   }
 
 	componentWillMount() {
 	}
 
 	render () {
-		if (this.props.deliverables.length < 1) {
-			return (
-				<LoadingMessage />
-			);
-		}
-		else {
+
 			return (
 				<div className="table-expand-container">
           <form>
@@ -81,7 +84,7 @@ class DeliverableListTable extends React.Component {
               <legend>Create Deliverable</legend>
 
               <label>Course Number</label>
-              <input type="text" value={this.props.courseId} onChange={this.handleChange}
+              <input type="text" value={this.props.params.courses} onChange={this.handleChange}
                 name="courseId" readOnly="readonly" />
               <label>Deliverable Source Code</label>
               <input type="text" name="url" onChange={this.handleChange} value={this.state.url}
@@ -128,7 +131,6 @@ class DeliverableListTable extends React.Component {
 					<Link onClick={this.submitDeliverable}><Button>Submit Deliverable</Button></Link>
 				</div>
 			);
-		}
 	}
 }
 

@@ -15,7 +15,6 @@ class SingleDelivTeamListTable extends React.Component {
 
 	componentWillMount() {
 		let that = this;
-		this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.courses));
 		this.props.dispatch(teamActions.getStudentsWithoutTeam(this.props.params.courses));
 		this.props.dispatch(courseActions.getCourseDetails(this.props.params.courses));
 	}
@@ -33,7 +32,7 @@ class SingleDelivTeamListTable extends React.Component {
 				    </h6>
 				  </div>
 				  { this.props.studentsWithoutTeam.map(student =>
-				  	<BatchDelivTeamListRow student={student}/>
+				  	<BatchDelivTeamListRow key={student._id} student={student}/>
 				  )}
 				  <div className="view-more-people">
 				    <p className="view-more-text">

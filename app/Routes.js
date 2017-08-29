@@ -15,6 +15,7 @@ import ClassListTable from './components/ClassList/ClassListTable';
 import AdminListTable from './components/Admin/AdminListTable';
 import LabListTable from './components/LabList/LabListTable';
 import DeliverableListTable from './components/Deliverable/DeliverableListTable';
+import CreateDeliverableForm from './components/Deliverable/CreateDeliverableForm';
 import DeliverableRepoOptions from './components/DeliverableRepo/DeliverableRepoOptionsTable';
 import CourseSettingsListTable from './components/CourseSettings/CourseSettingsListTable';
 import ErrorPage from './pages/error';
@@ -38,6 +39,7 @@ export default () => (
           <Route path="/superadmin/courses" component={SuperAdminCourseList}/>
           <Route path="/superadmin/:courses/students" component={ClassListTable} />
           <Route path="/superadmin/:courses/deliverables" component={DeliverableListTable}/>
+          <Route path="/superadmin/:courses/deliverable/create" component={CreateDeliverableForm}/>
           <Route path="/superadmin/:courses/settings" component={CourseSettingsListTable}/>
           <Route path="/superadmin/labs" component={SuperAdminCourseList}/>
           <Route path="/superadmin/:courses/labs" component={LabListTable}/>

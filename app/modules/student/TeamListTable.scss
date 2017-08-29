@@ -1,4 +1,19 @@
-.people-you-might-know {
+.batch-team-list-table {
+  .update-team-button-container {
+    display: block;
+
+    button {
+      margin: 30px auto;
+      display: block;
+    }
+  }
+}
+
+.available-team-members:nth-of-type(1) {
+  margin-top: 50px;
+}
+
+.available-team-members {
   background-color: $white;
   padding: 1rem 0 0;
   border: 1px solid $medium-gray;
@@ -10,6 +25,8 @@
 
     .header-title {
       font-weight: bold;
+      font-size: 1.7rem;
+      text-align: center;
     }
   }
 

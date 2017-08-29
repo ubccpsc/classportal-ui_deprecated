@@ -11,6 +11,7 @@ class DeliverableRepoOptionsRow extends React.Component {
 		super(props);
 		this.toggleEdit = false;
 		this.appRootPath = config.appAddress;
+		this.isCreating = props.isCreating;
 		this.createReposForTeams = this.createReposForTeams.bind(this);
 	}
 

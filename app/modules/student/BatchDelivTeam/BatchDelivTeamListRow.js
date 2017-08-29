@@ -5,6 +5,7 @@ const BatchDelivTeamListRow = (props) => (
     <div className="small-12 medium-6 columns about-people">
       <div className="about-people-author">
         <p className="author-name">
+          <input type="hidden" name="user_ids[]" value={ props.student._id } />
           { props.student.lname }
         </p>
         <p className="author-location">
@@ -18,14 +19,14 @@ const BatchDelivTeamListRow = (props) => (
     </div>
     <div className="small-12 medium-6 columns add-friend">
       <div className="add-friend-action">
-        <button className="button primary small">
+        <button data-id={ props.student._id } onClick={ props.addUserToTeam } className="button primary small">
           <i className="fa fa-user-plus" aria-hidden="true"></i>
-          Add Team Member
+          Add To Team
         </button>
-        <button className="button secondary small">
+{  /*      <button className="button secondary small">
           <i className="fa fa-user-times" aria-hidden="true"></i>
           Ignore
-        </button>
+        </button> */}
       </div>
     </div>
   </div>

@@ -38,9 +38,10 @@ class DeliverableListTable extends React.Component {
 	}
 
 	createDeliverableButton() {
-		let linkPath = `${config.appPath}/${this.props.user.userrole}/${this.props.params.courses}/`;
+		let linkPath = `${config.appAddress}/${this.props.user.userrole}/${this.props.params.courses}/deliverable/create`;
+		console.log(linkPath);
 			return (
-				<Link onClick={this.toggleCreate}><Button>Create Deliverable</Button></Link>
+				<Link to={linkPath}><Button>Create Deliverable</Button></Link>
 			);
 	}
 
@@ -52,7 +53,7 @@ class DeliverableListTable extends React.Component {
 		}
 		else if (this.state.isCreating) {
 			return (
-				<CreateDeliverableForm courseId={this.props.params.courses}/>
+				<CreateDeliverableForm isCreating={this.toggleCreate} courseId={this.props.params.courses}/>
 			);
 		}
 		else {
