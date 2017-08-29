@@ -9,7 +9,7 @@ class TeamApi {
         return teams.json();
       })
       .catch(err => {
-        console.log(`team.api::getCourseTeams(courseNum) ERROR: No response from API: ${err}`);
+        console.log(`team.api::getCourseTeams(courseNum) ERROR from API: ${err}`);
       });
   }
 
@@ -19,7 +19,7 @@ class TeamApi {
         return teams.json();
       })
       .catch(err => {
-        console.log(`team.api::getCourseTeamsPerSection() ERROR: No response from API: ${err}`);
+        console.log(`team.api::getCourseTeamsPerSection() ERROR from API: ${err}`);
       });
   }
 
@@ -29,7 +29,17 @@ class TeamApi {
         return teams.json();
       })
       .catch(err => {
-        console.log(`team.api::getCourseTeamsPerUser() ERROR: No response from API: ${err}`);
+        console.log(`team.api::getCourseTeamsPerUser() ERROR from API: ${err}`);
+      });
+  }
+
+  static getStudentsWithoutTeam(courseNum) {
+    return fetch(`${config.apiAddress}/${courseNum}/students/withoutTeam`, options.AUTHENTICATED)
+      .then(students => {
+        return students.json();
+      })
+      .catch(err => {
+        console.log(`team.api::getCourseTeamsPerUser() ERROR from API: ${err}`);
       });
   }
 }

@@ -7,11 +7,13 @@ import classList from './classList.reducer';
 import authStatus from './auth.reducer';
 import labSections from './labSections.reducer';
 import deliverables from './deliverables.reducer';
+import course from './course.reducer';
 import courseSettings from './courseSettings.reducer';
 import myActiveCourse from './myActiveCourse.reducer';
 import myCourses from './myCourses.reducer';
 import teams from './teams.reducer';
 import github from './github.reducer';
+import studentsWithoutTeam from './studentsWithoutTeam.reducer';
 import labs from './labs.reducer';
 import admins from './admins.reducer';
 import * as types from '../actions/types.helper';
@@ -42,6 +44,7 @@ const appReducer = combineReducers({
   user,
   teams,
   authStatus,
+  course,
   courses,
   myActiveCourse,
   myCourses,
@@ -51,6 +54,7 @@ const appReducer = combineReducers({
   github,
   admins,
   labSections,
+  studentsWithoutTeam,
   courseSettings,
   helloWorld: () => ['hello', 'ubc'],
 });

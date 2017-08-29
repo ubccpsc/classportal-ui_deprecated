@@ -1,8 +1,8 @@
 export default {
   students: [],
   user: {},
-  courses: [],
   course: {},
+  courses: [],
   classList: [],
   deliverables: [],
   courseSettings: {},
@@ -13,5 +13,7 @@ export default {
   myCourses: [],
   admins: [],
   github: {},
+  studentsWithoutTeam: [],
+  studentsWithTeam: [],
   authStatus: "Unauthenticated",
 }

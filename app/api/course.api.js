@@ -28,6 +28,19 @@ class CourseApi {
         console.log(`course.api::getCourseSettings(courseNum) ERROR: ${err}`);
       });
   }
+
+  static getCourseDetails(courseNum) {
+    return fetch(`${config.apiAddress}/${courseNum}/admin/courseSettings`, options.AUTHENTICATED)
+      .then(course => {
+        return course.json();
+      })
+      .then(course => {
+        return course;
+      })
+      .catch(err => {
+        console.log(`course.api::getCourseDetails(courseNum) ERROR: ${err}`);
+      });
+  }
 }
 
 export default CourseApi;

@@ -24,3 +24,11 @@ export function getCourseTeamsPerUser(courseNum, userId) {
 		payload: TeamApi.getCourseTeamsPerUser(courseNum, userId),
 	}
 }
+
+// Fetches the students without a team for possible new teams
+export function getStudentsWithoutTeam(courseNum) {
+	return {
+		type: types.GET_STUDENTS_WITHOUT_TEAM,
+		payload: TeamApi.getStudentsWithoutTeam(courseNum),
+	}
+}
