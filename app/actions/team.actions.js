@@ -32,3 +32,11 @@ export function getStudentsWithoutTeam(courseNum) {
 		payload: TeamApi.getStudentsWithoutTeam(courseNum),
 	}
 }
+
+// Fetches the team for the course param
+export function getMyTeamsPerCourse(courseNum) {
+	return {
+		type: types.GET_MY_TEAMS_PER_COURSE,
+		payload: TeamApi.getMyTeamsPerCourse(courseNum),
+	}
+}

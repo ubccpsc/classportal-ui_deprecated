@@ -11,6 +11,7 @@ import course from './course.reducer';
 import courseSettings from './courseSettings.reducer';
 import myActiveCourse from './myActiveCourse.reducer';
 import myCourses from './myCourses.reducer';
+import myTeams from './myTeams.reducer';
 import teams from './teams.reducer';
 import github from './github.reducer';
 import studentsWithoutTeam from './studentsWithoutTeam.reducer';
@@ -48,6 +49,7 @@ const appReducer = combineReducers({
   courses,
   myActiveCourse,
   myCourses,
+  myTeams,
   labs,
   classList,
   deliverables,

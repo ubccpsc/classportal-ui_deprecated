@@ -7,6 +7,7 @@ export default {
   deliverables: [],
   courseSettings: {},
   teams: [],
+  myTeams: {},
   labSections: [],
   labs: [],
   myActiveCourse: {},

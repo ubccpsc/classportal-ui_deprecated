@@ -33,6 +33,16 @@ class TeamApi {
       });
   }
 
+  static getMyTeamsPerCourse(courseNum) {
+    return fetch(`${config.apiAddress}/${courseNum}/myTeams`, options.AUTHENTICATED)
+      .then(teams => {
+        return teams.json();
+      })
+      .catch(err => {
+        console.log(`team.api::getCourseTeamsPerCourse() ERROR from API: ${err}`);
+      });
+  }
+
   static getStudentsWithoutTeam(courseNum) {
     return fetch(`${config.apiAddress}/${courseNum}/students/withoutTeam`, options.AUTHENTICATED)
       .then(students => {
