@@ -7,11 +7,22 @@ import SuperAdminCourseList from '../../components/Course/SuperAdminCourseList';
 
 class SuperAdminPortal extends React.Component {
 	constructor() {
-		super()
+		super();
+		this.authCheck = this.authCheck.bind(this);
 	}
 
 	componentWillMount() {
-		this.props.dispatch(userActions.getCurrentUser());
+		this.authCheck();
+	}
+
+	authCheck() {
+		if (this.props.user.userrole !== 'admin' || this.props.user.userrole !== 'superadmin') {
+			this.props.dispatch(userActions.getCurrentUser()).then(response => {
+				if (this.props.user.userrole !== 'superadmin' || this.props.user.userrole !== 'admin' ) {
+					browserHistory.push(`/404`);
+				}
+			});
+		}
 	}
 
 	render() {

@@ -4,14 +4,27 @@ import * as userActions from '../../actions/user.actions';
 import Logout from '../../modules/common/Logout';
 import { Row, Column } from 'react-foundation';
 import SuperAdminCourseList from '../../components/Course/SuperAdminCourseList';
+import { browserHistory } from 'react-router';
 
 class SuperAdminPortal extends React.Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props);
+		this.authCheck = this.authCheck.bind(this);
+
+	}
+
+	authCheck() {
+		if (this.props.user.userrole !== 'superadmin') {
+			this.props.dispatch(userActions.getCurrentUser()).then(response => {
+				if (this.props.user.userrole !== 'superadmin') {
+					browserHistory.push(`/404`);
+				}
+			});
+		}
 	}
 
 	componentWillMount() {
-		this.props.dispatch(userActions.getCurrentUser());
+		this.authCheck();
 	}
 
 	render() {

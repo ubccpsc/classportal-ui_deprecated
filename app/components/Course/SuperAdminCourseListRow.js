@@ -6,7 +6,7 @@ const CourseListRow = (props) => {
 
 	let courseUsersHref = "https://localhost:3000/superadmin/" + props.course.courseId + "/students";
 	let courseSettingsHref = "https://localhost:3000/superadmin/" + props.course.courseId + "/settings";
-	let deliverablesHref = "https://localhost:3000/superadmin/" + props.course.courseId + "/deliverables";
+	let deliverablesHref = "https://localhost:3000/superadmin/" + props.course.courseId + "/teams";
 
 	return (
 		<tbody>
@@ -19,6 +19,7 @@ const CourseListRow = (props) => {
 				<td>{props.course.teamsMustBeInSameLab ? "Enabled" : "Disabled"}</td>
 		  	<td><Link to={courseSettingsHref} isActiveClass="active-crud-link"><Button>Settings</Button></Link></td>
 		  	<td><Link to={deliverablesHref} isActiveClass="active-crud-link"><Button>Deliverables</Button></Link></td>
+		  	<td><Link to={deliverablesHref} isActiveClass="active-crud-link"><Button>Teams</Button></Link></td>
 			</tr>
 
 			<tr className="table-expand-row-content">

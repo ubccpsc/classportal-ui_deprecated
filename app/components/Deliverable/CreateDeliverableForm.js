@@ -21,7 +21,7 @@ class DeliverableListTable extends React.Component {
       url: null,
       open: null,
       close: null,
-      courseId: this.props.courseId,
+      courseId: this.props.params.courses,
       gradesReleased: null,
     } 
 

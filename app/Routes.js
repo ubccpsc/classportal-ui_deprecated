@@ -23,6 +23,7 @@ import App from './App';
 import SuperAdminCourseList from './components/Course/SuperAdminCourseList';
 import AdminCourseListTable from './components/Course/AdminCourseListTable';
 import TeamListTable from './modules/student/TeamListTable';
+import AdminTeamListTable from './modules/student/TeamListTable';
 import StudentCourseListTable from './components/Course/StudentCourseListTable';
 
 
@@ -43,7 +44,7 @@ export default () => (
           <Route path="/superadmin/:courses/settings" component={CourseSettingsListTable}/>
           <Route path="/superadmin/labs" component={SuperAdminCourseList}/>
           <Route path="/superadmin/:courses/labs" component={LabListTable}/>
-          <Route path="/superadmin/:courses/teams" component={TeamListTable}/>
+          <Route path="/superadmin/:courses/teams" component={AdminTeamListTable}/>
           <Route path="/superadmin/students" component={ClassListTable} />
         </Route>
         <Route path="admin" component={AdminPage}>
