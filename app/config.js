@@ -21,7 +21,7 @@ const config = {
 
 // alternative settings for production environment
 if (env === 'production') {
-  config.localHost: 'https://portal.cs.ubc.ca';
+  config.localHost = 'https://portal.cs.ubc.ca';
   config.appAddress = 'https://portal.cs.ubc.ca';
   config.clientId = '97ae59518a9d5cae2550';
   config.apiAddress = 'https://portal.cs.ubc.ca';
