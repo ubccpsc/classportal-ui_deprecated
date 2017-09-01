@@ -20,7 +20,7 @@ const webpack = require('webpack');
 
 const configFirebase = {
   title: 'UBC ClassPortal',
-  url: 'localhost',
+  url: 'https://portal.cs.ubc.ca',
   project: 'ubc-classportal',
   trackingID: '',
   routes: [
@@ -131,6 +131,7 @@ tasks.set('publish', () => {
         app.get('*', function(req, res) {
           res.sendFile(path.resolve(__dirname, 'public/index.html'));
         });
+        console.log('localHost', config.localHost);
 
         let sslCert = fs.readFileSync(config.sslCertPath, 'utf8');
         let sslKey = fs.readFileSync(config.sslKeyPath, 'utf8');
