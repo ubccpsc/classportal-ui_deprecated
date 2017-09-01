@@ -145,6 +145,8 @@ tasks.set('publish', () => {
           res.redirect('https://' + req.hostname + req.url);
         });
 
+        console.log('localHost', config.localHost);
+
         // create servers
         let httpServer = http.createServer(redirectApp);
         let httpsServer = https.createServer(options, app);

@@ -21,9 +21,10 @@ const config = {
 
 // alternative settings for production environment
 if (env === 'production') {
-  config.appAddress = 'https://ubc-classportal.firebaseapp.com';
+  config.localHost: 'https://portal.cs.ubc.ca';
+  config.appAddress = 'https://portal.cs.ubc.ca';
   config.clientId = '97ae59518a9d5cae2550';
-  config.apiAddress = 'https://classportal.mksarge.com';
+  config.apiAddress = 'https://portal.cs.ubc.ca';
 }
 
 module.exports = config;
