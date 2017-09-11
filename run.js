@@ -130,6 +130,11 @@ tasks.set('publish', () => {
         app.use(require('webpack-hot-middleware')(compiler));
         app.use(express.static('public'));
         app.use(cors());
+        app.use(function(req, res, next) {
+          res.header("Access-Control-Allow-Origin", "*");
+          res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+          next();
+        });
         app.get('*', function(req, res) {
           res.sendFile(path.resolve(__dirname, 'public/index.html'));
         });
@@ -203,6 +208,11 @@ tasks.set('start', () => {
           historyApiFallback: true,
           setup: function(app) {
             app.use(cors());
+            app.use(function(req, res, next) {
+              res.header("Access-Control-Allow-Origin", "*");
+              res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+              next();
+            });
             app.use(webpackDevMiddleware);
             app.use(require('webpack-hot-middleware')(compiler));
             app.use(require('connect-history-api-fallback')());
