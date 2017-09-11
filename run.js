@@ -15,6 +15,7 @@ const config = require('./app/config');
 const fs = require('fs');
 const del = require('del');
 const ejs = require('ejs');
+const cors = require('cors');
 const webpack = require('webpack');
 
 
@@ -128,6 +129,7 @@ tasks.set('publish', () => {
         app.use(webpackDevMiddleware);
         app.use(require('webpack-hot-middleware')(compiler));
         app.use(express.static('public'));
+        app.use(cors());
         app.get('*', function(req, res) {
           res.sendFile(path.resolve(__dirname, 'public/index.html'));
         });
@@ -200,6 +202,7 @@ tasks.set('start', () => {
           contentBase: 'public',
           historyApiFallback: true,
           setup: function(app) {
+            app.use(cors());
             app.use(webpackDevMiddleware);
             app.use(require('webpack-hot-middleware')(compiler));
             app.use(require('connect-history-api-fallback')());
