@@ -127,13 +127,16 @@ tasks.set('publish', () => {
         // configure express app
         app.use(require('connect-history-api-fallback')());
         app.use(webpackDevMiddleware);
-        app.use(require('webpack-hot-middleware')(compiler));
-        app.use(express.static('public'));
         app.use(function(req, res, next) {
           res.header("Access-Control-Allow-Origin", "*");
-          res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
           next();
         });
+        app.use(require('webpack-hot-middleware')(compiler));
+        app.use(function(req, res, next) {
+          res.header("Access-Control-Allow-Origin", "*");
+          next();
+        });
+        app.use(express.static('public'));
         app.get('*', function(req, res) {
           res.sendFile(path.resolve(__dirname, 'public/index.html'));
         });
@@ -206,11 +209,6 @@ tasks.set('start', () => {
           contentBase: 'public',
           historyApiFallback: true,
           setup: function(app) {
-            app.use(function(req, res, next) {
-              res.header("Access-Control-Allow-Origin", "*");
-              res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-              next();
-            });
             app.use(webpackDevMiddleware);
             app.use(require('webpack-hot-middleware')(compiler));
             app.use(require('connect-history-api-fallback')());
