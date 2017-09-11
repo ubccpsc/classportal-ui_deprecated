@@ -132,6 +132,8 @@ tasks.set('publish', () => {
           res.sendFile(path.resolve(__dirname, 'public/index.html'));
         });
         console.log('localHost', config.localHost);
+	console.log('apiAddress', config.apiAddress);
+	console.log('appPath', config.appPath);
 
         let sslCert = fs.readFileSync(config.sslCertPath, 'utf8');
         let sslKey = fs.readFileSync(config.sslKeyPath, 'utf8');
