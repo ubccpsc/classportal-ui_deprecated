@@ -15,7 +15,6 @@ class ClassListApi {
   }
 
   static uploadClassList(courseNum, classList) {
-
 		const AUTHENTICATED_FILE_POST = {
 			credentials: 'include',
 			method: 'post',

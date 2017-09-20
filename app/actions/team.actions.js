@@ -40,3 +40,17 @@ export function getMyTeamsPerCourse(courseNum) {
 		payload: TeamApi.getMyTeamsPerCourse(courseNum),
 	}
 }
+
+export function isStudentInSameLab(courseNum, username) {
+	return {
+		type: types.IS_STUDENT_IN_SAME_LAB,
+		payload: TeamApi.isStudentInSameLab(courseNum, username),
+	}
+}
+
+export function createCustomTeam(courseNum, usernames) {
+	return {
+		type: types.CREATE_CUSTOM_TEAM,
+		payload: TeamApi.createCustomTeam(courseNum, usernames),
+	}
+}

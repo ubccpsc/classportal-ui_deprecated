@@ -9,7 +9,13 @@ export default function classListReducer(state = initialState.classList, action)
    	  return action.payload.response;
    	case types.CLEAR_CLASS_LIST_FULFILLED:
    	  return state;
-    default: 
-      return state;  
+    case types.IS_STUDENT_IN_CLASS_FULFILLED:
+      console.log(action.payload);
+      return [
+        ...state.filter(classListItem => classListItem.username !== action.payload.response.username),
+        action.payload.response.username
+      ];
+    default:
+      return state;
   }
 }

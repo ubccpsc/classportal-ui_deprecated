@@ -15,7 +15,6 @@ const config = require('./app/config');
 const fs = require('fs');
 const del = require('del');
 const ejs = require('ejs');
-const cors = require('cors');
 const webpack = require('webpack');
 
 
