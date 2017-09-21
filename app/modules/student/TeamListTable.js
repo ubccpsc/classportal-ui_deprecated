@@ -42,7 +42,10 @@ class TeamListTable extends React.Component {
 
 	handleTeamSubmission(e) {
 		e.preventDefault();
-		this.props.dispatch(teamActions.createCustomTeam(310, this.props.teams));
+		this.props.dispatch(teamActions.createCustomTeam(310, this.props.teams))
+			.then(response => {
+				alert(JSON.stringify(response));
+			});
 	}
 
 	render () {
@@ -52,14 +55,14 @@ class TeamListTable extends React.Component {
 				<div className="team-tables-view row">
 					<form className="twelve column">
 						<div className="input-group">
-						  <span className="input-group-label">Add Team Member</span>
+						  <span className="input-group-label">GitHub Username</span>
 						  <input className="input-group-field"
 						  	  onChange={this.handleUsernameChange}
 							  name="username" 
 							  label="username"
 							  type="text"/>
 						  <div className="input-group-button">
-						    <input type="submit" className="button" onClick={this.addTeamMember}/>
+						    <input type="submit" value="Add" className="button" onClick={this.addTeamMember}/>
 						  </div>
 						</div>
 						{this.props.teams.map(username => 

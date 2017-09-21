@@ -17,6 +17,7 @@ import github from './github.reducer';
 import studentsWithoutTeam from './studentsWithoutTeam.reducer';
 import labs from './labs.reducer';
 import admins from './admins.reducer';
+import teamCreationStatus from './teamCreationStatus.reducer';
 import * as types from '../actions/types.helper';
 
 
@@ -56,6 +57,7 @@ const appReducer = combineReducers({
   github,
   admins,
   labSections,
+  teamCreationStatus,
   studentsWithoutTeam,
   courseSettings,
   helloWorld: () => ['hello', 'ubc'],

@@ -3,6 +3,7 @@ import initialState from './initial.state';
 import {browserHistory} from 'react-router';
 
 export default function teamsReducer(state = initialState.teams, action) {
+
   switch(action.type) {
     case types.GET_COURSE_TEAMS_FULFILLED:
       return action.payload.response;
@@ -18,7 +19,7 @@ export default function teamsReducer(state = initialState.teams, action) {
         return state;
       }
     case types.CREATE_CUSTOM_TEAM_FULFILLED:
-      browserHistory.push(`/students/310/teams`);
+      console.log(JSON.stringify(action.payload));
       return [];
     case types.REMOVE_STUDENT_FROM_TENTATIVE_TEAM:
       let newState = [];
@@ -26,7 +27,6 @@ export default function teamsReducer(state = initialState.teams, action) {
       for (let i = 0; i < state.length; i++) {
         let username = String(state[i]);
         if (username !== payloadUsername) {
-          alert(username !== payloadUsername);
           newState.push(username);
         }
       }

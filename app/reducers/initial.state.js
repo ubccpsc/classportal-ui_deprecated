@@ -16,5 +16,6 @@ export default {
   github: {},
   studentsWithoutTeam: [],
   studentsWithTeam: [],
+  teamCreationStatus: "",
   authStatus: "Unauthenticated",
 }

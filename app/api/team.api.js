@@ -32,10 +32,8 @@ class TeamApi {
       body: JSON.stringify({username}),
     }
 
-    console.log('stringify', JSON.stringify({username: username}));
     return fetch(`${config.apiAddress}/${courseNum}/students/isInClass`, AUTHENTICATED_POST)
       .then(students => {
-        alert('log ' + courseNum + ' ' + username);
         return students.json();
       })
       .catch(err => {
@@ -55,13 +53,20 @@ class TeamApi {
       }),
     }
 
-    console.log('stringify', JSON.stringify({members: usernames}));
     return fetch(`${config.apiAddress}/${courseNum}/admin/customTeam`, AUTHENTICATED_PUT)
-      .then(students => {
-        return students.json();
+      .then(response => {
+        let json = response.json();
+        if (response.status >= 200 && response.status < 300) {
+          return json;
+        } else {
+          return json.then(err => {
+            throw 'Team members either already on team or do not exist in lab.';
+          });
+        }
       })
       .catch(err => {
-        console.log(`team.api::getAllStudents() ERROR: No response from API: ${err}`);
+        console.log(`team.api::createCustomTeam() ERROR API: ${err}`);
+        return `team.api::createCustomTeam() ERROR API: ${err}`;
       });
   }
 
