@@ -54,3 +54,10 @@ export function createCustomTeam(courseNum, usernames) {
 		payload: TeamApi.createCustomTeam(courseNum, usernames),
 	}
 }
+
+export function removeStudentFromTentativeTeam(username) {
+	return {
+		type: types.REMOVE_STUDENT_FROM_TENTATIVE_TEAM,
+		payload: username,
+	}
+}

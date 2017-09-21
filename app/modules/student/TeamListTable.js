@@ -18,6 +18,7 @@ class TeamListTable extends React.Component {
 		this.addTeamMember = this.addTeamMember.bind(this);
 		this.handleUsernameChange = this.handleUsernameChange.bind(this);
 		this.handleTeamSubmission = this.handleTeamSubmission.bind(this);
+		this.handleRemoveTeamMember = this.handleRemoveTeamMember.bind(this);
 	}
 
 	componentWillMount() {
@@ -35,10 +36,13 @@ class TeamListTable extends React.Component {
 		this.setState({username: e.target.value});
 	}
 
+	handleRemoveTeamMember(event) {
+		this.props.dispatch(teamActions.removeStudentFromTentativeTeam(event.currentTarget.getAttribute('data-username')));
+	}
+
 	handleTeamSubmission(e) {
 		e.preventDefault();
-		alert(this.props.teams);
-		this.props.dispatch(teamActions.createCustomTeam(310, this.props.usernames));
+		this.props.dispatch(teamActions.createCustomTeam(310, this.props.teams));
 	}
 
 	render () {
@@ -59,8 +63,12 @@ class TeamListTable extends React.Component {
 						  </div>
 						</div>
 						{this.props.teams.map(username => 
-						  <div className="callout">
-						  	<button className="close-button" aria-label="Close alert" type="button">
+						  <div className="callout" key={username}>
+						  	<button className="close-button" 
+						  		aria-label="Close alert" 
+						  		type="button" 
+						  		data-username={username}
+						  		onClick={this.handleRemoveTeamMember}>
 						  	    <span aria-hidden="true">&times;</span>
   							</button>
 						    <p className="two stat column text-center">{username}
@@ -69,7 +77,7 @@ class TeamListTable extends React.Component {
 						  </div>
 						)}
 
-						{ this.props.teams.length > 0 ? <input type="submit" value="Submit" className="button" onClick={this.handleTeamSubmission}/> : null}
+						{ this.props.teams.length > 0 ? <input type="submit" value="Save Team" className="button" onClick={this.handleTeamSubmission}/> : null}
 					</form>
 				</div>
 			)
@@ -77,7 +85,7 @@ class TeamListTable extends React.Component {
 		else {
 			return ( 
 					null
-				) 
+				)
 		}
 	}
 }

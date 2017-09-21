@@ -20,6 +20,17 @@ export default function teamsReducer(state = initialState.teams, action) {
     case types.CREATE_CUSTOM_TEAM_FULFILLED:
       browserHistory.push(`/students/310/teams`);
       return [];
+    case types.REMOVE_STUDENT_FROM_TENTATIVE_TEAM:
+      let newState = [];
+      let payloadUsername = String(action.payload)
+      for (let i = 0; i < state.length; i++) {
+        let username = String(state[i]);
+        if (username !== payloadUsername) {
+          alert(username !== payloadUsername);
+          newState.push(username);
+        }
+      }
+      return newState;
     default: 
       return state;  
   }
