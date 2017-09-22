@@ -1,24 +1,49 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
+class FlashMessage extends React.Component {
 
-const FlashMessage = (props) => {
-	console.log('inside here2 ', props.message);
-	const { id, type, text } = props.message;
+	constructor(props) {
+		super(props);
+	}
 
-	return (
-				<div>
-					sdfasdfjn
-					<div className="alert callout" data-closable="">
-					  <h5>This is Important</h5>
-					  <p>But when youre done reading it, click the close button in the corner to dismiss this alert.</p>
-					  <p>Im using the default <code>data-closable</code> parameters, and simply fade out.</p>
-					  <button className="close-button" aria-label="Dismiss alert" type="button" data-close="">
-					    <span aria-hidden="true">&times;</span>
-					  </button>
-					</div>
-				</div>
+	render() {
+		const { id, type, text, headline} = this.props.message;
+		const FAILED_TAG = 'failed';
+		const WARNING_TAG = 'warning';
+
+		let statusClass = null;
+
+		if (type === FAILED_TAG) {
+			statusClass = 'alert callout';
+		} else if (type === WARNING_TAG) {
+			statusClass = 'warning callout';
+		} else {
+			statusClass = 'success callout';
+		}
+
+		return (	
+			<div className={statusClass}>
+			  <h5>{this.props.message.headline}</h5>
+			  <p>{this.props.message.body}</p>
+			  <button className="close-button" aria-label="Dismiss alert" type="button">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
 			);
+	}
+
+}
+
+FlashMessage.propTypes = {
+	message: React.PropTypes.object.isRequired
+}
+
+function mapStateToProps(state, ownState) {
+	return {
+		message: state.message,
+	}
 }
 
 export default FlashMessage;

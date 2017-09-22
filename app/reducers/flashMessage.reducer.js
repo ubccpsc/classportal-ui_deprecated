@@ -7,7 +7,8 @@ export default function flashMessage(state = initialState.flashMessage, action) 
   	case types.ADD_FLASH_MESSAGE:
   		return [{
   			type: action.message.type,
-  			text: action.message.text,
+  			body: action.message.body,
+  			headline: action.message.headline,
   			id: shortid.generate(),
   		}]
     default: 

@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 import config from '../../config';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { Row, Column } from 'react-foundation';
 import Links from '../Links/Links';
 import FlashMessageList from '../FlashMessage/FlashMessageList';
 import { connect } from 'react-redux';
@@ -24,11 +25,13 @@ class Layout extends React.Component {
 	render () {
 		return (
 		  <div>
-		    <div className="grid-center-example">
+		    <div>
 		      <Header user={this.props.user} />
-		      <FlashMessageList/>
 		    </div>
-		    <div>{this.props.children}</div>
+		    <Row>
+		    	<FlashMessageList/>
+		    	{this.props.children}
+		    </Row>
 		    <Footer />
 		  </div>
 		);

@@ -33,13 +33,7 @@ class SuperAdminPortal extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="grid-center-example">
-          <Row className="main-child-component-area">
-            <Column small={12} centerOnLarge>{this.props.children}</Column>
-          </Row>
-        </div>
-      </div>
+        <Column small={12} centerOnLarge>{this.props.children}</Column>
     );
   }
 }

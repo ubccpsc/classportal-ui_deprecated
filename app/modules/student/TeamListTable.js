@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import * as teamActions from '../../actions/team.actions';
 import * as courseActions from '../../actions/course.actions';
@@ -20,6 +21,7 @@ class TeamListTable extends React.Component {
 		this.handleUsernameChange = this.handleUsernameChange.bind(this);
 		this.handleTeamSubmission = this.handleTeamSubmission.bind(this);
 		this.handleRemoveTeamMember = this.handleRemoveTeamMember.bind(this);
+		this.clearInputField = this.clearInputField.bind(this);
 	}
 
 	componentWillMount() {
@@ -30,7 +32,16 @@ class TeamListTable extends React.Component {
 
 	addTeamMember(e) {
 		e.preventDefault();
-		this.props.dispatch(teamActions.isStudentInSameLab(310, this.state.username));
+		this.props.dispatch(teamActions.isStudentInSameLab(310, this.state.username))
+			.then(action => {
+				let inSameLab = action.value.response.inSameLab;
+				if (inSameLab === false) {
+					this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'failed', headline: 'Cannot Add Team Member', 
+						body: 'Team members must be registered in same lab section and cannot already be on a team.'}))
+				} else {
+					this.clearInputField();
+				}
+			});
 	}
 
 	handleUsernameChange(e) {
@@ -47,11 +58,17 @@ class TeamListTable extends React.Component {
 			.then(response => {
 				response = String(response.value);
 				if (response.indexOf('ERROR API') > -1) {
-					this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'failed', text: 'Your team could not be created. A user is already on a team.'}))
+					this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'failed', headline: 'Team Creation Failed', 
+						body: 'Your team could not be created. Team members cannot be on multiple teams.'}))
 				} else {
-					this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'success', text: 'Your team has successfully been created.'}))
+					this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'success', headline: 'Successfully Created Team',
+						body: 'Your team has successfully been created.'}))
 				}
 			});
+	}
+
+	clearInputField() {
+		ReactDOM.findDOMNode(this.refs.inputField).value = '';
 	}
 
 	render () {
@@ -66,6 +83,8 @@ class TeamListTable extends React.Component {
 							  <input className="input-group-field"
 							  	  onChange={this.handleUsernameChange}
 								  name="username" 
+								  ref="inputField"
+								  placeholder="ie. 'josiePartridge'"
 								  label="username"
 								  type="text"/>
 							  <div className="input-group-button">

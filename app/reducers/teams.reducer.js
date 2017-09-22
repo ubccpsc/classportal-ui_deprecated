@@ -19,7 +19,6 @@ export default function teamsReducer(state = initialState.teams, action) {
         return state;
       }
     case types.CREATE_CUSTOM_TEAM_FULFILLED:
-      console.log(JSON.stringify(action.payload));
       return [];
     case types.REMOVE_STUDENT_FROM_TENTATIVE_TEAM:
       let newState = [];

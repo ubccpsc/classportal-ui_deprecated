@@ -56,7 +56,6 @@ class TeamApi {
     return fetch(`${config.apiAddress}/${courseNum}/admin/customTeam`, AUTHENTICATED_PUT)
       .then(response => {
         let json = response.json();
-        console.log('the status', response.status);
         if (response.status === 200) {
           return json;
         } else {
