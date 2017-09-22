@@ -18,6 +18,7 @@ import studentsWithoutTeam from './studentsWithoutTeam.reducer';
 import labs from './labs.reducer';
 import admins from './admins.reducer';
 import teamCreationStatus from './teamCreationStatus.reducer';
+import flashMessage from './flashMessage.reducer';
 import * as types from '../actions/types.helper';
 
 
@@ -47,6 +48,7 @@ const appReducer = combineReducers({
   teams,
   authStatus,
   course,
+  flashMessage,
   courses,
   myActiveCourse,
   myCourses,

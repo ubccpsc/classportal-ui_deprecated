@@ -41,6 +41,7 @@
     "redux-promise-middleware": "^4.3.0",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
+    "shortid": "^2.2.8",
     "webpack-dev-server": "^2.4.5"
   },
   "devDependencies": {

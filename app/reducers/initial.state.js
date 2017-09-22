@@ -11,6 +11,7 @@ export default {
   labSections: [],
   labs: [],
   myActiveCourse: {},
+  flashMessage: [],
   myCourses: [],
   admins: [],
   github: {},

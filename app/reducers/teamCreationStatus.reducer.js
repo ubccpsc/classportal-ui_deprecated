@@ -4,7 +4,7 @@ import {browserHistory} from 'react-router';
 
 const ERROR_TAG = 'ERROR API';
 const TEAM_CREATION_SUCCESS = 'SUCCESS';
-const TEAM_CREATION_FAILED = 'FAILED';
+const TEAM_CREATION_FAILED = 'FAILURE';
 
 export default function teamsReducer(state = initialState.teamCreationStatus, action) {
 

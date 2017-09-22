@@ -6,6 +6,7 @@ import config from '../../config';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Links from '../Links/Links';
+import FlashMessageList from '../FlashMessage/FlashMessageList';
 import { connect } from 'react-redux';
 
 
@@ -25,6 +26,7 @@ class Layout extends React.Component {
 		  <div>
 		    <div className="grid-center-example">
 		      <Header user={this.props.user} />
+		      <FlashMessageList/>
 		    </div>
 		    <div>{this.props.children}</div>
 		    <Footer />
