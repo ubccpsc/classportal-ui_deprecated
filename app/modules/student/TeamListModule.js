@@ -79,7 +79,7 @@ class TeamListModule extends React.Component {
 		if (this.props.course.markDelivsByBatch == true && typeof this.props.myTeams[0] === 'string') {
 
 			this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'warning', headline: 'You Are Not On Any Teams',
-				body: 'To create a team, add GitHub users who are registered in your lab.'}))
+				body: 'To create a team, add GitHub users who are registered in your lab. Only TAs may disband Teams.'}))
 
 			return (
 				<div>
