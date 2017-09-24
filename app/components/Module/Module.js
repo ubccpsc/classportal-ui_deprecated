@@ -3,7 +3,7 @@ import css from './Module.css';
 
 // parent component for all content modules.
 const Module = (props) => (
-  <div className={css.container}>
+  <div className={css.container + ' twelve column'}>
     <div className={css.title}><p>{props.title}</p></div>
     <div className={css.subcontainer} >{props.children}</div>
   </div>

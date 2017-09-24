@@ -5,6 +5,7 @@ import * as userActions from '../../actions/user.actions';
 import { browserHistory } from 'react-router';
 import PostLogin from '../../modules/common/PostLogin';
 import { loginRequest, testGet } from '../../../app/ajax';
+import { Row, Column } from 'react-foundation';
 
 class PostloginPage extends React.Component {
 
@@ -57,7 +58,13 @@ class PostloginPage extends React.Component {
   }
 
   render() {
-    return (<PostLogin error={this.state.error} />);
+    return (
+          <Row>
+            <Column className="twelve">
+              <PostLogin className="post-login-page" error={this.state.error} />
+            </Column>
+          </Row>
+      );
   }
 
 }

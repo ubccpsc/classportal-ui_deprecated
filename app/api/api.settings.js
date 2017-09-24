@@ -1,5 +1,6 @@
 export const AUTHENTICATED = {
-	credentials: 'include'
+	credentials: 'include',
+	mode: 'cors',
 }
 
 export const AUTHENTICATED_PUT = {

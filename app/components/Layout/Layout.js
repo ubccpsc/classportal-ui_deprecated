@@ -28,10 +28,12 @@ class Layout extends React.Component {
 		    <div>
 		      <Header user={this.props.user} />
 		    </div>
-		    <Row>
-		    	<FlashMessageList/>
-		    	{this.props.children}
-		    </Row>
+		    <main className="main-body-content">
+			    <Row>
+			    	<FlashMessageList/>
+			    	{this.props.children}
+			    </Row>
+		    </main>
 		    <Footer />
 		  </div>
 		);
