@@ -103,13 +103,17 @@ tasks.set('build', () => {
 tasks.set('publish', () => {
   let count = 0;
   global.HMR = !process.argv.includes('--no-hmr'); // Hot Module Replacement (HMR)
+  return run('clean').then(() => new Promise((resolve) => {
     const webpackConfig = require('./webpack.config');
+    // Node.js middleware that compiles application in watch mode with HMR support
+    // http://webpack.github.io/docs/webpack-dev-middleware.html
     const compiler = webpack(webpackConfig, (err, stats) => {
+      console.log('ERROR', err);
       // Generate index.html page
       const bundle = stats.compilation.chunks.find((x) => x.name === 'main').files[0];
       const template = fs.readFileSync('./public/index.ejs', 'utf8');
       const render = ejs.compile(template, { filename: './public/index.ejs' });
-      const output = render({ debug: true, bundle: `/dist/${bundle}`, config });
+      const output = render({ debug: false, bundle: `/dist/${bundle}`, config });
       fs.writeFileSync('./public/index.html', output, 'utf8');
 
 
@@ -163,8 +167,7 @@ tasks.set('publish', () => {
           console.log('Started server in production mode on 443');
         });
     });
-
-
+  }));
 });
 
 //

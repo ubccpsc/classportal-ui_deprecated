@@ -6,16 +6,33 @@ import thunk from 'redux-thunk';
 import promiseMiddleware from 'redux-promise-middleware';
 import rootReducer from './reducers';
 
-const middleware = [
-  thunk,
-  logger,
-  promiseMiddleware(),
-];
+let middleware;
 
-const enhancers = compose(
-  applyMiddleware(...middleware),
-  window.devToolsExtension ? window.devToolsExtension() : f => f
-);
+let enhancers;
+
+const ENVIRONMENT_MODE = String(process.env.NODE_ENV);
+
+console.log('mode' + ENVIRONMENT_MODE);
+if (ENVIRONMENT_MODE === 'production') {
+	middleware = [
+	  thunk,
+	  promiseMiddleware(),
+	];
+	enhancers = compose(
+  		applyMiddleware(...middleware)
+	);
+} else {
+	middleware = [
+	  thunk,
+	  logger,
+	  promiseMiddleware(),
+	];
+	enhancers = compose(
+  		applyMiddleware(...middleware),
+  		window.devToolsExtension ? window.devToolsExtension() : f => f
+	);
+}
+
 
 /**
  * CREATE STORE 
