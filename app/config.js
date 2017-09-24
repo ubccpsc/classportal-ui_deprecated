@@ -25,7 +25,7 @@ if (env === 'production') {
   config.localHost = 'https://portal.cs.ubc.ca';
   config.appAddress = 'https://portal.cs.ubc.ca';
   config.clientId = '97ae59518a9d5cae2550';
-  config.apiAddress = 'https://portal.cs.ubc.ca';
+  config.apiAddress = 'https://portal.cs.ubc.ca:5000';
 }
 
 module.exports = config;
