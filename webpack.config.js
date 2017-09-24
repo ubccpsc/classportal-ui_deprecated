@@ -48,7 +48,7 @@ const config = {
 
   // Developer tool to enhance debugging, source maps
   // http://webpack.github.io/docs/configuration.html#devtool
-  devtool: isDebug ? 'source-map' : false,
+  devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
 
   // What information should be printed to the console
   stats: {
@@ -66,7 +66,7 @@ const config = {
   // The list of plugins for Webpack compiler
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
+      'process.env.NODE_ENV': process.env.PRODUCTION ? '"production"' : '"development"',
       __DEV__: isDebug,
     }),
     // Emit a JSON file with assets paths
@@ -106,7 +106,7 @@ const config = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: isDebug,
+              sourceMap: true,
               importLoaders: true,
               // CSS Modules https://github.com/css-modules/css-modules
               modules: true,
@@ -157,5 +157,8 @@ if (isDebug && useHMR) {
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
   config.plugins.push(new webpack.NoEmitOnErrorsPlugin());
 }
+
+console.log(config.entry);
+console.log('isDebug', isDebug);
 
 module.exports = config;

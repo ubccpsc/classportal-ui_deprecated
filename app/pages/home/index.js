@@ -36,11 +36,8 @@ class HomePage extends React.Component {
   }
 
   authenticationCheck() {
-    console.log(this.props.authStatus);
     let authStatus = String(this.props.authStatus);
-    console.log(authStatus);
     if (authStatus === UNAUTHENTICATED_TAG) {
-      console.log(config.appPath);
       this.redirectToLogin();
     }
   }
