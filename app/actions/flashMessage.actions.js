@@ -9,9 +9,9 @@ export function addFlashMessage(message) {
   }
 }
 
-export function createReposForUsers(courseId, deliverableName) {
+export function clearFlashMessage() {
   return {
-    type: types.CREATE_REPOS_FOR_USERS,
-    payload: GithubApi.createReposForUsers(courseId, deliverableName),
+    type: types.CLEAR_FLASH_MESSAGE,
+    payload: [],
   }
 }

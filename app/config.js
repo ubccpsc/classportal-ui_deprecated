@@ -9,6 +9,7 @@ const config = {
   title: 'ClassPortal',
   subtitle: 'UBC CPSC',
   github: 'https://github.com/mksarge/classportal',
+  githubEnterprise: 'https://github.ubc.ca',
   appAddress: 'https://localhost:3000',
   apiAddress: 'https://localhost:5000',
   clientId: '7b22a00a9158cd0c43a1',

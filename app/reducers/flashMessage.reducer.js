@@ -11,6 +11,8 @@ export default function flashMessage(state = initialState.flashMessage, action) 
   			headline: action.message.headline,
   			id: shortid.generate(),
   		}]
+  	case types.CLEAR_FLASH_MESSAGE: 
+  		return action.payload;
     default: 
       return state;
   }

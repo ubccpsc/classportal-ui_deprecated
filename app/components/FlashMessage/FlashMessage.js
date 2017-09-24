@@ -6,6 +6,17 @@ class FlashMessage extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.handleCloseFlashMessage = this.handleCloseFlashMessage.bind(this);
+		this.clearFlashMessage = this.clearFlashMessage.bind(this);
+	}
+
+	clearFlashMessage() {
+		e.preventDefault();
+		this.props.dispatch(flashMessageActions.clearFlashMessage());
+	}
+
+	handleCloseFlashMessage() {
+		this.clearFlashMessage();
 	}
 
 	render() {

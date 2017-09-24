@@ -22,8 +22,8 @@ import ErrorPage from './pages/error';
 import App from './App';
 import SuperAdminCourseList from './components/Course/SuperAdminCourseList';
 import AdminCourseListTable from './components/Course/AdminCourseListTable';
-import TeamListTable from './modules/student/TeamListTable';
-import AdminTeamListTable from './modules/student/TeamListTable';
+import TeamListTableModule from './modules/student/TeamListModule';
+import AdminTeamListTable from './modules/student/TeamListModule';
 import StudentCourseListTable from './components/Course/StudentCourseListTable';
 
 
@@ -54,13 +54,13 @@ export default () => (
           <Route path="/admin/:courses/settings" component={CourseSettingsListTable}/>
           <Route path="/admin/:courses/deliverable" component={CourseSettingsListTable}/>
           <Route path="/admin/:courses/:deliverableName/repos" component={DeliverableRepoOptions}/>
-          <Route path="/admin/teams" component={TeamListTable}/>
-          <Route path="/admin/:courses/teams" component={TeamListTable}/>
+          <Route path="/admin/teams" component={TeamListTableModule}/>
+          <Route path="/admin/:courses/teams" component={TeamListTableModule}/>
         </Route>
         <Route path="students" component={StudentPage}>
           <Route path="/students/courses" component={StudentCourseListTable}/>
           <Route path="/students/:courses/deliverables" component={DeliverableListTable}/>
-          <Route path="/students/:courses/teams" component={TeamListTable}/>
+          <Route path="/students/:courses/teams" component={TeamListTableModule}/>
         </Route>
         <Route path="postLogin" component={PostLoginPage} onEnter={auth.requireAuthentication, auth.checkUnauthenticated}/>
         <Route path="*" component={ErrorPage}/>

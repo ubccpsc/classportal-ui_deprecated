@@ -33,7 +33,7 @@ class SuperAdminPortal extends React.Component {
 
   render() {
     return (
-        <Column small={12} centerOnLarge>{this.props.children}</Column>
+        <Column className="hereIaM">{this.props.children}</Column>
     );
   }
 }

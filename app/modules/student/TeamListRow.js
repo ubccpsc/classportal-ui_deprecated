@@ -1,30 +1,67 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { Row, Column } from 'react-foundation';
+import config from '../../config';
 
-const TeamListRow = (props) => {
+class TeamListRow extends React.Component {
 
-	let courseUsersHref = "https://localhost:3000/superadmin/" + props.courseId + "/students";
-	let courseSettingsHref = "https://localhost:3000/superadmin/" + props.courseId + "/settings";
+	constructor(props) {
+		super(props);
+	}
 
-	return (
-		<tbody>
-			<tr className="table-expand-row" data-open-details>
-		  	<td><Link to={courseUsersHref}></Link></td>
-		  	<td></td>
-		  	<td></td>
-		  	<td></td>
-		  	<td><span className="expand-icon"></span></td>
-		  	<td><a href={courseSettingsHref} >Settings</a></td>
-			</tr>
+	render() {
 
-			<tr className="table-expand-row-content">
-			  <td colSpan="8" className="table-expand-row-nested">
-			  	<h6>Course Summary:</h6>
-			    <p></p>
-			  </td>
-			</tr>
-		</tbody>
-	);
+			if (this.props.team) {
+				let teamMemberRows = this.props.team.members.map(teamMember => {
+					return (
+						<div key={teamMember.username} className="row add-people-section">
+						    <div className="small-12 medium-6 columns about-people">
+						      <div className="about-people-author">
+						        <p className="author-name">
+						          {teamMember.username}
+						        </p>
+						        {/*<p className="author-location">
+						          <i className="fa fa-map-marker" aria-hidden="true"></i>
+						          Mumbai, India
+						        </p>
+						        <p className="author-mutual">
+						          <strong>Shahrukh Khan</strong> is a mutual friend.
+						        </p>*/}
+						      </div>    
+						    </div>
+						    <div className="small-12 medium-6 columns add-friend">
+						      <div className="add-friend-action">
+						      	<a href={config.githubEnterprise + '/' + teamMember.username}>
+							        <button className="button primary small">
+							          <i className="fa fa-user-plus" aria-hidden="true"></i>
+							          View Github Profile
+							        </button>
+						        </a>
+						        {/* <button className="button secondary small">
+						          <i className="fa fa-user-times" aria-hidden="true"></i>
+						          Remove
+						        </button>*/}
+						      </div>
+						    </div>
+						</div>
+					);
+				});
+
+				return (
+					<div className="columns small-12 large-centered">{teamMemberRows}</div>
+					)			
+			} else {
+				return (
+					null
+					);
+			}
+
+	}
 }
+
+TeamListRow.propTypes = {
+	team: React.PropTypes.object.isRequired
+}
+
 
 export default TeamListRow;
