@@ -25,6 +25,7 @@ class TeamListModule extends React.Component {
 		this.handleTeamSubmission = this.handleTeamSubmission.bind(this);
 		this.handleRemoveTeamMember = this.handleRemoveTeamMember.bind(this);
 		this.clearInputField = this.clearInputField.bind(this);
+		this.addLoggedInUserToTeam = this.addLoggedInUserToTeam.bind(this);
 		this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.params.courses));
 		this.props.dispatch(courseActions.getCourseDetails(this.props.params.courses))
 			.then((_course) => {
@@ -42,6 +43,7 @@ class TeamListModule extends React.Component {
 		e.preventDefault();
 		this.props.dispatch(teamActions.isStudentInSameLab(310, this.state.username))
 			.then(action => {
+				this.addLoggedInUserToTeam();
 				let inSameLab = action.value.response.inSameLab;
 				if (inSameLab === false) {
 					this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'failed', headline: 'Cannot Add Team Member', 
@@ -50,6 +52,14 @@ class TeamListModule extends React.Component {
 					this.clearInputField();
 				}
 			});
+	}
+
+	addLoggedInUserToTeam() {
+		console.log(this.props.user);
+		let userrole = String(this.props.user.userrole);
+		if (userrole === STUDENT_ROLE) {
+			this.props.dispatch(teamActions.isStudentInSameLab(310, this.props.user.username));
+		}
 	}
 
 	handleUsernameChange(e) {
@@ -92,7 +102,7 @@ class TeamListModule extends React.Component {
 		if (this.props.course.markDelivsByBatch == true && typeof this.props.myTeams[0] === 'string') {
 
 			this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'warning', headline: 'You Are Not On Any Teams',
-				body: 'To create a team, add GitHub users who are registered in your lab. Only TAs may disband Teams.'}))
+				body: 'To create a team, add GitHub users who are registered in your lab. Only TAs may disband teams.'}))
 
 			return (
 				<div>
