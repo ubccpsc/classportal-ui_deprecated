@@ -11,6 +11,7 @@ import { Button } from 'elemental';
 import { Link } from 'elemental';
 
 let course = 'empty';
+let STUDENT_ROLE = 'student';
 
 class TeamListModule extends React.Component {
 	constructor(props) {
@@ -61,7 +62,8 @@ class TeamListModule extends React.Component {
 
 	handleTeamSubmission(e) {
 		e.preventDefault();
-		if (this.props.teams.length > course.maxTeamSize) {
+		let userrole = String(this.props.user.userrole);
+		if (this.props.teams.length > course.maxTeamSize && userrole === STUDENT_ROLE) {
 			this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'failed', headline: 'Cannot Create Team', 
 				body: `A team has a maximum size of ${course.maxTeamSize} for this course.`}))
 		} else {
@@ -98,7 +100,7 @@ class TeamListModule extends React.Component {
 						<form className="twelve column">
 							<div className="input-group">
 							  <span className="input-group-label">GitHub Username</span>
-							  <input className="input-group-field"
+							  <input classNfffame="input-group-field"
 							  	  onChange={this.handleUsernameChange}
 								  name="username" 
 								  ref="inputField"
@@ -144,6 +146,7 @@ class TeamListModule extends React.Component {
 }
 
 TeamListModule.propTypes = {
+	user: PropTypes.object.isRequired,
 	teams: PropTypes.array.isRequired,
 	studentsWithoutTeam: PropTypes.array.isRequired,
 	course: PropTypes.object.isRequired,
@@ -157,6 +160,7 @@ TeamListModule.propTypes = {
 
 function mapStateToProps(state, ownState) {
 	return {
+		user: state.user,
 		teams: state.teams,
 		studentsWithoutTeam: state.studentsWithoutTeam,
 		myTeams: state.myTeams,

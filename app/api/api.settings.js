@@ -6,7 +6,7 @@ export const AUTHENTICATED = {
 export const AUTHENTICATED_GET = {
 	credentials: 'include',
 	method: 'get',
-	mode: 'cors',
+	mode: 'no-cors',
 }
 
 export const AUTHENTICATED_PUT = {
