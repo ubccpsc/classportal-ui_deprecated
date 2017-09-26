@@ -30,7 +30,7 @@ class CourseApi {
   }
 
   static getCourseDetails(courseNum) {
-    return fetch(`${config.apiAddress}/${courseNum}/admin/courseSettings`, options.AUTHENTICATED)
+    return fetch(`${config.apiAddress}/${courseNum}/course`, options.AUTHENTICATED)
       .then(course => {
         return course.json();
       })
@@ -38,7 +38,7 @@ class CourseApi {
         return course;
       })
       .catch(err => {
-        console.log(`course.api::getCourseDetails(courseNum) ERROR: ${err}`);
+        console.log(`course.api::getCourseSettings(courseNum) ERROR: ${err}`);
       });
   }
 }

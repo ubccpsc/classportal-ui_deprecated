@@ -57,12 +57,13 @@ export default () => (
           <Route path="/admin/teams" component={TeamListTableModule}/>
           <Route path="/admin/:courses/teams" component={TeamListTableModule}/>
         </Route>
-        <Route path="students" component={StudentPage}>
-          <Route path="/students/courses" component={StudentCourseListTable}/>
-          <Route path="/students/:courses/deliverables" component={DeliverableListTable}/>
-          <Route path="/students/:courses/teams" component={TeamListTableModule}/>
+        <Route path="student" component={StudentPage}>
+          <Route path="/student/courses" component={StudentCourseListTable}/>
+          <Route path="/student/postLogin" component={PostLoginPage} />
+          <Route path="/student/:courses/deliverables" component={DeliverableListTable}/>
+          <Route path="/student/:courses/teams" component={TeamListTableModule}/>
         </Route>
-        <Route path="postLogin" component={PostLoginPage} onEnter={auth.requireAuthentication, auth.checkUnauthenticated}/>
+        <Route path="postLogin" component={PostLoginPage}/>
         <Route path="*" component={ErrorPage}/>
       </Route>
     </Router>

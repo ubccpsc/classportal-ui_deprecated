@@ -14,6 +14,9 @@ let logoutHandler = function(dispatch) {
       localStorage.clear();
       browserHistory.push('/login');
     })
+    .then(() => {
+      dispatch(initialStateActions.reInitState())
+    })
     .catch(err => {
       console.log(`Logout::logoutHandler() ERROR ${err} `)
     });

@@ -7,6 +7,10 @@ import PostLogin from '../../modules/common/PostLogin';
 import { loginRequest, testGet } from '../../../app/ajax';
 import { Row, Column } from 'react-foundation';
 
+const STUDENT_ROLE = "student";
+const ADMIN_ROLE = "admin";
+
+
 class PostloginPage extends React.Component {
 
   constructor(props) {
@@ -17,53 +21,25 @@ class PostloginPage extends React.Component {
   componentDidMount() {
     this.props.dispatch(authActions.isAuthenticated())
       .then(() => {
-        return this.props.dispatch(userActions.getCurrentUser());
-      });
-
-    return Promise.resolve()
-        .then(() => {
-        const url = window.location.href;
-        // this is where we should put the "isLoggedIn() API call"
-        const validAuthCode = /[?]code=([\w\/\-]+)/; // eslint-disable-line no-useless-escape
-        if (validAuthCode.test(url)) {
-          const authcode = url.split('code=')[1];
-          return Promise.resolve(authcode);
-        }
-        return Promise.reject('Error: Invalid authcode.');
+        return this.props.dispatch(userActions.getCurrentUser())
+          .then(() => {
+            let userrole = String(this.props.user.userrole);
+            if (userrole === STUDENT_ROLE) {
+              browserHistory.push('/student/310/teams');
+            } else if (userrole === ADMIN_ROLE) {
+              browserHistory.push('/admin/310/teams');
+            } else if (userrole === SUPERADMIN_ROLE) {
+              browserHistory.push('/superadmin/310/teams');
+            }
+          });;
       })
-      .then((authcode) => 
-        // then get the current user information and store it in local storage
-        // should include csid, snum, user role, and might not need authcode
-        loginRequest(localStorage.csid || '', localStorage.sid || '', authcode))
-      .then((response) => {
-        if (!!response.username && !!response.token) {
-          localStorage.clear();
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('username', response.username);
-          localStorage.setItem('admin', response.admin);
-          browserHistory.push('/');
-          return Promise.resolve();
-        }
-        return Promise.reject('Error: There was a problem loading user info.');
-      })
-      .catch((error) => {
-        this.setState({ error: true }, () => {
-          console.log(error);
-          localStorage.clear();
-          setTimeout(() => {
-            browserHistory.push('/');
-          }, 1500);
-        });
-      });
   }
 
   render() {
     return (
-          <Row>
-            <Column className="twelve">
-              <PostLogin className="post-login-page" error={this.state.error} />
-            </Column>
-          </Row>
+            <div className="post-login-page twelve columns">
+              <PostLogin />
+            </div>
       );
   }
 

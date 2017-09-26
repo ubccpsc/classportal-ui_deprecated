@@ -10,16 +10,16 @@ export function getAllCourses() {
 }
 
 // gets a single course with its details
-export function getCourseDetails(courseNum) {
+export function getCourseSettings(courseNum) {
     return {
-        type: types.GET_COURSE_DETAILS,
-        payload: CourseApi.getCourseDetails(courseNum),
+        type: types.GET_COURSE_SETTINGS,
+        payload: CourseApi.getCourseSettings(courseNum),
     }
 }
 
-export function getCourseSettings(courseNum) {
+export function getCourseDetails(courseNum) {
 	return {
-		type: types.GET_COURSE_SETTINGS,
-		payload: CourseApi.getCourseSettings(courseNum),
+		type: types.GET_COURSE_DETAILS,
+		payload: CourseApi.getCourseDetails(courseNum),
 	}
 }
