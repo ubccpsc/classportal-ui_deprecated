@@ -100,7 +100,7 @@ class TeamListModule extends React.Component {
 						<form className="twelve column">
 							<div className="input-group">
 							  <span className="input-group-label">GitHub Username</span>
-							  <input classNfffame="input-group-field"
+							  <input className="input-group-field"
 							  	  onChange={this.handleUsernameChange}
 								  name="username" 
 								  ref="inputField"
