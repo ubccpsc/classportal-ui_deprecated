@@ -30,7 +30,7 @@ class CourseApi {
   }
 
   static getCourseDetails(courseNum) {
-    return fetch(`${config.apiAddress}/${courseNum}/admin/courseDetails`, options.AUTHENTICATED)
+    return fetch(`${config.apiAddress}/${courseNum}/course`, options.AUTHENTICATED)
       .then(course => {
         return course.json();
       })

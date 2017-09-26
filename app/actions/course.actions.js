@@ -12,7 +12,7 @@ export function getAllCourses() {
 // gets a single course with its details
 export function getCourseSettings(courseNum) {
     return {
-        type: types.GET_COURSE_DETAILS,
+        type: types.GET_COURSE_SETTINGS,
         payload: CourseApi.getCourseSettings(courseNum),
     }
 }

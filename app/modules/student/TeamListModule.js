@@ -10,6 +10,8 @@ import TeamListTable from './TeamListTable';
 import { Button } from 'elemental';
 import { Link } from 'elemental';
 
+let course = 'empty';
+
 class TeamListModule extends React.Component {
 	constructor(props) {
 		super(props);
@@ -23,6 +25,10 @@ class TeamListModule extends React.Component {
 		this.handleRemoveTeamMember = this.handleRemoveTeamMember.bind(this);
 		this.clearInputField = this.clearInputField.bind(this);
 		this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.params.courses));
+		this.props.dispatch(courseActions.getCourseDetails(this.props.params.courses))
+			.then((_course) => {
+				course = _course.action.payload.response;
+			});
 	}
 
 	componentWillMount() {
@@ -55,8 +61,10 @@ class TeamListModule extends React.Component {
 
 	handleTeamSubmission(e) {
 		e.preventDefault();
-
-
+		if (this.props.teams.length > course.maxTeamSize) {
+			this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'failed', headline: 'Cannot Create Team', 
+				body: `A team has a maximum size of ${course.maxTeamSize} for this course.`}))
+		} else {
 		this.props.dispatch(teamActions.createCustomTeam(310, this.props.teams))
 			.then(response => {
 				response = String(response.value);
@@ -69,6 +77,7 @@ class TeamListModule extends React.Component {
 					this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.params.courses));
 				}
 			});
+		}
 	}
 
 	clearInputField() {
