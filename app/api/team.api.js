@@ -58,6 +58,7 @@ class TeamApi {
         let json = response.json();
         if (response.status === 200) {
           return json;
+          console.log(teams.json());
         } else {
           return json.then(err => {
             throw 'Team members either already on team or do not exist in lab.';

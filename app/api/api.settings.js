@@ -3,6 +3,12 @@ export const AUTHENTICATED = {
 	mode: 'cors',
 }
 
+export const AUTHENTICATED_GET = {
+	credentials: 'include',
+	method: 'get',
+	mode: 'cors',
+}
+
 export const AUTHENTICATED_PUT = {
 	credentials: 'include',
 	method: 'put',
