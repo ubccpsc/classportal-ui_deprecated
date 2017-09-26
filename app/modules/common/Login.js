@@ -14,7 +14,7 @@ function registerButton(e) {
 function loginButton(e) {
   e.preventDefault();
   // const redirectUri = `${config.appAddress}/postlogin`; handled by Github and Passport now.
-  window.location = `https://localhost:5000/auth/login`;
+  window.location = `${config.apiAddress}/auth/login`;
 }
 
 const Login = () => (

@@ -32,14 +32,6 @@ import * as types from '../actions/types.helper';
 //   helloWorld: () => ['hello', 'ubc'],
 // });
 
-const rootReducer = (state, action) => {
-  if (action.type === types.LOGOUT) {
-  	state = undefined;
-  }
-
-  return appReducer(state, action);
-}
-
 /* top level reducers */
 const appReducer = combineReducers({  
   routing: routerReducer,
@@ -64,5 +56,15 @@ const appReducer = combineReducers({
   courseSettings,
   helloWorld: () => ['hello', 'ubc'],
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === types.LOGOUT) {
+  	state = undefined;
+  }
+
+  return appReducer(state, action);
+}
+
+
 
 export default rootReducer;

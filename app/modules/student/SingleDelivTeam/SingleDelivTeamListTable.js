@@ -16,7 +16,7 @@ class SingleDelivTeamListTable extends React.Component {
 	componentWillMount() {
 		let that = this;
 		this.props.dispatch(teamActions.getStudentsWithoutTeam(this.props.params.courses));
-		this.props.dispatch(courseActions.getCourseDetails(this.props.params.courses));
+		this.props.dispatch(courseActions.getCourseSettings(this.props.params.courses));
 	}
 
 	render () {

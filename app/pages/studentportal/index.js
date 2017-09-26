@@ -6,6 +6,7 @@ import { Row, Column } from 'react-foundation';
 import SuperAdminCourseList from '../../components/Course/SuperAdminCourseList';
 import DeliverableListTable from '../../components/Deliverable/DeliverableListTable';
 import { browserHistory } from 'react-router';
+import PostLogin from '../../modules/common/PostLogin';
 
 class SuperAdminPortal extends React.Component {
   constructor() {

@@ -6,7 +6,6 @@ const LoginPage = () => (
   <div>
     <Login />
     <Privacy />
-
   </div>
 );
 

@@ -28,7 +28,7 @@ class TeamListModule extends React.Component {
 	componentWillMount() {
 		let that = this;
 		this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.params.courses));
-		this.props.dispatch(courseActions.getCourseDetails(this.props.params.courses));
+		this.props.dispatch(courseActions.getCourseSettings(this.props.params.courses));
 	}
 
 	addTeamMember(e) {
@@ -55,6 +55,8 @@ class TeamListModule extends React.Component {
 
 	handleTeamSubmission(e) {
 		e.preventDefault();
+
+
 		this.props.dispatch(teamActions.createCustomTeam(310, this.props.teams))
 			.then(response => {
 				response = String(response.value);

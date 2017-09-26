@@ -7,12 +7,10 @@ import promiseMiddleware from 'redux-promise-middleware';
 import rootReducer from './reducers';
 
 let middleware;
-
 let enhancers;
 
 const ENVIRONMENT_MODE = String(process.env.NODE_ENV);
 
-console.log('mode' + ENVIRONMENT_MODE);
 if (ENVIRONMENT_MODE === 'production') {
 	middleware = [
 	  thunk,
@@ -22,6 +20,7 @@ if (ENVIRONMENT_MODE === 'production') {
   		applyMiddleware(...middleware)
 	);
 } else {
+	// DEV MODE 
 	middleware = [
 	  thunk,
 	  logger,
