@@ -22,10 +22,6 @@ const Login = () => (
     <Form id="text-center">
       <FormField>
         <ButtonGroup>
-          <Button id="1" size="sm" onClick={registerButton}>
-            <Glyph icon="bookmark" />
-            &nbsp; Register
-              </Button>
           <Button id="2" size="sm" onClick={loginButton}>
             <Glyph icon="mark-github" />
             &nbsp; Sign In

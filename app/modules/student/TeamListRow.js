@@ -32,10 +32,10 @@ class TeamListRow extends React.Component {
 						    <div className="small-12 medium-6 columns add-friend">
 						      <div className="add-friend-action">
 						      	<a href={config.githubEnterprise + '/' + teamMember.username}>
-							        <button className="button primary small">
-							          <i className="fa fa-user-plus" aria-hidden="true"></i>
-							          View Github Profile
-							        </button>
+						        <button className="button primary small">
+						          <i className="fa fa-user-plus" aria-hidden="true"></i>
+						          View Github Profile
+						        </button>
 						        </a>
 						        {/* <button className="button secondary small">
 						          <i className="fa fa-user-times" aria-hidden="true"></i>

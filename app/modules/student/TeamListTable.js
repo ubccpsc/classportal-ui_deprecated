@@ -25,7 +25,6 @@ class TeamListTable extends React.Component {
 			title = team.deliverableIds.length === (i + 1) ? title + team.deliverableIds[i].name : title + team.deliverableIds[i].name + ', ';
 		}
 
-
 		// Add in Team Name with Team Model Number and pretty print it
 		let teamName = name.charAt(0).toUpperCase() + name.slice(1).replace(/[0-9]/g, '') + ' ' + name.replace(/^\D+/g, '');
 		title = teamName + ' | ' + title;
@@ -41,16 +40,15 @@ class TeamListTable extends React.Component {
 		return title;
 	}
 
-	renderTable(teams) {
-		return teams.map(team => {
-
+	renderTable(team) {
+		return team.map(team => {
+				console.log(team);
 				let teamTitle = '';
 				let githubRepoLink = null;
 
 				// IF multi-deliverable team project
 				if (typeof team.deliverableIds !== 'undefined' && typeof team.deliverableId === 'undefined') {
 					teamTitle = this.createBatchDelivTeamTitle(team);
-					
 				} else {
 					// ELSE single-deliverable team project
 					teamTitle = this.createSingleDelivTeamTitle(team);
@@ -58,11 +56,12 @@ class TeamListTable extends React.Component {
 
 			  	if (team.githubState.repo.url !== '') {
 			  		githubRepoLink = (							  
-			  			<div className="view-more-people">
-			    			<p className="view-more-text">
-			      				<a href={config.githubEnterprise + '/' + 'test'} className="view-more-link">Github Repo</a>
-			    			</p>
-			  			</div>
+	  					<a href={config.githubEnterprise + '/' + 'test'} className="view-more-link">
+		  					<button className="button secondary small">
+					          <i className="fa fa-user-plus" aria-hidden="true"></i>
+					          View Github Repo
+					        </button>
+				        </a>
 			  		);
 			  	}
 
@@ -74,7 +73,13 @@ class TeamListTable extends React.Component {
 						    </h6>
 						  </div>
 						  <TeamListRow team={team}/>
-						  	{githubRepoLink}
+						  	<div className="large centered team-action-links">
+						  		{githubRepoLink}
+						        <button className="button alert small">
+						          <i className="fa fa-user-plus" aria-hidden="true"></i>
+						          Disband Team
+						        </button>
+						  	</div>
 						</div>
 					);
 			});
@@ -83,23 +88,14 @@ class TeamListTable extends React.Component {
 	render() {
 		let userrole = String(this.props.user.userrole);
 
-		if (this.props.myTeams.length > 0 && userrole === STUDENT_ROLE) {
+		if (this.props.team.length > 0) {
 
-			const teamListRows = this.renderTable(this.props.myTeams);
+			const teamListRows = this.renderTable(this.props.team);
 
 			return (
 				<div className="team">{teamListRows}</div>
 				)
 
-		} else if (this.props.teams.length > 0 && userrole !== STUDENT_ROLE) {
-			const teamListRows = this.renderTable(this.props.teams);
-			
-			return (
-				<div>
-					<div className="team">{teamListRows}</div>
-					<div>admin delete team option</div>
-				</div>
-				)
 		}
 		else {
 			return (
@@ -111,15 +107,12 @@ class TeamListTable extends React.Component {
 }
 
 TeamListTable.propTypes = {
-	myTeams: React.PropTypes.array.isRequired,
-	teams: React.PropTypes.array.isRequired,
+	team: React.PropTypes.array.isRequired,
 	user: React.PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state, ownState) {
 	return {
-		myTeams: state.myTeams,
-		teams: state.teams,
 		user: state.user
 	}
 }
