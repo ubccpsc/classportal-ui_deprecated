@@ -64,34 +64,14 @@ export function registerRequest(csid, sid) {
 }
 
 export function logoutRequest() {
-  return fetch(`${config.apiAddress}/api/logout`, {
-    method: 'post',
-    mode: 'cors',
-    headers: {
-      'Content-type': 'application/json',
-      Accept: 'application/json',
-      username: localStorage.username,
-      token: localStorage.token,
-      admin: localStorage.admin,
-    },
-  })
+  return fetch(`${config.apiAddress}/logout`, { credentials: 'include' })
     .then(checkStatus)
     .then(getJson)
     .catch(checkNetworkError);
 }
 
 export function loadPortalRequest() {
-  return fetch(`${config.apiAddress}/api/load`, {
-    method: 'post',
-    mode: 'cors',
-    headers: {
-      'Content-type': 'application/json',
-      Accept: 'application/json',
-      username: localStorage.username,
-      token: localStorage.token,
-      admin: localStorage.admin,
-    },
-  })
+  return fetch(`${config.apiAddress}/currentUser`, { credentials: 'include' })
     .then(checkStatus)
     .then(getJson)
     .catch(checkNetworkError);
@@ -182,20 +162,19 @@ export function submitGradeRequest(sid, assnId, grade, comment) {
 }
 
 export function testGet() {
-  return fetch(`${config.apiAddress}/710/admin/students`, {
+  return fetch(`${config.apiAddress}/710/students`, {
     method: 'get',
     mode: 'cors',
     credentials: 'include',
     headers: {
       Accept: 'application/json',
-      
     },
   })  
   .then(  
     function(response) {  
+      console.log(response);
       if (response.status !== 200) {  
-        console.log('Looks like there was a problem. Status Code: ' +  
-          response.status);  
+        console.log('Looks like there was a problem. Status Code: ' + response.status);  
         return;  
       }
 

@@ -57,7 +57,7 @@ class CreateTeam extends React.Component {
     for (let index = 0; index < config.teamSize; index++) {
       arr.push((<FormSelect
         key={index.toString()}
-        options={
+      options={
           (index === 0 && this.props.isAdmin !== 'true')
             ? [{ label: this.props.studentName }]
             : this.props.namesArray

@@ -2,19 +2,27 @@
 
 import React from 'react';
 import { browserHistory } from 'react-router';
-import css from './Header.css';
 import config from '../../config';
+import Links from '../Links/Links';
+import Logout from '../../modules/common/Logout';
+import { FormInput, FormIconField, Glyph, Button, InputGroup } from 'elemental';
+// import CourseSelector from '../../modules/common/CourseSelector';
 
 function redirect(e) {
   e.preventDefault();
   browserHistory.push('/');
 }
 
-const Header = () => (
-  <div className={css.header} onClick={redirect} >
-    <img className={css.logo} alt="" src="ubc.png" />
-    <p className={css.title} >{config.title}</p>
-    <p className={css.subtitle}>{config.subtitle}</p>
+const Header = (props) => (
+	<div>
+  <header className="subnav-hero-section">
+	{/* <CourseSelector /> */}
+	    <h1 className="subnav-hero-headline">UBC ClassPortal<small> with AutoTest</small></h1>
+		    <div className="subnav-logout-button-area">
+			   	<Logout/>
+		    </div>
+	    <Links />
+  </header>
   </div>
 );
 

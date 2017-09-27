@@ -1,0 +1,16 @@
+@import "../node_modules/foundation-sites/scss/foundation";
+@import "./components/Layout/Layout";
+@import "./components/Header/Header";
+@import "./components/Footer/Footer";
+@import "./components/Links/Links";
+@import "./modules/common/CourseSelector";
+@import "./modules/student/TeamListTable";
+
+
+@include foundation-flex-grid;
+@include foundation-flex-classes;
+@include foundation-everything;
+
+body {
+  background: #f5f5f5;
+}

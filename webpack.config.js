@@ -12,7 +12,6 @@ const path = require('path');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 const pkg = require('./package.json');
-
 const isDebug = global.DEBUG === false ? false : !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose') || process.argv.includes('-v');
 const useHMR = !!global.HMR; // Hot Module Replacement (HMR)
@@ -95,6 +94,10 @@ const config = {
         options: babelConfig,
       },
       {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader?sourceMap'
+      },
+      {
         test: /\.css/,
         use: [
           {
@@ -103,7 +106,7 @@ const config = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: isDebug,
+              sourceMap: true,
               importLoaders: true,
               // CSS Modules https://github.com/css-modules/css-modules
               modules: true,
@@ -154,5 +157,7 @@ if (isDebug && useHMR) {
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
   config.plugins.push(new webpack.NoEmitOnErrorsPlugin());
 }
+
+console.log('isDebug mode enabled:', isDebug);
 
 module.exports = config;

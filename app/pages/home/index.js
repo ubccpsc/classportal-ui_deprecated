@@ -1,39 +1,80 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import AdminPortal from '../adminportal';
+import SuperAdminPortal from '../superadminportal';
 import StudentPortal from '../studentportal';
 import LoadingMessage from '../../modules/common/LoadingMessage';
 import { loadPortalRequest } from '../../../app/ajax';
+import * as userActions from '../../actions/user.actions';
+import * as authActions from '../../actions/auth.actions';
+import { browserHistory } from 'react-router';
+import PostLogin from '../../modules/common/PostLogin';
+import config from '../../config';
+
+
+const UNAUTHENTICATED_TAG = 'Unauthenticated';
 
 class HomePage extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      loaded: false,
-      data: {},
-    };
-  }
 
   componentWillMount() {
-    loadPortalRequest()
-      .then((response) => {
-        console.log(response);
-        this.setState({ data: response, loaded: true });
+    this.props.dispatch(authActions.isAuthenticated())
+      .then((action) => {
+        this.authenticationCheck();
       })
-      .catch((error) => {
-        alert(error);
-        localStorage.clear();
-        window.location.reload(true);
-      });
+      .catch((err) => {
+        this.authenticationCheck();
+      })
+  }
+
+  constructor(props) {
+    super(props);
+    this.authenticationCheck = this.authenticationCheck.bind(this);
+    this.redirectToLogin = this.redirectToLogin.bind(this)
+  }
+
+  componentDidMount() {
+  }
+
+  authenticationCheck() {
+    let authStatus = String(this.props.authStatus);
+    if (authStatus === UNAUTHENTICATED_TAG) {
+      this.redirectToLogin();
+    }
+  }
+
+  redirectToLogin() {
+    browserHistory.push(config.appAddress + '/login');
   }
 
   render() {
-    if (!this.state.loaded) {
+    if (!this.props.user) {
       return (<LoadingMessage />);
     }
-    return (this.state.data.userType === 'admin'
-      ? (<AdminPortal data={this.state.data} />)
-      : (<StudentPortal data={this.state.data} />));
+
+    switch(this.props.user.userrole) {
+      case 'superadmin':
+        return (<SuperAdminPortal user={this.props.user} />)
+      case 'admin':
+        return (<AdminPortal user={this.props.user} />);
+      case 'student':
+        return (<StudentPortal user={this.props.user} />);
+      default:
+        return null;
+    }
+
   }
 }
 
-export default HomePage;
+HomePage.propTypes = {
+  user: PropTypes.object.isRequired,
+  authStatus: PropTypes.string.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+  return {
+    authStatus: state.authStatus,
+    user: state.user
+  }
+};
+
+export default connect(mapStateToProps)(HomePage);

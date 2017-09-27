@@ -1,35 +1,55 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import * as userActions from '../../actions/user.actions';
 import Logout from '../../modules/common/Logout';
-import Deliverables from '../../modules/student/Deliverables';
-import DisplayTeam from '../../modules/student/DisplayTeam';
-import CreateTeam from '../../modules/common/CreateTeam';
+import { Row, Column } from 'react-foundation';
+import SuperAdminCourseList from '../../components/Course/SuperAdminCourseList';
+import DeliverableListTable from '../../components/Deliverable/DeliverableListTable';
+import { browserHistory } from 'react-router';
+import PostLogin from '../../modules/common/PostLogin';
 
-const StudentPortal = (props) => (
-  <div>
-    <Logout
-      username={props.data.myStudentFile.username}
-      firstname={props.data.myStudentFile.firstname}
-      sid={props.data.myStudentFile.sid}
-    />
-    {(props.data.myStudentFile.hasTeam === true)
-      ? (<DisplayTeam
-        myTeamFile={props.data.myTeamFile}
-        teammateNames={props.data.namesArray}
-      />)
-      : (<CreateTeam
-        namesArray={props.data.namesArray}
-        isAdmin={false}
-        studentName={`${props.data.myStudentFile.firstname} ${props.data.myStudentFile.lastname}`}
-      />)}
-    <Deliverables
-      deliverables={props.data.deliverablesFile}
-      grades={props.data.myGradesFile.grades}
-    />
-  </div>
-);
+class SuperAdminPortal extends React.Component {
+  constructor() {
+    super();
+    this.authCheck = this.authCheck.bind(this);
+  }
 
-StudentPortal.propTypes = {
-  data: PropTypes.any, // eslint-disable-line
+  componentWillMount() {
+  
+    this.props.dispatch(userActions.getCurrentUser())
+      .then(() => {
+        this.authCheck();
+      });
+  }
+
+  authCheck() {
+    if (this.props.user.userrole !== 'student') {
+      this.props.dispatch(userActions.getCurrentUser()).then(response => {
+        if (this.props.user.userrole !== 'student') {
+          browserHistory.push(`/404`);
+        }
+      });
+    }
+  }
+
+  render() {
+    return (
+
+        <Column className="student-portal-page">
+        {this.props.children}
+        </Column>
+    );
+  }
+}
+
+function mapStateToProps(state, ownProps) {
+  return {
+    user: state.user
+  }
+}
+
+SuperAdminPortal.propTypes = {
+  user: PropTypes.object
 };
 
-export default StudentPortal;
+export default connect(mapStateToProps)(SuperAdminPortal);

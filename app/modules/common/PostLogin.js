@@ -1,11 +1,14 @@
 import React, { PropTypes } from 'react';
 import { Spinner } from 'elemental';
 import Module from '../../components/Module/Module';
+import { Row, Column } from 'react-foundation';
 
 const PostLogin = (props) => (
-  <Module title={props.error ? 'Error! Redirecting to Login' : 'Connecting to GitHub'}>
-    <Spinner size="lg" type="primary" />
-  </Module>
+	  <div>
+		  <Module title={'Connecting to GitHub'}>
+		    <Spinner size="lg" type="primary" />
+		  </Module>
+	  </div>
 );
 
 PostLogin.propTypes = {

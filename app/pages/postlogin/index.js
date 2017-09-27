@@ -1,58 +1,60 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import * as authActions from '../../actions/auth.actions';
+import * as userActions from '../../actions/user.actions';
 import { browserHistory } from 'react-router';
 import PostLogin from '../../modules/common/PostLogin';
 import { loginRequest, testGet } from '../../../app/ajax';
+import { Row, Column } from 'react-foundation';
+
+const STUDENT_ROLE = "student";
+const ADMIN_ROLE = "admin";
+
 
 class PostloginPage extends React.Component {
-  constructor() {
-    super();
+
+  constructor(props) {
+    super(props);
     this.state = { error: false };
   }
 
   componentDidMount() {
-    return Promise.resolve()
+    this.props.dispatch(authActions.isAuthenticated())
       .then(() => {
-        testGet().then( result => {
-          console.log('my result' + result);
-          return result;
-        })
+        return this.props.dispatch(userActions.getCurrentUser())
+          .then(() => {
+            let userrole = String(this.props.user.userrole);
+            if (userrole === STUDENT_ROLE) {
+              browserHistory.push('/student/310/teams');
+            } else if (userrole === ADMIN_ROLE) {
+              browserHistory.push('/admin/310/teams');
+            } else if (userrole === SUPERADMIN_ROLE) {
+              browserHistory.push('/superadmin/310/teams');
+            }
+          });;
       })
-      .then(() => {
-        const url = window.location.href;
-        const validAuthCode = /[?]code=([\w\/\-]+)/; // eslint-disable-line no-useless-escape
-        if (validAuthCode.test(url)) {
-          const authcode = url.split('code=')[1];
-          return Promise.resolve(authcode);
-        }
-        return Promise.reject('Error: Invalid authcode.');
-      })
-      .then((authcode) => loginRequest(localStorage.csid || '', localStorage.sid || '', authcode))
-      .then((response) => {
-        if (!!response.username && !!response.token) {
-          localStorage.clear();
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('username', response.username);
-          localStorage.setItem('admin', response.admin);
-          browserHistory.push('/');
-          return Promise.resolve();
-        }
-        return Promise.reject('Error: There was a problem loading user info.');
-      })
-      .catch((error) => {
-        this.setState({ error: true }, () => {
-          alert(error);
-          localStorage.clear();
-          setTimeout(() => {
-            browserHistory.push('/');
-          }, 1500);
-        });
-      });
   }
 
   render() {
-    return (<PostLogin error={this.state.error} />);
+    return (
+            <div className="post-login-page twelve columns">
+              <PostLogin />
+            </div>
+      );
   }
 
 }
 
-export default PostloginPage;
+PostloginPage.propTypes = {
+  user: PropTypes.object.isRequired,
+  authStatus: PropTypes.string.isRequired,
+};
+
+function mapStateToProps(state, ownProps) {
+  return {
+    user: state.user,
+    authStatus: state.authStatus,
+  }
+};
+
+export default connect(mapStateToProps)(PostloginPage);

@@ -9,8 +9,9 @@ const config = {
   title: 'ClassPortal',
   subtitle: 'UBC CPSC',
   github: 'https://github.com/mksarge/classportal',
-  appAddress: 'http://localhost:3000',
-  apiAddress: 'http://localhost:5000',
+  githubEnterprise: 'https://github.ubc.ca',
+  appAddress: 'https://localhost:3000',
+  apiAddress: 'https://localhost:5000',
   clientId: '7b22a00a9158cd0c43a1',
   teamSize: 2,
   studentsCanDisbandTeams: true,
@@ -21,9 +22,10 @@ const config = {
 
 // alternative settings for production environment
 if (env === 'production') {
-  config.appAddress = 'https://ubc-classportal.firebaseapp.com';
+  config.localHost = 'https://portal.cs.ubc.ca';
+  config.appAddress = 'https://portal.cs.ubc.ca';
   config.clientId = '97ae59518a9d5cae2550';
-  config.apiAddress = 'https://classportal.mksarge.com';
+  config.apiAddress = 'https://portal.cs.ubc.ca:5000';
 }
 
 module.exports = config;

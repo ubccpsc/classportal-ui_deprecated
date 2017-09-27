@@ -1,26 +1,52 @@
 import fetch from 'isomorphic-fetch'
 import config from '../config';
-
-console.log('made it in the class');
+import * as options from './api.settings';
 
 class UserApi {
-  static fetchAllUsers(courseNum: number) {
-      console.log('hello. inside UsersAPI class.');
-      return fetch(`${config.apiAddress}/${courseNum}/students`)
-        .then(users => {
-          return users.json();
-        })
-        .catch(err => {
-          console.log(err + 'error!');
-        });
-    }
+  static getUserDetails(username) {
+    return fetch(`${config.apiAddress}/${courseNum}/students`, options.AUTHENTICATED)
+      .then(response => {
+        return response.json();
+      })
+      .catch(err => {
+        console.log(`user.api::getUserDetails() ERROR: No response from API: ${err}`);
+      });
+  }
 
-  static fetchUserDetails(username: string) {
-      return fetch(`${config.apiAddress}/${courseNum}/students`)
-        .then(response => {
-          return response.json();
-        })
-    }
+  static getCurrentUser() {
+    return fetch(`${config.apiAddress}/currentUser`, options.AUTHENTICATED)
+      .then(response => {
+        return response.json();
+      })
+      .catch(err => {
+        console.log(`user.api::getCurrentUser() ERROR: No response from API: ${err}`);
+      });
+  }
+
+  static getUserRole() {
+    return fetch(`${config.apiAddress}/currentUser`, options.AUTHENTICATED)
+      .then(response => {
+        return response.json()
+      })
+      .then((user) => {
+        return user.role;
+      });
+  }
+
+  static getMyCourses() {
+    return fetch(`${config.apiAddress}/myCourses`, options.AUTHENTICATED)
+      .then(response => {
+        return response.json()
+      })
+  }
+
+  static getAllAdmins() {
+    return fetch(`${config.apiAddress}/getAllAdmins`, options.AUTHENTICATED)
+      .then(response => {
+        return response.json()
+      })
+  }
 }
 
 export default UserApi;
+

@@ -20,7 +20,7 @@ const webpack = require('webpack');
 
 const configFirebase = {
   title: 'UBC ClassPortal',
-  url: 'localhost',
+  url: 'https://portal.cs.ubc.ca',
   project: 'ubc-classportal',
   trackingID: '',
   routes: [
@@ -104,33 +104,38 @@ tasks.set('publish', () => {
   let count = 0;
   global.HMR = !process.argv.includes('--no-hmr'); // Hot Module Replacement (HMR)
   return run('clean').then(() => new Promise((resolve) => {
-    const WebpackDevServer = require('webpack-dev-server');
     const webpackConfig = require('./webpack.config');
-    const compiler = webpack(webpackConfig);
     // Node.js middleware that compiles application in watch mode with HMR support
     // http://webpack.github.io/docs/webpack-dev-middleware.html
-    const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
-      publicPath: webpackConfig.output.publicPath,
-      stats: webpackConfig.stats,
-    });
-    compiler.plugin('done', (stats) => {
+    const compiler = webpack(webpackConfig, (err, stats) => {
+      console.log('ERROR', err);
       // Generate index.html page
       const bundle = stats.compilation.chunks.find((x) => x.name === 'main').files[0];
       const template = fs.readFileSync('./public/index.ejs', 'utf8');
       const render = ejs.compile(template, { filename: './public/index.ejs' });
-      const output = render({ debug: true, bundle: `/dist/${bundle}`, config });
+      const output = render({ debug: false, bundle: `/dist/${bundle}`, config });
       fs.writeFileSync('./public/index.html', output, 'utf8');
 
-      if (++count === 1) {
 
         // configure express app
         app.use(require('connect-history-api-fallback')());
-        app.use(webpackDevMiddleware);
-        app.use(require('webpack-hot-middleware')(compiler));
+        app.use(function(req, res, next) {
+          res.header("Access-Control-Allow-Origin", "*");
+          next();
+        });
+
+        app.use(function(req, res, next) {
+          res.header("Access-Control-Allow-Origin", "*");
+          next();
+        });
+
         app.use(express.static('public'));
         app.get('*', function(req, res) {
           res.sendFile(path.resolve(__dirname, 'public/index.html'));
         });
+        console.log('localHost', config.localHost);
+        console.log('apiAddress', config.apiAddress);
+        console.log('appPath', config.appPath);
 
         let sslCert = fs.readFileSync(config.sslCertPath, 'utf8');
         let sslKey = fs.readFileSync(config.sslKeyPath, 'utf8');
@@ -144,6 +149,8 @@ tasks.set('publish', () => {
         redirectApp.get('*', function(req, res) {
           res.redirect('https://' + req.hostname + req.url);
         });
+
+        console.log('localHost', config.localHost);
 
         // create servers
         let httpServer = http.createServer(redirectApp);
@@ -159,7 +166,6 @@ tasks.set('publish', () => {
           if (err) { console.log('Error: ' + err)}
           console.log('Started server in production mode on 443');
         });
-      }
     });
   }));
 });

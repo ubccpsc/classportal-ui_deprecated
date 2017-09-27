@@ -1,57 +1,63 @@
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
 import { FormInput, FormIconField, Glyph, Button, InputGroup } from 'elemental';
 import Module from '../../components/Module';
 import { logoutRequest } from '../../ajax';
+import config from '../../config';
+import * as authActions from '../../actions/auth.actions';
 
-function logoutSubmit(event) {
-  event.preventDefault();
-  logoutRequest()
+// Logs user out of API when user clicks on 'Logout' button
+let logoutHandler = function(dispatch) {
+  dispatch(authActions.logout())
     .then(() => {
       localStorage.clear();
       browserHistory.push('/login');
     })
-    .catch(() => {
-      // If the logout process fails, we still log the user out.
-      localStorage.clear();
-      browserHistory.push('/login');
+    .then(() => {
+      dispatch(initialStateActions.reInitState())
+    })
+    .catch(err => {
+      console.log(`Logout::logoutHandler() ERROR ${err} `)
     });
 }
 
-const Logout = (props) => (
-  <Module title={`Welcome, ${props.firstname}!`}>
-    <InputGroup >
-      <InputGroup.Section grow >
-        <FormIconField iconKey="mortar-board" >
-          <FormInput
-            placeholder={` ${props.sid}`}
-            size="sm"
-            disabled
-          />
-        </FormIconField>
-      </InputGroup.Section>
-      <InputGroup.Section grow>
-        <FormIconField iconKey="mark-github" >
-          <FormInput
-            placeholder={` ${props.username}`}
-            size="sm"
-            disabled
-          />
-        </FormIconField>
-      </InputGroup.Section>
-      <InputGroup.Section>
-        <Button size="sm" onClick={logoutSubmit}>
+class Logout extends React.Component {
+
+  componentWillMount() {
+    this.props.dispatch(authActions.isAuthenticated());
+  }
+
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+  }
+
+  render () {
+    if (this.props.authStatus === "Logged in") {
+      return (
+        <Button className="subnav-hero-signout" size="sm" onClick={() => logoutHandler(this.props.dispatch)}>
           <Glyph icon="sign-out" />&nbsp; Log out
-            </Button>
-      </InputGroup.Section>
-    </InputGroup>
-  </Module>
-);
+        </Button>
+      );
+    }
+    else {
+      return null;
+    }
+  }
+}
 
 Logout.propTypes = {
-  firstname: PropTypes.string,
-  username: PropTypes.string,
-  sid: PropTypes.string,
+  authStatus: PropTypes.string,
 };
 
-export default Logout;
+function mapStateToProps(state, ownProps) {
+  return {
+    authStatus: state.authStatus,
+  }
+};
+
+export default connect(mapStateToProps)(Logout);
+

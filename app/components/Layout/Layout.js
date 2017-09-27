@@ -1,18 +1,53 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
 import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
+import config from '../../config';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import css from './Layout.css';
+import { Row, Column } from 'react-foundation';
+import Links from '../Links/Links';
+import FlashMessageList from '../FlashMessage/FlashMessageList';
+import { connect } from 'react-redux';
 
-const Layout = (props) => (
-  <div className={css.container}>
-    <Header />
-    <div className={css.content}>{props.children}</div>
-    <Footer />
-  </div>
-);
 
-Layout.propTypes = {
-  children: PropTypes.node,
-};
+function redirect(e) {
+  e.preventDefault();
+  browserHistory.push('/');
+}
 
-export default Layout;
+class Layout extends React.Component {
+
+	constructor(props) {
+		super(props);
+	}
+
+	render () {
+		return (
+		  <div>
+		    <div>
+		      <Header user={this.props.user} />
+		    </div>
+		    <main className="main-body-content">
+			    <Row>
+			    	<FlashMessageList/>
+			    	{this.props.children}
+			    </Row>
+		    </main>
+		    <Footer />
+		  </div>
+		);
+	} 
+}
+
+Layout.PropTypes = {
+	user: PropTypes.object
+}
+
+function mapStateToProps(state, ownProps) {
+	return {
+		user: state.user
+	}
+}
+
+export default connect(mapStateToProps)(Layout);
