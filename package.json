@@ -125,7 +125,7 @@
     "cover": "npm run lint && node_modules/.bin/istanbul cover node_modules/.bin/_mocha --require test/.setup.js \"test/**/*.spec.js\"",
     "build": "node run build",
     "dev": "node run",
-    "publish": "sudo NODE_ENV='production' node run publish --release",
+    "publish": "sudo NODE_ENV='production' forever start --spinSleepTime 10000 -l LOGFILE -o OUTPUT -e ERRFILE --append ./run.js publish --release",
     "publishtwo": "sudo NODE_ENV='production' webpack -p --config ./webpack.config.js && node run publish --release"
   }
 }
