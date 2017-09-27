@@ -170,7 +170,7 @@ TeamListModule.propTypes = {
 	course: PropTypes.object.isRequired,
 	myTeams: PropTypes.oneOfType([
 		PropTypes.string,
-		PropTypes.object,
+		PropTypes.array,
 		]),
 	teamCreationStatus: PropTypes.string,
 	addFlashMessage: PropTypes.func.isRequired,

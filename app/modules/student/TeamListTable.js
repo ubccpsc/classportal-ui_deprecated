@@ -42,9 +42,9 @@ class TeamListTable extends React.Component {
 
 	renderTable(team) {
 		return team.map(team => {
-				console.log(team);
 				let teamTitle = '';
-				let githubRepoLink = null;
+				let githubRepoButton = null;
+				let disbandTeamButton = null;
 
 				// IF multi-deliverable team project
 				if (typeof team.deliverableIds !== 'undefined' && typeof team.deliverableId === 'undefined') {
@@ -55,14 +55,23 @@ class TeamListTable extends React.Component {
 				}
 
 			  	if (team.githubState.repo.url !== '') {
-			  		githubRepoLink = (							  
-	  					<a href={config.githubEnterprise + '/' + 'test'} className="view-more-link">
+			  		githubRepoButton = (							  
+	  					<a href={team.githubState.repo.url} className="view-more-link">
 		  					<button className="button secondary small">
 					          <i className="fa fa-user-plus" aria-hidden="true"></i>
 					          View Github Repo
 					        </button>
 				        </a>
 			  		);
+			  	}
+
+			  	if (String(this.props.user.userrole) !== STUDENT_ROLE) {
+					disbandTeamButton = (
+						<button className="button alert small">
+				          <i className="fa fa-user-plus" aria-hidden="true"></i>
+				          Disband Team
+				        </button>
+			        );
 			  	}
 
 				return (
@@ -74,11 +83,8 @@ class TeamListTable extends React.Component {
 						  </div>
 						  <TeamListRow team={team}/>
 						  	<div className="large centered team-action-links">
-						  		{githubRepoLink}
-						        <button className="button alert small">
-						          <i className="fa fa-user-plus" aria-hidden="true"></i>
-						          Disband Team
-						        </button>
+						  		{githubRepoButton}
+						        {disbandTeamButton}
 						  	</div>
 						</div>
 					);

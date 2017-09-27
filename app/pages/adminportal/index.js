@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import * as userActions from '../../actions/user.actions';
 import Logout from '../../modules/common/Logout';
 import { Row, Column } from 'react-foundation';
@@ -18,7 +19,7 @@ class SuperAdminPortal extends React.Component {
 	authCheck() {
 		if (this.props.user.userrole !== 'admin' || this.props.user.userrole !== 'superadmin') {
 			this.props.dispatch(userActions.getCurrentUser()).then(response => {
-				if (this.props.user.userrole !== 'superadmin' || this.props.user.userrole !== 'admin' ) {
+				if (this.props.user.userrole !== 'admin' ) {
 					browserHistory.push(`/404`);
 				}
 			});
