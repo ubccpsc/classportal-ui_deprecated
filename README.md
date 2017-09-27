@@ -11,7 +11,6 @@ This project requires access to a live instance of [ClassPortal API][classapi], 
 * [Develop](#develop)
 * [Contribute](#contribute)
 
-<a name="directory-layout"/>
 ## Directory Layout
 
 ```sh
@@ -40,14 +39,13 @@ This project requires access to a live instance of [ClassPortal API][classapi], 
 └── webpack.config.js           # Bundling and optimization settings for Webpack
 ```
 
-<a name="getting-started"/>
 ## Getting Started
 
 ### Install
 
 ```sh
-git clone https://github.com/mksarge/classportal.git
-npm install
+git clone https://github.com/ubccpsc/classportal-ui.git
+yarn install
 ```
 
 ### Lint
@@ -55,13 +53,13 @@ npm install
 Eslint and stylelint are used to lint `.js` and `.css` files, respectively.
 
 ```sh
-npm run lint
+yarn run lint
 ```
 
 ### Test
 
 ```sh
-npm run test
+yarn run test
 ```
 
 ### Build
@@ -69,19 +67,19 @@ npm run test
 Webpack is used to bundle all of the js and css assets, and Hot Module Replacement allows live reloading of .js and .css files.
 
 ```sh
-npm run start
-
+yarn run start
 ```
 
-<a name="develop"/>
+
+## Contribute
+
+TBD
+
 ## Develop
 
 under construction
 
-<a name="contribute"/>
-## Contribute
-
-under construction
+## Notes
 
 [rsb]: <https://github.com/kriasoft/react-static-boilerplate>
 [classapi]: <https://github.com/mksarge/classportal-api>
