@@ -4,12 +4,15 @@ import { Row, Column } from 'react-foundation';
 import config from '../../config';
 import TeamListRow from './TeamListRow';
 
+const STUDENT_ROLE = 'student';
+
 class TeamListTable extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.createBatchDelivTeamTitle = this.createBatchDelivTeamTitle.bind(this);
 		this.createSingleDelivTeamTitle = this.createSingleDelivTeamTitle.bind(this);
+		this.renderTable = this.renderTable.bind(this);
 	}
 
 	createBatchDelivTeamTitle(team) {
@@ -38,11 +41,8 @@ class TeamListTable extends React.Component {
 		return title;
 	}
 
-	render() {
-
-		if (this.props.myTeams.length > 0) {
-
-			const teamListRows = this.props.myTeams.map(team => {
+	renderTable(teams) {
+		return teams.map(team => {
 
 				let teamTitle = '';
 				let githubRepoLink = null;
@@ -78,12 +78,30 @@ class TeamListTable extends React.Component {
 						</div>
 					);
 			});
+	}
+
+	render() {
+		let userrole = String(this.props.user.userrole);
+
+		if (this.props.myTeams.length > 0 && userrole === STUDENT_ROLE) {
+
+			const teamListRows = this.renderTable(this.props.myTeams);
 
 			return (
-				<div className="team-list-table">{teamListRows}</div>
+				<div className="team">{teamListRows}</div>
 				)
 
-		} else {
+		} else if (this.props.teams.length > 0 && userrole !== STUDENT_ROLE) {
+			const teamListRows = this.renderTable(this.props.teams);
+			
+			return (
+				<div>
+					<div className="team">{teamListRows}</div>
+					<div>admin delete team option</div>
+				</div>
+				)
+		}
+		else {
 			return (
 				null
 				)
@@ -93,12 +111,16 @@ class TeamListTable extends React.Component {
 }
 
 TeamListTable.propTypes = {
-	myTeams: React.PropTypes.array.isRequired
+	myTeams: React.PropTypes.array.isRequired,
+	teams: React.PropTypes.array.isRequired,
+	user: React.PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state, ownState) {
 	return {
-		myTeams: state.myTeams
+		myTeams: state.myTeams,
+		teams: state.teams,
+		user: state.user
 	}
 }
 

@@ -41,6 +41,14 @@ export function getMyTeamsPerCourse(courseNum) {
 	}
 }
 
+// Fetches the team for the course param
+export function getCourseTeamsWithBatchMarking(courseNum) {
+	return {
+		type: types.GET_COURSE_TEAMS_WITH_BATCH_MARKING,
+		payload: TeamApi.getCourseTeamsWithBatchMarking(courseNum),
+	}
+}
+
 export function isStudentInSameLab(courseNum, username) {
 	return {
 		type: types.IS_STUDENT_IN_SAME_LAB,

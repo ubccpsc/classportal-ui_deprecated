@@ -16,7 +16,6 @@ class AuthApi {
       })
       .then(isLoggedIn => {
         let responseMessage = String(isLoggedIn.response);
-        console.log(responseMessage);
         return responseMessage === LOGOUT_CONFIRMATION_MESSAGE ? LOGGED_OUT : LOGGED_IN;
       })
       .catch(err => {
