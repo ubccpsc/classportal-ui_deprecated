@@ -4,12 +4,15 @@ import { Row, Column } from 'react-foundation';
 import config from '../../config';
 import TeamListRow from './TeamListRow';
 
+const STUDENT_ROLE = 'student';
+
 class TeamListTable extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.createBatchDelivTeamTitle = this.createBatchDelivTeamTitle.bind(this);
 		this.createSingleDelivTeamTitle = this.createSingleDelivTeamTitle.bind(this);
+		this.renderTable = this.renderTable.bind(this);
 	}
 
 	createBatchDelivTeamTitle(team) {
@@ -21,7 +24,6 @@ class TeamListTable extends React.Component {
 		for (let i = 0; i < team.deliverableIds.length; i++) {
 			title = team.deliverableIds.length === (i + 1) ? title + team.deliverableIds[i].name : title + team.deliverableIds[i].name + ', ';
 		}
-
 
 		// Add in Team Name with Team Model Number and pretty print it
 		let teamName = name.charAt(0).toUpperCase() + name.slice(1).replace(/[0-9]/g, '') + ' ' + name.replace(/^\D+/g, '');
@@ -38,19 +40,15 @@ class TeamListTable extends React.Component {
 		return title;
 	}
 
-	render() {
-
-		if (this.props.myTeams.length > 0) {
-
-			const teamListRows = this.props.myTeams.map(team => {
-
+	renderTable(team) {
+		return team.map(team => {
+				console.log(team);
 				let teamTitle = '';
 				let githubRepoLink = null;
 
 				// IF multi-deliverable team project
 				if (typeof team.deliverableIds !== 'undefined' && typeof team.deliverableId === 'undefined') {
 					teamTitle = this.createBatchDelivTeamTitle(team);
-					
 				} else {
 					// ELSE single-deliverable team project
 					teamTitle = this.createSingleDelivTeamTitle(team);
@@ -58,11 +56,12 @@ class TeamListTable extends React.Component {
 
 			  	if (team.githubState.repo.url !== '') {
 			  		githubRepoLink = (							  
-			  			<div className="view-more-people">
-			    			<p className="view-more-text">
-			      				<a href={config.githubEnterprise + '/' + 'test'} className="view-more-link">Github Repo</a>
-			    			</p>
-			  			</div>
+	  					<a href={config.githubEnterprise + '/' + 'test'} className="view-more-link">
+		  					<button className="button secondary small">
+					          <i className="fa fa-user-plus" aria-hidden="true"></i>
+					          View Github Repo
+					        </button>
+				        </a>
 			  		);
 			  	}
 
@@ -74,16 +73,31 @@ class TeamListTable extends React.Component {
 						    </h6>
 						  </div>
 						  <TeamListRow team={team}/>
-						  	{githubRepoLink}
+						  	<div className="large centered team-action-links">
+						  		{githubRepoLink}
+						        <button className="button alert small">
+						          <i className="fa fa-user-plus" aria-hidden="true"></i>
+						          Disband Team
+						        </button>
+						  	</div>
 						</div>
 					);
 			});
+	}
+
+	render() {
+		let userrole = String(this.props.user.userrole);
+
+		if (this.props.team.length > 0) {
+
+			const teamListRows = this.renderTable(this.props.team);
 
 			return (
-				<div className="team-list-table">{teamListRows}</div>
+				<div className="team">{teamListRows}</div>
 				)
 
-		} else {
+		}
+		else {
 			return (
 				null
 				)
@@ -93,12 +107,13 @@ class TeamListTable extends React.Component {
 }
 
 TeamListTable.propTypes = {
-	myTeams: React.PropTypes.array.isRequired
+	team: React.PropTypes.array.isRequired,
+	user: React.PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state, ownState) {
 	return {
-		myTeams: state.myTeams
+		user: state.user
 	}
 }
 

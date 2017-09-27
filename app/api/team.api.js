@@ -58,7 +58,6 @@ class TeamApi {
         let json = response.json();
         if (response.status === 200) {
           return json;
-          console.log(teams.json());
         } else {
           return json.then(err => {
             throw 'Team members either already on team or do not exist in lab.';
@@ -83,6 +82,16 @@ class TeamApi {
 
   static getMyTeamsPerCourse(courseNum) {
     return fetch(`${config.apiAddress}/${courseNum}/myTeams`, options.AUTHENTICATED)
+      .then(teams => {
+        return teams.json();
+      })
+      .catch(err => {
+        console.log(`team.api::getCourseTeamsPerCourse() ERROR from API: ${err}`);
+      });
+  }
+
+  static getCourseTeamsWithBatchMarking(courseNum) {
+    return fetch(`${config.apiAddress}/${courseNum}/admin/teams/byBatch`, options.AUTHENTICATED)
       .then(teams => {
         return teams.json();
       })

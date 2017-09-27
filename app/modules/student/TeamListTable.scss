@@ -109,8 +109,21 @@
 .people-you-might-know {
   background-color: $white;
   padding: 1rem 0 0;
+  margin-bottom: 45px;
   border: 1px solid $medium-gray;
   box-shadow: 0 0 rem-calc(50) rgba(0,0,0, 0.18);
+
+  .team-action-links {
+    display: flex;
+    justify-content: center;
+
+    button:not(:first-child) {
+      margin-left: 40px;
+    }
+    button {
+      margin-top: 0.9rem;
+    }
+  }
 
   .add-people-header {
     padding: 0 0.9375rem;

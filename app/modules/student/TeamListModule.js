@@ -11,7 +11,7 @@ import { Button } from 'elemental';
 import { Link } from 'elemental';
 
 let course = 'empty';
-let STUDENT_ROLE = 'student';
+const STUDENT_ROLE = 'student';
 
 class TeamListModule extends React.Component {
 	constructor(props) {
@@ -37,6 +37,10 @@ class TeamListModule extends React.Component {
 		let that = this;
 		this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.params.courses));
 		this.props.dispatch(courseActions.getCourseSettings(this.props.params.courses));
+		let username = String(this.props.user.username);
+		if (username !== STUDENT_ROLE) {
+			this.props.dispatch(teamActions.getCourseTeamsWithBatchMarking(this.props.params.courses));
+		}
 	}
 
 	addTeamMember(e) {
@@ -55,7 +59,6 @@ class TeamListModule extends React.Component {
 	}
 
 	addLoggedInUserToTeam() {
-		console.log(this.props.user);
 		let userrole = String(this.props.user.userrole);
 		if (userrole === STUDENT_ROLE) {
 			this.props.dispatch(teamActions.isStudentInSameLab(310, this.props.user.username));
@@ -141,10 +144,15 @@ class TeamListModule extends React.Component {
 					</div>
 				</div>
 			)
-		} else if (this.props.course.markDelivsByBatch == true && this.props.myTeams.length > 0) {
+		} else if (this.props.course.markDelivsByBatch == true && this.props.myTeams.length > 0 && String(this.props.user.userrole) === STUDENT_ROLE) {
 			// ELSE IF Display the teams that the student is on.
 			return ( 
-				<TeamListTable/>
+				<TeamListTable team={this.props.myTeams} />
+				)
+		} else if (this.props.course.markDelivsByBatch == true && this.props.teams.length > 0 && String(this.props.user.userrole) !== STUDENT_ROLE) {
+			// ELSE IF Display the teams that are created for the Admin/TAs
+			return (
+				<TeamListTable team={this.props.teams} />
 				)
 		}
 		else {

@@ -18,6 +18,8 @@ export default function teamsReducer(state = initialState.teams, action) {
       else {
         return state;
       }
+    case types.GET_COURSE_TEAMS_WITH_BATCH_MARKING_FULFILLED:
+      return action.payload.response;
     case types.CREATE_CUSTOM_TEAM_FULFILLED:
       return [];
     case types.REMOVE_STUDENT_FROM_TENTATIVE_TEAM:
