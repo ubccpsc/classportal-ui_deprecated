@@ -1,5 +1,5 @@
 import React from 'react';
-require("./main.scss");
+require('./main.scss');
 
 const App = () => (
   <div>

@@ -1,13 +1,13 @@
 import fetch from 'isomorphic-fetch';
 import config from './config';
 import * as options from './api/api.settings';
-import { connect } from 'react-redux';
-import React, { PropTypes } from 'react';
+import {connect} from 'react-redux';
+import React, {PropTypes} from 'react';
 
 /* *********** NOTE: ************
  * *********** localStorage.token is deprecated and being replaced with
  * localStorage.isLoggedIn boolean.
- */ 
+ */
 
 
 /**
@@ -19,7 +19,7 @@ function checkUnauthenticated(nextState, replace) {
     // console.log(localStorage: ${JSON.stringify(localStorage)}`);
     replace({
       pathname: '/',
-      state: { nextPathname: nextState.location.pathname },
+      state: {nextPathname: nextState.location.pathname},
     });
   }
 }
@@ -32,21 +32,21 @@ function checkAuthenticated(nextState, replace) {
     // console.log(localStorage: ${JSON.stringify(localStorage)}`);
     replace({
       pathname: '/login',
-      state: { nextPathname: nextState.location.pathname },
+      state: {nextPathname: nextState.location.pathname},
     });
   }
 }
 
 /**
  * Require Authentication Check through Restify when placed on Route
- * Since this will hammer the API, ideally this will be only used on 
+ * Since this will hammer the API, ideally this will be only used on
  * Admin routes
  * // By DEFAULT, uses checkAuthenticated. * do not include twice with routes *
  */
- function requireAuthentication(nextState, replace) {
-  fetch(`${config.apiAddress}/isAuthenticated`, { credentials: 'include' })
+function requireAuthentication(nextState, replace) {
+  fetch(`${config.apiAddress}/isAuthenticated`, {credentials: 'include'})
     .then(data => {
-      console.log('data returned')
+      console.log('data returned');
       return data.json();
     })
     .then(isLoggedIn => {
@@ -55,7 +55,7 @@ function checkAuthenticated(nextState, replace) {
         localStorage.loggedIn = true;
         localStorage.token = true;
       } else {
-        console.log('the else ... not logged in')
+        console.log('the else ... not logged in');
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('token');
       }
@@ -68,4 +68,4 @@ function checkAuthenticated(nextState, replace) {
     });
 }
 
-export { checkAuthenticated, checkUnauthenticated, requireAuthentication };
+export {checkAuthenticated, checkUnauthenticated, requireAuthentication};

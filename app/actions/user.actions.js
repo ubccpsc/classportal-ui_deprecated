@@ -16,9 +16,7 @@ export function getMyCourses() {
   };
 }
 
-
 // ADMIN FUNCTIONS
-
 export function getAllAdmins() {
   return {
     type: types.GET_ALL_ADMINS,

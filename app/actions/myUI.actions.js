@@ -6,5 +6,5 @@ export function getMyCourses() {
   return {
     type: types.GET_MY_COURSES,
     payload: UserApi.getMycourses(),
-  }
+  };
 }
