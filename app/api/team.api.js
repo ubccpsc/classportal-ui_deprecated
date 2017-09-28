@@ -109,6 +109,24 @@ class TeamApi {
         console.log(`team.api::getCourseTeamsPerUser() ERROR from API: ${err}`);
       });
   }
+
+  static disbandTeamById(teamId) {
+    const AUTHENTICATED_POST = {
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      method: 'post',
+      mode: 'cors'
+    }
+
+    return fetch(`${config.apiAddress}/teams/disband/${teamId}`, AUTHENTICATED_POST)
+      .then(response => {
+        return response.json();
+      })
+      .catch(err => {
+        console.log(`student.api::disbandTeam() ERROR: No response from API: ${err}`);
+      });
+  }
+
 }
 
 

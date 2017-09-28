@@ -32,6 +32,8 @@ export default function teamsReducer(state = initialState.teams, action) {
         }
       }
       return newState;
+    // case types.DISBAND_TEAM_FULFILLED:
+    //   return action.payload.response;
     default: 
       return state;  
   }

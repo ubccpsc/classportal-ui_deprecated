@@ -90,6 +90,7 @@ class TeamListModule extends React.Component {
 					this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'success', headline: 'Successfully Created Team',
 						body: 'Your team has successfully been created.'}))
 					this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.params.courses));
+					this.props.dispatch(teamActions.getCourseTeamsWithBatchMarking(this.props.params.courses));
 				}
 			});
 		}
@@ -146,13 +147,13 @@ class TeamListModule extends React.Component {
 			)
 		} else if (this.props.course.markDelivsByBatch == true && this.props.myTeams.length > 0 && String(this.props.user.userrole) === STUDENT_ROLE) {
 			// ELSE IF Display the teams that the student is on.
-			return ( 
-				<TeamListTable team={this.props.myTeams} />
+			return (
+				<TeamListTable courseNum={this.props.params.courses} team={this.props.myTeams} />
 				)
 		} else if (this.props.course.markDelivsByBatch == true && this.props.teams.length > 0 && String(this.props.user.userrole) !== STUDENT_ROLE) {
 			// ELSE IF Display the teams that are created for the Admin/TAs
 			return (
-				<TeamListTable team={this.props.teams} />
+				<TeamListTable courseNum={this.props.params.courses} team={this.props.teams} />
 				)
 		}
 		else {

@@ -69,3 +69,10 @@ export function removeStudentFromTentativeTeam(username) {
 		payload: username,
 	}
 }
+
+export function disbandTeamById(teamId) {
+	return {
+		type: types.DISBAND_TEAM,
+		payload: TeamApi.disbandTeamById(teamId)
+	}
+}

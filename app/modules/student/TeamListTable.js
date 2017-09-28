@@ -2,9 +2,12 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Row, Column } from 'react-foundation';
 import config from '../../config';
+import * as teamActions from '../../actions/team.actions';
 import TeamListRow from './TeamListRow';
+import { browserHistory } from 'react-router';
 
 const STUDENT_ROLE = 'student';
+const TEAM_DISBANDED_SUCCESS = 'Team disbanded.';
 
 class TeamListTable extends React.Component {
 
@@ -13,6 +16,7 @@ class TeamListTable extends React.Component {
 		this.createBatchDelivTeamTitle = this.createBatchDelivTeamTitle.bind(this);
 		this.createSingleDelivTeamTitle = this.createSingleDelivTeamTitle.bind(this);
 		this.renderTable = this.renderTable.bind(this);
+		this.handleDisbandTeamClick = this.handleDisbandTeamClick.bind(this);
 	}
 
 	createBatchDelivTeamTitle(team) {
@@ -38,6 +42,19 @@ class TeamListTable extends React.Component {
 		title = teamName + ' | ' + title;
 
 		return title;
+	}
+
+	handleDisbandTeamClick(e) {
+		e.preventDefault();
+		let teamId = e.currentTarget.getAttribute('data-team-id');
+		this.props.dispatch(teamActions.disbandTeamById(teamId))
+			.then((action) => {
+				let isSuccessful = String(action.value.response) === TEAM_DISBANDED_SUCCESS ? true : false;
+				if (isSuccessful) {
+					this.props.dispatch(teamActions.getCourseTeamsWithBatchMarking(this.props.courseNum));
+					this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.courseNum));
+				}
+			});
 	}
 
 	renderTable(team) {
@@ -67,7 +84,7 @@ class TeamListTable extends React.Component {
 
 			  	if (String(this.props.user.userrole) !== STUDENT_ROLE) {
 					disbandTeamButton = (
-						<button className="button alert small">
+						<button className="button alert small" data-team-id={team._id} onClick={this.handleDisbandTeamClick}>
 				          <i className="fa fa-user-plus" aria-hidden="true"></i>
 				          Disband Team
 				        </button>
