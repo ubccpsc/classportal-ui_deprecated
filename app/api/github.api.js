@@ -1,17 +1,16 @@
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch';
 import config from '../config';
 import * as options from './api.settings';
 
 class GithubApi {
 
   static createReposForTeamsWithBatchMarking(courseNum, deliverableName) {
-
     const AUTHENTICATED_POST = {
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       method: 'put',
       body: JSON.stringify({deliverableName}),
-    }
+    };
 
     console.log('deliverableName');
     console.log(deliverableName);
@@ -20,7 +19,7 @@ class GithubApi {
 
     return fetch(`${config.apiAddress}/${courseNum}/admin/github/team`, AUTHENTICATED_POST)
       .then(teams => {
-      	console.log(`Github.Api::createReposForTeams(${courseNum}, ${deliverableName})`);
+        console.log(`Github.Api::createReposForTeams(${courseNum}, ${deliverableName})`);
         return teams.json();
       })
       .catch(err => {

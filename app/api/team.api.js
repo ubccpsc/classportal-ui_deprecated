@@ -13,7 +13,7 @@ class TeamApi {
       });
   }
 
-  static getCourseTeamsPerSection(courseNum, sectionNum) {
+  static getCourseTeamsPerSection(courseNum) { // }, sectionNum) {
     return fetch(`${config.apiAddress}/${courseNum}/admin/students`, options.AUTHENTICATED)
       .then(teams => {
         return teams.json();
@@ -26,11 +26,11 @@ class TeamApi {
   static isStudentInSameLab(courseNum, username) {
     const AUTHENTICATED_POST = {
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       method: 'post',
       mode: 'cors',
       body: JSON.stringify({username}),
-    }
+    };
 
     return fetch(`${config.apiAddress}/${courseNum}/students/isInClass`, AUTHENTICATED_POST)
       .then(students => {
@@ -44,21 +44,22 @@ class TeamApi {
   static createCustomTeam(courseNum, usernames) {
     const AUTHENTICATED_PUT = {
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       method: 'put',
       mode: 'cors',
       body: JSON.stringify({
         members: usernames,
         markInBatch: true
       }),
-    }
+    };
 
     return fetch(`${config.apiAddress}/${courseNum}/admin/customTeam`, AUTHENTICATED_PUT)
       .then(response => {
-        let json = response.json();
+        const json = response.json();
         if (response.status === 200) {
           return json;
         } else {
+          // TODO: examine this block: what is json.then doing here?
           return json.then(err => {
             throw 'Team members either already on team or do not exist in lab.';
           });
@@ -128,6 +129,5 @@ class TeamApi {
   }
 
 }
-
 
 export default TeamApi;

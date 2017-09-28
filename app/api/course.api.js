@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch';
 import config from '../config';
 import * as options from './api.settings';
 
@@ -9,7 +9,7 @@ class CourseApi {
         return courses.json();
       })
       .then(courses => {
-      	return courses;
+        return courses;
       })
       .catch(err => {
         console.log(`course.api::getAllCourses() ERROR: ${err}`);

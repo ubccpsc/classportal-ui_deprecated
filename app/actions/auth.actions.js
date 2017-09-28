@@ -6,12 +6,12 @@ export function logout() {
   return {
     type: types.LOGOUT,
     payload: AuthApi.logout(),
-  }
+  };
 }
 
 export function isAuthenticated() {
-	return {
-		type: types.IS_AUTHENTICATED,
-		payload: AuthApi.isAuthenticated(),
-	}
+  return {
+    type: types.IS_AUTHENTICATED,
+    payload: AuthApi.isAuthenticated(),
+  };
 }
