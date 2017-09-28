@@ -77,7 +77,13 @@ TBD
 
 ## Develop
 
-under construction
+
+To run the dev build; this will start the server on `https://localhost:3000/`.
+
+```sh
+yarn run dev
+```
+
 
 ## Notes
 

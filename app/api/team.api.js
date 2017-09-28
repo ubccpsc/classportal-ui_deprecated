@@ -26,11 +26,11 @@ class TeamApi {
   static isStudentInSameLab(courseNum, username) {
     const AUTHENTICATED_POST = {
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       method: 'post',
       mode: 'cors',
       body: JSON.stringify({username}),
-    }
+    };
 
     return fetch(`${config.apiAddress}/${courseNum}/students/isInClass`, AUTHENTICATED_POST)
       .then(students => {
@@ -44,14 +44,14 @@ class TeamApi {
   static createCustomTeam(courseNum, usernames) {
     const AUTHENTICATED_PUT = {
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       method: 'put',
       mode: 'cors',
       body: JSON.stringify({
         members: usernames,
         markInBatch: true
       }),
-    }
+    };
 
     return fetch(`${config.apiAddress}/${courseNum}/admin/customTeam`, AUTHENTICATED_PUT)
       .then(response => {
