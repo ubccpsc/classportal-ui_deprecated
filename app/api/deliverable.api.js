@@ -1,10 +1,9 @@
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch';
 import config from '../config';
 import * as options from './api.settings';
 
 class DeliverableApi {
   static getDeliverablesFromCourse(courseNum) {
-
     return fetch(`${config.apiAddress}/${courseNum}/deliverables`, options.AUTHENTICATED)
       .then(deliverables => {
         return deliverables.json();
@@ -17,11 +16,11 @@ class DeliverableApi {
   static createDeliverable(deliverable) {
     const AUTHENTICATED_POST = {
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       method: 'put',
       body: JSON.stringify({deliverable}),
-    }
-  
+    };
+
     return fetch(`${config.apiAddress}/${deliverable.courseId}/admin/deliverable`, AUTHENTICATED_POST)
       .then(result => {
         return result.json();
@@ -32,12 +31,12 @@ class DeliverableApi {
   }
 
   static updateDeliverable(updatedDeliv) {
-
     const AUTHENTICATED_POST = {
-	  credentials: 'include',
-	  method: 'post'
-    }
+      credentials: 'include',
+      method: 'post'
+    };
 
+    // TODO: what is newDeliv; should this come from pudatedDeliv instead?
     return fetch(`${config.apiAddress}/${newDeliv.courseId}/admin/deliverable`, AUTHENTICATED_POST)
       .then(result => {
         return result.json();

@@ -1,10 +1,9 @@
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch';
 import config from '../config';
 import * as options from './api.settings';
 
 class LabListApi {
   static getLabSectionsFromCourse(courseNum) {
-
     return fetch(`${config.apiAddress}/${courseNum}/labSections`, options.AUTHENTICATED)
       .then(labSections => {
         return labSections.json();
@@ -15,20 +14,19 @@ class LabListApi {
   }
 
   static uploadLabList(courseNum, labList) {
+    const AUTHENTICATED_FILE_POST = {
+      credentials: 'include',
+      method: 'post',
+      body: labList,
+    };
 
-  	const AUTHENTICATED_FILE_POST = {
-  		credentials: 'include',
-  		method: 'post',
-  		body: labList,
-	}
-
-  	return fetch(`${config.apiAddress}/${courseNum}/admin/labList`, AUTHENTICATED_FILE_POST)
-  	  .then(result => {
-  	  	return result.json();
-  	  })
-  	  .catch(err => {
-  	  	console.log(`labList.api::uploadLabList(courseNum, csvFormData) ERROR: No response from API: ${err}`)
-  	  });
+    return fetch(`${config.apiAddress}/${courseNum}/admin/labList`, AUTHENTICATED_FILE_POST)
+      .then(result => {
+        return result.json();
+      })
+      .catch(err => {
+        console.log(`labList.api::uploadLabList(courseNum, csvFormData) ERROR: No response from API: ${err}`);
+      });
   }
 }
 

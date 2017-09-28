@@ -13,7 +13,7 @@ class TeamApi {
       });
   }
 
-  static getCourseTeamsPerSection(courseNum, sectionNum) {
+  static getCourseTeamsPerSection(courseNum) { // }, sectionNum) {
     return fetch(`${config.apiAddress}/${courseNum}/admin/students`, options.AUTHENTICATED)
       .then(teams => {
         return teams.json();
@@ -55,10 +55,11 @@ class TeamApi {
 
     return fetch(`${config.apiAddress}/${courseNum}/admin/customTeam`, AUTHENTICATED_PUT)
       .then(response => {
-        let json = response.json();
+        const json = response.json();
         if (response.status === 200) {
           return json;
         } else {
+          // TODO: examine this block: what is json.then doing here?
           return json.then(err => {
             throw 'Team members either already on team or do not exist in lab.';
           });
@@ -110,6 +111,5 @@ class TeamApi {
       });
   }
 }
-
 
 export default TeamApi;

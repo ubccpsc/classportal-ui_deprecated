@@ -1,11 +1,11 @@
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch';
 import config from '../config';
 import * as options from './api.settings';
 
-const LOGOUT_CONFIRMATION_MESSAGE = "Successfully logged out.";
-const LOGGED_IN = "Logged in";
-const LOGGED_OUT = "Logged out";
-const UNAUTHENTICATED = "Unauthenticated";
+const LOGOUT_CONFIRMATION_MESSAGE = 'Successfully logged out.';
+const LOGGED_IN = 'Logged in';
+const LOGGED_OUT = 'Logged out';
+const UNAUTHENTICATED = 'Unauthenticated';
 
 
 class AuthApi {
@@ -15,7 +15,7 @@ class AuthApi {
         return logoutStatus.json();
       })
       .then(isLoggedIn => {
-        let responseMessage = String(isLoggedIn.response);
+        const responseMessage = String(isLoggedIn.response);
         return responseMessage === LOGOUT_CONFIRMATION_MESSAGE ? LOGGED_OUT : LOGGED_IN;
       })
       .catch(err => {

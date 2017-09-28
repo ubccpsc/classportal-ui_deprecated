@@ -4,6 +4,8 @@ import * as options from './api.settings';
 
 class UserApi {
   static getUserDetails(username) {
+    // TODO: what is courseNum in this context?
+    // TODO: is this code used anywhere?
     return fetch(`${config.apiAddress}/${courseNum}/students`, options.AUTHENTICATED)
       .then(response => {
         return response.json();
@@ -26,7 +28,7 @@ class UserApi {
   static getUserRole() {
     return fetch(`${config.apiAddress}/currentUser`, options.AUTHENTICATED)
       .then(response => {
-        return response.json()
+        return response.json();
       })
       .then((user) => {
         return user.role;
@@ -36,15 +38,15 @@ class UserApi {
   static getMyCourses() {
     return fetch(`${config.apiAddress}/myCourses`, options.AUTHENTICATED)
       .then(response => {
-        return response.json()
-      })
+        return response.json();
+      });
   }
 
   static getAllAdmins() {
     return fetch(`${config.apiAddress}/getAllAdmins`, options.AUTHENTICATED)
       .then(response => {
-        return response.json()
-      })
+        return response.json();
+      });
   }
 }
 

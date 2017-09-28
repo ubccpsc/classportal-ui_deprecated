@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch';
 import config from '../config';
 import * as options from './api.settings';
 
@@ -13,4 +13,3 @@ class AdminApi {
 }
 
 export default AdminApi;
-
