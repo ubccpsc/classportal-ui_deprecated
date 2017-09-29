@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as teamActions from '../../actions/team.actions';
 import * as courseActions from '../../actions/course.actions';
 import * as flashMessageActions from '../../actions/flashMessage.actions';
+import * as userActions from '../../actions/user.actions';
 import * as classListActions from '../../actions/classList.actions';
 import LoadingMessage from '../../modules/common/LoadingMessage';
 import TeamListTable from './TeamListTable';
@@ -18,7 +19,6 @@ class TeamListModule extends React.Component {
 		super(props);
 		this.state = {
 			teamList: [],
-			username: ''
 		}
 		this.addTeamMember = this.addTeamMember.bind(this);
 		this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -37,19 +37,36 @@ class TeamListModule extends React.Component {
 		let that = this;
 		this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.params.courses));
 		this.props.dispatch(courseActions.getCourseSettings(this.props.params.courses));
-		let username = String(this.props.user.username);
-		if (username !== STUDENT_ROLE) {
-			this.props.dispatch(teamActions.getCourseTeamsWithBatchMarking(this.props.params.courses));
-		}
+		this.props.dispatch(userActions.getCurrentUser())
+			.then((action) => {
+					let userrole = String(action.value.user.userrole);
+					if (userrole !== STUDENT_ROLE) {
+					this.props.dispatch(teamActions.getCourseTeamsWithBatchMarking(this.props.params.courses));
+				}
+			});
 	}
 
 	addTeamMember(e) {
 		e.preventDefault();
 		this.props.dispatch(teamActions.isStudentInSameLab(310, this.state.username))
-			.then(action => {
-				this.addLoggedInUserToTeam();
-				let inSameLab = action.value.response.inSameLab;
-				if (inSameLab === false) {
+			.then(data => {
+
+				let response = data.action.payload.response;
+
+		        if (response.inSameLab && this.state.teamList.indexOf(response.username) < 0) {
+		        	let newTeamList = this.state.teamList.slice();
+		        	newTeamList.push(response.username);
+		        	console.log(newTeamList);
+		        	console.log(response);
+		        	console.log(this.props.user)
+		        	console.log(this.props.user.username);
+		        	if (this.state.teamList.indexOf(this.props.user.username) === -1) {
+		        		newTeamList.push(this.props.user.username);
+		        	}
+		        	this.setState({teamList: newTeamList});
+		        } 
+
+				if (response.inSameLab === false) {
 					this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'failed', headline: 'Cannot Add Team Member', 
 						body: 'Team members must be registered in same lab section and cannot already be on a team.'}))
 				} else {
@@ -69,30 +86,41 @@ class TeamListModule extends React.Component {
 		this.setState({username: e.target.value});
 	}
 
-	handleRemoveTeamMember(event) {
-		this.props.dispatch(teamActions.removeStudentFromTentativeTeam(event.currentTarget.getAttribute('data-username')));
+	handleRemoveTeamMember(e) {
+		let newTeamList = this.state.teamList.slice();
+		let index = newTeamList.indexOf(e.currentTarget.getAttribute('data-username'));
+		newTeamList.splice(index, 1);
+		this.setState({
+			teamList: newTeamList
+		});
 	}
 
 	handleTeamSubmission(e) {
 		e.preventDefault();
 		let userrole = String(this.props.user.userrole);
-		if (this.props.teams.length > course.maxTeamSize && userrole === STUDENT_ROLE) {
+		if (this.state.teamList.length > course.maxTeamSize && userrole === STUDENT_ROLE) {
 			this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'failed', headline: 'Cannot Create Team', 
 				body: `A team has a maximum size of ${course.maxTeamSize} for this course.`}))
+		} else if (this.state.teamList.length < course.minTeamSize && userrole === STUDENT_ROLE) {
+			this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'failed', headline: 'Cannot Create Team', 
+				body: `A team must have a minimum size of ${course.minTeamSize} for this course.`}))
 		} else {
-		this.props.dispatch(teamActions.createCustomTeam(310, this.props.teams))
-			.then(response => {
-				response = String(response.value);
-				if (response.indexOf('ERROR API') > -1) {
-					this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'failed', headline: 'Team Creation Failed', 
-						body: 'Your team could not be created. Team members cannot be added to multiple teams.'}))
-				} else {
-					this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'success', headline: 'Successfully Created Team',
-						body: 'Your team has successfully been created.'}))
-					this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.params.courses));
-					this.props.dispatch(teamActions.getCourseTeamsWithBatchMarking(this.props.params.courses));
-				}
-			});
+			this.props.dispatch(teamActions.createCustomTeam(310, this.state.teamList))
+				.then(response => {
+					response = String(response.value);
+					if (response.indexOf('ERROR API') > -1) {
+						this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'failed', headline: 'Team Creation Failed', 
+							body: 'Your team could not be created. Team members cannot be added to multiple teams.'}))
+					} else if (response.indexOf('ERROR API') < 0 && STUDENT_ROLE === userrole) {
+						this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'success', headline: 'Successfully Created Team',
+							body: 'Your team has successfully been created.'}))
+						this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.params.courses));
+					} else if (response.indexOf('ERROR API') < 0 && STUDENT_ROLE !== userrole){
+						this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'success', headline: 'Successfully Created Team',
+							body: 'You have successfully added the student team.'}))
+						this.props.dispatch(teamActions.getCourseTeamsWithBatchMarking(this.props.params.courses));
+					}
+				});
 		}
 	}
 
@@ -107,7 +135,6 @@ class TeamListModule extends React.Component {
 
 			this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'warning', headline: 'You Are Not On Any Teams',
 				body: 'To create a team, add GitHub users who are registered in your lab. Only TAs may disband teams.'}))
-
 			return (
 				<div>
 					<div className="team-tables-view row">
@@ -125,7 +152,7 @@ class TeamListModule extends React.Component {
 							    <input type="submit" value="Add" className="button" onClick={this.addTeamMember}/>
 							  </div>
 							</div>
-							{this.props.teams.map(username => 
+							{this.state.teamList.map(username => 
 							  <div className="callout" key={username}>
 							  	<button className="close-button" 
 							  		aria-label="Close alert" 
@@ -140,7 +167,7 @@ class TeamListModule extends React.Component {
 							  </div>
 							)}
 
-							{this.props.teams.length > 0 ? <input type="submit" value="Save Team" className="button" onClick={this.handleTeamSubmission}/> : null}
+							{this.state.teamList.length > 0 ? <input type="submit" value="Save Team" className="button" onClick={this.handleTeamSubmission}/> : null}
 						</form>
 					</div>
 				</div>
@@ -168,13 +195,12 @@ TeamListModule.propTypes = {
 	user: PropTypes.object.isRequired,
 	teams: PropTypes.array.isRequired,
 	studentsWithoutTeam: PropTypes.array.isRequired,
-	course: PropTypes.object.isRequired,
 	myTeams: PropTypes.oneOfType([
 		PropTypes.string,
 		PropTypes.array,
 		]),
 	teamCreationStatus: PropTypes.string,
-	addFlashMessage: PropTypes.func.isRequired,
+	addFlashMessage: PropTypes.func,
 }
 
 function mapStateToProps(state, ownState) {

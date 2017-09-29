@@ -11,13 +11,13 @@ export default function teamsReducer(state = initialState.teams, action) {
       return action.payload.response;
     case types.GET_COURSE_TEAMS_PER_USER_FULFILLED:
       return action.payload.response;
-    case types.IS_STUDENT_IN_SAME_LAB_FULFILLED:
-      if (action.payload.response.inSameLab && state.indexOf(action.payload.response.username) < 0) {
-        return [...state, action.payload.response.username];
-      } 
-      else {
-        return state;
-      }
+    // case types.IS_STUDENT_IN_SAME_LAB_FULFILLED:
+    //   if (action.payload.response.inSameLab && state.indexOf(action.payload.response.username) < 0) {
+    //     return [...state, action.payload.response.username];
+    //   } 
+    //   else {
+    //     return state;
+    //   }
     case types.GET_COURSE_TEAMS_WITH_BATCH_MARKING_FULFILLED:
       return action.payload.response;
     case types.CREATE_CUSTOM_TEAM_FULFILLED:

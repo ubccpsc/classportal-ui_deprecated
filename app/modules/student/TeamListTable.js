@@ -51,8 +51,12 @@ class TeamListTable extends React.Component {
 			.then((action) => {
 				let isSuccessful = String(action.value.response) === TEAM_DISBANDED_SUCCESS ? true : false;
 				if (isSuccessful) {
-					this.props.dispatch(teamActions.getCourseTeamsWithBatchMarking(this.props.courseNum));
 					this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.courseNum));
+				}
+				if (isSuccessful && String(this.props.user.userrole) !== STUDENT_ROLE) {
+					console.log('handleDisbandTeamClick');
+					this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.courseNum));
+					this.props.dispatch(teamActions.getCourseTeamsWithBatchMarking(this.props.courseNum));
 				}
 			});
 	}
