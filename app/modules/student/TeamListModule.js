@@ -62,7 +62,7 @@ class TeamListModule extends React.Component {
 		        	if (this.state.teamList.indexOf(this.props.user.username) === -1) {
 		        		newTeamList.push(this.props.user.username);
 		        	}
-		        	
+
 		        	this.setState({teamList: newTeamList});
 		        } 
 
@@ -129,9 +129,10 @@ class TeamListModule extends React.Component {
 	}
 
 	render () {
+		let userrole = String(this.props.user.userrole);
 
 		// IF returns view of markByBatch team creation, as the student is not on any teams yet. 
-		if (this.props.course.markDelivsByBatch == true && typeof this.props.myTeams[0] === 'string') {
+		if (this.props.course.markDelivsByBatch == true && typeof this.props.myTeams[0] === 'string' && userrole === STUDENT_ROLE ) {
 
 			this.props.dispatch(flashMessageActions.addFlashMessage({ type: 'warning', headline: 'You Are Not On Any Teams',
 				body: 'To create a team, add GitHub users who are registered in your lab. Only TAs may disband teams.'}))
