@@ -33,13 +33,13 @@ class TeamListModule extends React.Component {
 			});
 		this.props.dispatch(userActions.getCurrentUser())
 		.then((action) => {
-				console.log(action);
+				// console.log(action);
 
 				let userrole = String(action.value.user.userrole);
 				if (userrole !== STUDENT_ROLE) {
 				this.props.dispatch(teamActions.getCourseTeamsWithBatchMarking(this.props.params.courses))
 					.then((action) => {
-						console.log(action);
+						//
 					});
 			}
 		});
