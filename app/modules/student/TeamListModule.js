@@ -56,13 +56,13 @@ class TeamListModule extends React.Component {
 		        if (response.inSameLab && this.state.teamList.indexOf(response.username) < 0) {
 		        	let newTeamList = this.state.teamList.slice();
 		        	newTeamList.push(response.username);
-		        	console.log(newTeamList);
-		        	console.log(response);
-		        	console.log(this.props.user)
-		        	console.log(this.props.user.username);
+
+		 		    this.setState({teamList: newTeamList});
+
 		        	if (this.state.teamList.indexOf(this.props.user.username) === -1) {
 		        		newTeamList.push(this.props.user.username);
 		        	}
+		        	
 		        	this.setState({teamList: newTeamList});
 		        } 
 
