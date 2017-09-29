@@ -31,19 +31,24 @@ class TeamListModule extends React.Component {
 			.then((_course) => {
 				course = _course.action.payload.response;
 			});
+		this.props.dispatch(userActions.getCurrentUser())
+		.then((action) => {
+				console.log(action);
+
+				let userrole = String(action.value.user.userrole);
+				if (userrole !== STUDENT_ROLE) {
+				this.props.dispatch(teamActions.getCourseTeamsWithBatchMarking(this.props.params.courses))
+					.then((action) => {
+						console.log(action);
+					});
+			}
+		});
 	}
 
 	componentWillMount() {
 		let that = this;
 		this.props.dispatch(teamActions.getMyTeamsPerCourse(this.props.params.courses));
 		this.props.dispatch(courseActions.getCourseSettings(this.props.params.courses));
-		this.props.dispatch(userActions.getCurrentUser())
-			.then((action) => {
-					let userrole = String(action.value.user.userrole);
-					if (userrole !== STUDENT_ROLE) {
-					this.props.dispatch(teamActions.getCourseTeamsWithBatchMarking(this.props.params.courses));
-				}
-			});
 	}
 
 	addTeamMember(e) {
