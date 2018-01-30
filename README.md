@@ -1,3 +1,7 @@
+# DEPRECATION WARNING
+
+This repo is deprecated, you probably want to look at [ClassPortal UI](https://github.com/ubccpsc/classportal-ui).
+
 # ClassPortal
 
 Static React frontend for ClassPortal. Built with help from [React Static Boilerplate][rsb].
